@@ -1,5 +1,5 @@
 module.exports = {
-  resAllUser: (res, response, status) => {
+  resUser: (res, response, status) => {
     const form = {
       status, // status: status
       response,
