@@ -1,68 +1,86 @@
-import React, { useEffect, useState } from "react";
-import { Button } from "antd";
-import "antd/dist/antd.css";
-import { Layout, Menu } from "antd";
+import React from "react";
 import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
+  Layout, Table, Menu, Breadcrumb
+} from "antd";
+import Axios from "axios";
+import "antd/dist/antd.css";
+import "./App.css";
+import {
+  PieChartOutlined,
   UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
 } from "@ant-design/icons";
+import UserTable from "./view/admin/user/UserTable";
 
-const { Header, Sider, Content } = Layout;
+const { Header, Content, Footer, Sider } = Layout;
+const { SubMenu } = Menu;
+const { Column, ColumnGroup } = Table;
 
-function App() {
-  const [collapsed, setcollapsed] = useState(false);
-  // const [toggle, settoggle] = useState(false);
-
-  toggle = () => {
-    this.setState({
-      collapsed: !this.state.collapsed,
-    });
+class App extends React.Component {
+  state = {
+    collapsed: false,
+    users: [],
   };
 
-  return (
-    <div className="App">
-      <Layout>
-        <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
-          <div className="logo" />
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
-            <Menu.Item key="1" icon={<UserOutlined />}>
-              nav 1
+  componentDidMount() {
+    Axios.get(`http://localhost:6600`).then((res) => {
+      const users = res.data.response;
+      this.setState({ users });
+    });
+  }
+
+  onCollapse = (collapsed) => {
+    console.log(collapsed);
+    this.setState({ collapsed });
+  };
+
+  render() {
+    return (
+      <Layout style={{ minHeight: "100vh" }}>
+        <Sider
+          collapsible
+          collapsed={this.state.collapsed}
+          onCollapse={this.onCollapse}
+        >
+          <div className="logo">
+            <h1 style={{ color: "white", marginLeft: 10, marginTop: 20 }}>
+              Class Admin
+            </h1>
+          </div>
+          <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+            <Menu.Item
+              style={{ marginTop: 7 }}
+              key="1"
+              icon={<PieChartOutlined />}
+            >
+              Option 1
             </Menu.Item>
-            <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-              nav 2
-            </Menu.Item>
-            <Menu.Item key="3" icon={<UploadOutlined />}>
-              nav 3
-            </Menu.Item>
+            <SubMenu key="sub1" icon={<UserOutlined />} title="User">
+              <Menu.Item key="3">Tom</Menu.Item>
+              <Menu.Item key="4">Bill</Menu.Item>
+              <Menu.Item key="5">Alex</Menu.Item>
+            </SubMenu>
           </Menu>
         </Sider>
         <Layout className="site-layout">
-          <Header className="site-layout-background" style={{ padding: 0 }}>
-            {React.createElement(
-              this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
-              {
-                className: "trigger",
-                onClick: this.toggle,
-              }
-            )}
-          </Header>
-          <Content
-            className="site-layout-background"
-            style={{
-              margin: "24px 16px",
-              padding: 24,
-              minHeight: 280,
-            }}
-          >
-            Content
+          <Header className="site-layout-background" style={{ padding: 0 }} />
+          <Content style={{ margin: "0 16px" }}>
+            <Breadcrumb style={{ margin: "16px 0" }}>
+              <Breadcrumb.Item>User</Breadcrumb.Item>
+              <Breadcrumb.Item>Table</Breadcrumb.Item>
+            </Breadcrumb>
+            <div
+              className="site-layout-background"
+              style={{ padding: 24, minHeight: 360 }}
+            >
+              <UserTable />
+            </div>
           </Content>
+          <Footer style={{ textAlign: "center" }}>
+            Class ©2020 Created by DCC
+          </Footer>
         </Layout>
       </Layout>
-    </div>
-  );
+    );
+  }
 }
-
 export default App;
