@@ -1,48 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import Axios from "axios";
+import { Card } from "@material-ui/core";
+import ReactDOM from 'react-dom';
 
-function Main(props) {
-  const [user, setUser] = useState([]);
 
-  const getUser = async () => {
-    try {
-      let response = await Axios.get("http://localhost:6600");
-      setUser(response.data.response);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
+const Main = ({ children, title, subtitle, icon }) => {
   return (
-    <div className="py-5">
-      <div className="container">
-        <div className="row">
-          {user.map((data, index) => {
-            return (
-              <div className="col-md-4" key={index}>
-                <div className="card mb-4">
-                  <div className="card-header">{data.name}</div>
-                  <div className="card-body">{data.email}</div>
-                  <div className="card-footer">
-                    <NavLink
-                      className="btn btn-primary"
-                      to={`/kelas/${data.id}`}
-                    >
-                      selengkapnya
-                    </NavLink>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </div>
+    <Card elevation={6} className="px-24 py-20 h-100">
+      <div className="card-title">{title}</div>
+      <div className="card-subtitle mb-24">{subtitle}</div>
+      {children}
+    </Card>
   );
 }
+
 export default Main;
