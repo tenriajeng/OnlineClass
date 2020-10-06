@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
-// import { NavLink } from "react-router-dom";
+import React from "react";
 import Axios from "axios";
-import { Table, Space, Button, Modal } from "antd";
-import { DeleteOutlined, EditOutlined, ExclamationCircleOutlined, } from "@ant-design/icons";
+import { Table, Space, Button, Modal, Input } from "antd";
+import { DeleteOutlined, EditOutlined, EyeTwoTone, PlusOutlined, EyeInvisibleOutlined, ExclamationCircleOutlined, } from "@ant-design/icons";
 
 const { Column } = Table;
 
@@ -26,7 +25,7 @@ class UserTable extends React.Component {
   };
 
   componentDidMount() {
-    Axios.get(`http://localhost:6600`).then((res) => {
+    Axios.get('http://localhost:6600').then((res) => {
       const users = res.data.response;
       this.setState({ users });
     });
@@ -46,7 +45,10 @@ class UserTable extends React.Component {
 
     return (
       <div>
-        <Table dataSource={this.state.users}>
+        <Button onClick={this.showModal} type="primary" style={{ marginBottom: 16 }}>
+          <PlusOutlined />
+        </Button>
+        <Table dataSource={this.state.users} pagination={{ pageSize: 50 }} scroll={{ y: 240 }}>
           <Column title="Name" dataIndex="name" key="name" />
           <Column title="Email" dataIndex="email" key="email" />
           <Column
@@ -58,28 +60,32 @@ class UserTable extends React.Component {
                   <DeleteOutlined />
                 </Button>
                 <Button type="primary" onClick={this.showModal}>
-                  Modal
+                  <EditOutlined />
                 </Button>
                 <Button type="primary">
-                  <EditOutlined />
+                  {/* <EditOutlined /> */}
                 </Button>
                 {/* <a>Edit {record.name}</a> */}
               </Space>
             )}
           />
         </Table>
-        <Modal title="Modal"
+        <Modal title="Tambah User"
           visible={this.state.visible}
           onOk={this.hideModal}
           onCancel={this.hideModal}
-          okText="YES"
-          cancelText="NO" >
-          <p>Bla bla ...</p>
-          <p>Bla bla ...</p>
-          <p>Bla bla ...</p>
+          okText="Simpan"
+          cancelText="Batal" >
+          <Input style={{ marginBottom: 10 }} placeholder="Name" />
+          <Input style={{ marginBottom: 10 }} placeholder="Email" />
+          <Input.Password
+            placeholder="Password"
+            iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+          />
         </Modal>
       </div>
     );
   }
 }
+
 export default UserTable;
