@@ -1,6 +1,6 @@
 import React from "react";
 import Axios from "axios";
-import { Table, Space, Button, Modal, Input } from "antd";
+import { Table, Space, Button, Modal, Input, Form, Row, Col } from "antd";
 import { DeleteOutlined, EditOutlined, EyeTwoTone, PlusOutlined, EyeInvisibleOutlined, ExclamationCircleOutlined, } from "@ant-design/icons";
 
 const { Column } = Table;
@@ -25,7 +25,7 @@ class UserTable extends React.Component {
   };
 
   componentDidMount() {
-    Axios.get('http://localhost:6600').then((res) => {
+    Axios.get('http://localhost:6600/user').then((res) => {
       const users = res.data.response;
       this.setState({ users });
     });
@@ -45,31 +45,49 @@ class UserTable extends React.Component {
 
     return (
       <div>
-        <Button onClick={this.showModal} type="primary" style={{ marginBottom: 16 }}>
-          <PlusOutlined />
-        </Button>
-        <Table dataSource={this.state.users} pagination={{ pageSize: 50 }} scroll={{ y: 240 }}>
-          <Column title="Name" dataIndex="name" key="name" />
-          <Column title="Email" dataIndex="email" key="email" />
-          <Column
-            title="Action"
-            key="action"
-            render={(text, record) => (
-              <Space size="middle">
-                <Button type="danger" onClick={confirm}>
-                  <DeleteOutlined />
-                </Button>
-                <Button type="primary" onClick={this.showModal}>
-                  <EditOutlined />
-                </Button>
-                <Button type="primary">
-                  {/* <EditOutlined /> */}
-                </Button>
-                {/* <a>Edit {record.name}</a> */}
-              </Space>
-            )}
-          />
-        </Table>
+        <Row justify="space-between" gutter={[8, 8]}>
+          <Col span={12}>
+            <Button onClick={this.showModal} type="primary" style={{ marginBottom: 10 }}>
+              <PlusOutlined />
+            </Button>
+            <Button onClick={this.showModal} type="primary" style={{ marginBottom: 10, marginLeft: 10 }}>
+              <PlusOutlined />
+            </Button>
+          </Col>
+          <Col span={8}>
+            <Input style={{ marginBottom: 10 }} placeholder="Name" />
+          </Col>
+        </Row>
+        <Row justify="space-between">
+          <Col span={8}>
+          </Col>
+          <Col span={1}>
+
+          </Col>
+          <Table dataSource={this.state.users} pagination={{ pageSize: 50 }} scroll={{ y: 240 }}>
+            <Column title="Name" dataIndex="name" key="name" />
+            <Column title="Email" dataIndex="email" key="email" />
+            <Column
+              title="Action"
+              key="action"
+              render={(text, record) => (
+                <Space size="middle">
+                  <Button type="danger" onClick={confirm}>
+                    <DeleteOutlined />
+                  </Button>
+                  <Button type="primary" onClick={this.showModal}>
+                    <EditOutlined />
+                  </Button>
+                  <Button type="primary">
+                    {/* <EditOutlined /> */}
+                  </Button>
+                  {/* <a>Edit {record.name}</a> */}
+                </Space>
+              )}
+            />
+          </Table>
+        </Row>
+
         <Modal title="Tambah User"
           visible={this.state.visible}
           onOk={this.hideModal}
@@ -83,7 +101,7 @@ class UserTable extends React.Component {
             iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
           />
         </Modal>
-      </div>
+      </div >
     );
   }
 }

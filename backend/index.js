@@ -1,7 +1,7 @@
 const express = require("express");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
-const router = require("./api/Routes/users");
+const router = require("./api/Routes/index");
 const app = express();
 
 const port = 6600;

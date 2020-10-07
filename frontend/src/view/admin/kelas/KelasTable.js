@@ -25,7 +25,7 @@ class KelasTable extends React.Component {
     };
 
     componentDidMount() {
-        Axios.get('http://localhost:6600').then((res) => {
+        Axios.get('http://localhost:6600/kelas').then((res) => {
             const kelas = res.data.response;
             this.setState({ kelas });
         });
@@ -49,8 +49,8 @@ class KelasTable extends React.Component {
                     <PlusOutlined />
                 </Button>
                 <Table dataSource={this.state.kelas} pagination={{ pageSize: 50 }} scroll={{ y: 240 }}>
-                    <Column title="Name" dataIndex="name" key="name" />
-                    <Column title="Email" dataIndex="email" key="email" />
+                    <Column title="Nama" dataIndex="nama" key="nama" />
+                    <Column title="Limit" dataIndex="limit" key="limit" />
                     <Column
                         title="Action"
                         key="action"
