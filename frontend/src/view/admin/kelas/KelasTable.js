@@ -48,7 +48,7 @@ class KelasTable extends React.Component {
                 <Button onClick={this.showModal} type="primary" style={{ marginBottom: 16 }}>
                     <PlusOutlined />
                 </Button>
-                <Table dataSource={this.state.kelas} pagination={{ pageSize: 50 }} scroll={{ y: 240 }}>
+                <Table dataSource={this.state.kelas} pagination={{ pageSize: 10 }} scroll={{ y: 300 }}>
                     <Column title="Nama" dataIndex="nama" key="nama" />
                     <Column title="Limit" dataIndex="limit" key="limit" />
                     <Column

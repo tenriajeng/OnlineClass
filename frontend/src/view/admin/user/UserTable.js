@@ -64,7 +64,7 @@ class UserTable extends React.Component {
           <Col span={1}>
 
           </Col>
-          <Table dataSource={this.state.users} pagination={{ pageSize: 50 }} scroll={{ y: 240 }}>
+          <Table dataSource={this.state.users} pagination={{ pageSize: 10 }} scroll={{ y: 300 }}>
             <Column title="Name" dataIndex="name" key="name" />
             <Column title="Email" dataIndex="email" key="email" />
             <Column

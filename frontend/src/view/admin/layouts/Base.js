@@ -49,12 +49,6 @@ class Base extends React.Component {
                             <Menu.Item key="2" icon={<VideoCameraOutlined />}>
                                 <Link to="/admin/kelas">Kelas</Link>
                             </Menu.Item>
-                            <Menu.Item key="3" icon={<UploadOutlined />}>
-                                nav 3
-                            </Menu.Item>
-                            <Menu.Item key="4" icon={<UserOutlined />}>
-                                nav 4
-                            </Menu.Item>
                             <SubMenu key="sub1" icon={<UserOutlined />} title="User">
                                 <Menu.Item key="5">Tom</Menu.Item>
                                 <Menu.Item key="6">Bill</Menu.Item>
