@@ -25,7 +25,7 @@ class UserTable extends React.Component {
   };
 
   componentDidMount() {
-    Axios.get('http://localhost:6600/user').then((res) => {
+    Axios.get('http://localhost:6600/admin/user').then((res) => {
       const users = res.data.response;
       this.setState({ users });
     });

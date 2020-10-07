@@ -25,7 +25,7 @@ class KelasTable extends React.Component {
     };
 
     componentDidMount() {
-        Axios.get('http://localhost:6600/kelas').then((res) => {
+        Axios.get('http://localhost:6600/admin/kelas').then((res) => {
             const kelas = res.data.response;
             this.setState({ kelas });
         });
