@@ -36,6 +36,14 @@ class UserTable extends React.Component {
     });
   };
 
+  showModalUpdate = (id) => {
+    this.setState({
+      userId: id,
+      visible: true,
+    });
+    this.getOnedata(id);
+  };
+
   showModalHapus = (id) => {
     this.setState({
       visibleHapus: true,
@@ -99,6 +107,21 @@ class UserTable extends React.Component {
       this.setState({ users });
     });
   }
+
+  getOnedata(id) {
+    console.log("apa di", this.state.userId);
+
+    Axios.get(`http://localhost:6600/admin/user/detail/${id}`).then((res) => {
+      const users = res.data.response;
+      this.setState({
+        name: res.data.response.name,
+        email: res.data.response.email,
+        password: res.data.response.password,
+      });
+      console.log(res.data.response);
+    });
+  }
+
   componentDidMount() {
     this.getdata();
   }
@@ -141,7 +164,10 @@ class UserTable extends React.Component {
                   >
                     <DeleteOutlined />
                   </Button>
-                  <Button type="primary" onClick={() => this.showModal}>
+                  <Button
+                    type="primary"
+                    onClick={() => this.showModalUpdate(record.id)}
+                  >
                     <EditOutlined />
                   </Button>
                 </Space>
