@@ -2,7 +2,6 @@ import { Breadcrumb, Layout, Menu } from 'antd'
 import React from 'react'
 import {
     UserOutlined,
-    UploadOutlined,
     VideoCameraOutlined
 } from "@ant-design/icons";
 import { Link, Route } from 'react-router-dom';

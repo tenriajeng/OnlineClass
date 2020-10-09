@@ -1,25 +1,63 @@
 import React from "react";
 import Axios from "axios";
-import { Table, Space, Button, Modal, Input, Form, Row, Col } from "antd";
-import { DeleteOutlined, EditOutlined, EyeTwoTone, PlusOutlined, EyeInvisibleOutlined, ExclamationCircleOutlined, } from "@ant-design/icons";
-import Title from "antd/lib/skeleton/Title";
+import { Table, Space, Button, Modal, Input, Row, Col } from "antd";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  EyeTwoTone,
+  PlusOutlined,
+  EyeInvisibleOutlined,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
 
 const { Column } = Table;
 
 class UserTable extends React.Component {
-  state = { users: [], visible: false, formTittle: 'Tambah' };
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [],
+      visible: false,
+      name: '',
+      email: '',
+      password: '',
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
 
   showModal = (title) => {
     this.setState({
       visible: true,
-      formTittle: title,
+      name: '',
+      email: '',
+      password: '',
     });
   };
 
-  hideModal = () => {
+  hideModal = (kondisi) => {
+
+    const data = {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+    }
+
+    if (kondisi == "simpan") {
+      Axios.post('http://localhost:6600/admin/user/create', data).then((res) => {
+      });
+    }
+
     this.setState({
+      visible: false,
     });
+
   };
+
+  handleChange(changeObject) {
+    this.setState(changeObject)
+    // alert(this.state.email);
+  }
 
   componentDidMount() {
     Axios.get('http://localhost:6600/admin/user').then((res) => {
@@ -47,9 +85,9 @@ class UserTable extends React.Component {
             <Button onClick={this.showModal} type="primary" style={{ marginBottom: 10 }}>
               <PlusOutlined />
             </Button>
-            <Button onClick={this.showModal} type="primary" style={{ marginBottom: 10, marginLeft: 10 }}>
+            {/* <Button onClick={this.showModal} type="primary" style={{ marginBottom: 10, marginLeft: 10 }}>
               <PlusOutlined />
-            </Button>
+            </Button> */}
           </Col>
           <Col span={8}>
             <Input style={{ marginBottom: 10 }} placeholder="Name" />
@@ -85,17 +123,19 @@ class UserTable extends React.Component {
           </Table>
         </Row>
 
-        <Modal title={this.state.formTittle + " User"}
+        <Modal title="Tambah User"
           visible={this.state.visible}
-          onOk={this.hideModal}
-          onCancel={this.hideModal}
+          onOk={() => this.hideModal('simpan')}
+          onCancel={() => this.hideModal('batal')}
           okText="Simpan"
           cancelText="Batal" >
-          <Input style={{ marginBottom: 10 }} placeholder="Name" />
-          <Input style={{ marginBottom: 10 }} placeholder="Email" />
+          <Input style={{ marginBottom: 10 }} onChange={(e) => this.handleChange({ name: e.target.value })} value={this.state.name} placeholder="Name" />
+          <Input style={{ marginBottom: 10 }} onChange={(e) => this.handleChange({ email: e.target.value })} value={this.state.email} placeholder="Email" />
           <Input.Password
             placeholder="Password"
             iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+            onChange={(e) => this.handleChange({ password: e.target.value })}
+            value={this.state.password}
           />
         </Modal>
       </div >

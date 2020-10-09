@@ -10,9 +10,6 @@ import { BrowserRouter as Router } from "react-router-dom"
 import KelasTable from "./view/admin/kelas/KelasTable";
 import Base from "./view/admin/layouts/Base";
 
-const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
-
 class App extends React.Component {
 
   render() {
