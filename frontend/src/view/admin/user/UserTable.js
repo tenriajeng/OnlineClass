@@ -1,5 +1,6 @@
 import React from "react";
 import Axios from "axios";
+import swal from "sweetalert";
 import { Table, Space, Button, Modal, Input, Row, Col } from "antd";
 import {
   DeleteOutlined,
@@ -7,7 +8,6 @@ import {
   EyeTwoTone,
   PlusOutlined,
   EyeInvisibleOutlined,
-  ExclamationCircleOutlined,
 } from "@ant-design/icons";
 
 const { Column } = Table;
@@ -52,6 +52,12 @@ class UserTable extends React.Component {
     this.setState({
       visibleHapus: false,
     });
+    swal({
+      title: "Selamat",
+      text: "Berhasil dihapus!",
+      icon: "success",
+      button: "Tutup",
+    });
   };
 
   hideModal = (kondisi) => {
@@ -61,10 +67,16 @@ class UserTable extends React.Component {
       password: this.state.password,
     };
 
-    if (kondisi == "simpan") {
+    if (kondisi === "simpan") {
       Axios.post("http://localhost:6600/admin/user/create", data).then(
         (res) => {
           this.getdata();
+          swal({
+            title: "Selamat",
+            text: "Berhasil ditambahkan!",
+            icon: "success",
+            button: "Tutup",
+          });
         }
       );
     }
@@ -129,11 +141,9 @@ class UserTable extends React.Component {
                   >
                     <DeleteOutlined />
                   </Button>
-                  <Button type="primary" onClick={this.showModal}>
+                  <Button type="primary" onClick={() => this.showModal}>
                     <EditOutlined />
                   </Button>
-                  <Button type="primary">{/* <EditOutlined /> */}</Button>
-                  {/* <a>Edit</a> */}
                 </Space>
               )}
             />
