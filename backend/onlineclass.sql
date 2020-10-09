@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 09, 2020 at 03:56 PM
+-- Generation Time: Oct 09, 2020 at 04:14 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -194,6 +194,7 @@ CREATE TABLE `users` (
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `level` int(11) DEFAULT NULL,
+  `foto` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -204,19 +205,19 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `level`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'ilham', 'ilham@gmail.com', NULL, 'ilham', 0, NULL, NULL, '2020-10-07 05:53:05', NULL),
-(6, 'tenriajeng12', 'tenriajeng03@gmail.com', NULL, 'tenriajeng', 0, NULL, '2020-10-02 19:46:34', '2020-10-02 20:13:29', '2020-10-02 20:13:29'),
-(7, 'iladih', 'hlhksdh', NULL, 'iuysiu', 0, NULL, NULL, NULL, NULL),
-(8, 'jahsdgjhg', 'jgjhg', NULL, 'jhgsjfhgd', 0, NULL, NULL, NULL, NULL),
-(9, 'shfjfs', 'hgfhsdf', NULL, 'ajhdgjahgd', 0, NULL, NULL, NULL, NULL),
-(10, 'jahdgja', 'jhsgdfjhg', NULL, 'asdgjahg', 0, NULL, NULL, NULL, NULL),
-(11, 'asdjhkh', 'kjshdk', NULL, 'jhagdjagd', 0, NULL, NULL, NULL, NULL),
-(12, 'jahsdgja', 'jhgjh', NULL, 'kajdhkah', 0, NULL, NULL, NULL, NULL),
-(13, 'jahdgj', 'jhgjhgj', NULL, 'kjahdkjah', 0, NULL, NULL, NULL, NULL),
-(14, 'jasdgjhg', 'jhgjhg', NULL, 'ajsdhjahsk', 0, NULL, NULL, NULL, NULL),
-(15, 'jhadgjhg', 'jhgjhgsjd', NULL, 'kajsdhkhak', 0, NULL, NULL, NULL, NULL),
-(16, 'kjahdskh', 'jkhkjshhk', NULL, 'jahdgjha', 0, NULL, NULL, NULL, NULL);
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `level`, `foto`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'ilham', 'ilham@gmail.com', NULL, 'ilham', 0, NULL, NULL, NULL, '2020-10-07 05:53:05', NULL),
+(6, 'tenriajeng12', 'tenriajeng03@gmail.com', NULL, 'tenriajeng', 0, NULL, NULL, '2020-10-02 19:46:34', '2020-10-02 20:13:29', '2020-10-02 20:13:29'),
+(7, 'iladih', 'hlhksdh', NULL, 'iuysiu', 0, NULL, NULL, NULL, NULL, NULL),
+(8, 'jahsdgjhg', 'jgjhg', NULL, 'jhgsjfhgd', 0, NULL, NULL, NULL, NULL, NULL),
+(9, 'shfjfs', 'hgfhsdf', NULL, 'ajhdgjahgd', 0, NULL, NULL, NULL, NULL, NULL),
+(10, 'jahdgja', 'jhsgdfjhg', NULL, 'asdgjahg', 0, NULL, NULL, NULL, NULL, NULL),
+(11, 'asdjhkh', 'kjshdk', NULL, 'jhagdjagd', 0, NULL, NULL, NULL, NULL, NULL),
+(12, 'jahsdgja', 'jhgjh', NULL, 'kajdhkah', 0, NULL, NULL, NULL, NULL, NULL),
+(13, 'jahdgj', 'jhgjhgj', NULL, 'kjahdkjah', 0, NULL, NULL, NULL, NULL, NULL),
+(14, 'jasdgjhg', 'jhgjhg', NULL, 'ajsdhjahsk', 0, NULL, NULL, NULL, NULL, NULL),
+(15, 'jhadgjhg', 'jhgjhgsjd', NULL, 'kajsdhkhak', 0, NULL, NULL, NULL, NULL, NULL),
+(16, 'kjahdskh', 'jkhkjshhk', NULL, 'jahdgjha', 0, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
