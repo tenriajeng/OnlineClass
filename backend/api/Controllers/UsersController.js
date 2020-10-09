@@ -1,5 +1,5 @@
 "use strict";
-const userModel = require("../Models/Users");
+const userModel = require("../Models/admin/Users");
 const formRes = require("../Helpers/formRes");
 
 module.exports = {

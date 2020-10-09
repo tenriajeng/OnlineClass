@@ -2,26 +2,23 @@ import React from "react";
 import Axios from "axios";
 import { Table, Space, Button, Modal, Input, Form, Row, Col } from "antd";
 import { DeleteOutlined, EditOutlined, EyeTwoTone, PlusOutlined, EyeInvisibleOutlined, ExclamationCircleOutlined, } from "@ant-design/icons";
+import Title from "antd/lib/skeleton/Title";
 
 const { Column } = Table;
 
 class UserTable extends React.Component {
-  state = { visible: false };
+  state = { users: [], visible: false, formTittle: 'Tambah' };
 
-  showModal = () => {
+  showModal = (title) => {
     this.setState({
       visible: true,
+      formTittle: title,
     });
   };
 
   hideModal = () => {
     this.setState({
-      visible: false,
     });
-  };
-
-  state = {
-    users: [],
   };
 
   componentDidMount() {
@@ -88,7 +85,7 @@ class UserTable extends React.Component {
           </Table>
         </Row>
 
-        <Modal title="Tambah User"
+        <Modal title={this.state.formTittle + " User"}
           visible={this.state.visible}
           onOk={this.hideModal}
           onCancel={this.hideModal}

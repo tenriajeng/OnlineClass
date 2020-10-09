@@ -1,5 +1,5 @@
 "use strict";
-const kelasModel = require("../Models/Kelas");
+const kelasModel = require("../Models/admin/Kelas");
 const formRes = require("../Helpers/formRes");
 
 module.exports = {

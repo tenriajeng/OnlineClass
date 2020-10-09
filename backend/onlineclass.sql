@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Okt 2020 pada 22.28
--- Versi server: 10.4.14-MariaDB
--- Versi PHP: 7.3.21
+-- Generation Time: Oct 09, 2020 at 03:56 PM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `failed_jobs`
+-- Table structure for table `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -39,7 +40,7 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kelas`
+-- Table structure for table `kelas`
 --
 
 CREATE TABLE `kelas` (
@@ -54,10 +55,17 @@ CREATE TABLE `kelas` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `kelas`
+--
+
+INSERT INTO `kelas` (`id`, `nama`, `limit`, `aktif`, `harga`, `foto`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(2, 'c++', 100, 1, 100000, 'image.jpg', NULL, '2020-10-06 23:33:20', '0000-00-00 00:00:00');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kelas_users`
+-- Table structure for table `kelas_users`
 --
 
 CREATE TABLE `kelas_users` (
@@ -72,7 +80,7 @@ CREATE TABLE `kelas_users` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `materis`
+-- Table structure for table `materis`
 --
 
 CREATE TABLE `materis` (
@@ -91,7 +99,7 @@ CREATE TABLE `materis` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `migrations`
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -101,7 +109,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -118,7 +126,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `password_resets`
+-- Table structure for table `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -130,7 +138,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pemateris`
+-- Table structure for table `pemateris`
 --
 
 CREATE TABLE `pemateris` (
@@ -145,7 +153,7 @@ CREATE TABLE `pemateris` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pembayarans`
+-- Table structure for table `pembayarans`
 --
 
 CREATE TABLE `pembayarans` (
@@ -159,7 +167,7 @@ CREATE TABLE `pembayarans` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transaksis`
+-- Table structure for table `transaksis`
 --
 
 CREATE TABLE `transaksis` (
@@ -176,7 +184,7 @@ CREATE TABLE `transaksis` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -185,6 +193,7 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `level` int(11) DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -192,135 +201,145 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `users`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'ilham', 'ilham@gmail.com', NULL, 'ilham', NULL, NULL, NULL, NULL),
-(6, 'tenriajeng12', 'tenriajeng03@gmail.com', NULL, 'tenriajeng', NULL, '2020-10-02 19:46:34', '2020-10-02 20:13:29', '2020-10-02 20:13:29');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `level`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'ilham', 'ilham@gmail.com', NULL, 'ilham', 0, NULL, NULL, '2020-10-07 05:53:05', NULL),
+(6, 'tenriajeng12', 'tenriajeng03@gmail.com', NULL, 'tenriajeng', 0, NULL, '2020-10-02 19:46:34', '2020-10-02 20:13:29', '2020-10-02 20:13:29'),
+(7, 'iladih', 'hlhksdh', NULL, 'iuysiu', 0, NULL, NULL, NULL, NULL),
+(8, 'jahsdgjhg', 'jgjhg', NULL, 'jhgsjfhgd', 0, NULL, NULL, NULL, NULL),
+(9, 'shfjfs', 'hgfhsdf', NULL, 'ajhdgjahgd', 0, NULL, NULL, NULL, NULL),
+(10, 'jahdgja', 'jhsgdfjhg', NULL, 'asdgjahg', 0, NULL, NULL, NULL, NULL),
+(11, 'asdjhkh', 'kjshdk', NULL, 'jhagdjagd', 0, NULL, NULL, NULL, NULL),
+(12, 'jahsdgja', 'jhgjh', NULL, 'kajdhkah', 0, NULL, NULL, NULL, NULL),
+(13, 'jahdgj', 'jhgjhgj', NULL, 'kjahdkjah', 0, NULL, NULL, NULL, NULL),
+(14, 'jasdgjhg', 'jhgjhg', NULL, 'ajsdhjahsk', 0, NULL, NULL, NULL, NULL),
+(15, 'jhadgjhg', 'jhgjhgsjd', NULL, 'kajsdhkhak', 0, NULL, NULL, NULL, NULL),
+(16, 'kjahdskh', 'jkhkjshhk', NULL, 'jahdgjha', 0, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `failed_jobs`
+-- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `kelas`
+-- Indexes for table `kelas`
 --
 ALTER TABLE `kelas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `kelas_users`
+-- Indexes for table `kelas_users`
 --
 ALTER TABLE `kelas_users`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `materis`
+-- Indexes for table `materis`
 --
 ALTER TABLE `materis`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `migrations`
+-- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `password_resets`
+-- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Indeks untuk tabel `pemateris`
+-- Indexes for table `pemateris`
 --
 ALTER TABLE `pemateris`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `pembayarans`
+-- Indexes for table `pembayarans`
 --
 ALTER TABLE `pembayarans`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `transaksis`
+-- Indexes for table `transaksis`
 --
 ALTER TABLE `transaksis`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `failed_jobs`
+-- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `kelas`
+-- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `kelas_users`
+-- AUTO_INCREMENT for table `kelas_users`
 --
 ALTER TABLE `kelas_users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `materis`
+-- AUTO_INCREMENT for table `materis`
 --
 ALTER TABLE `materis`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `migrations`
+-- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT untuk tabel `pemateris`
+-- AUTO_INCREMENT for table `pemateris`
 --
 ALTER TABLE `pemateris`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `pembayarans`
+-- AUTO_INCREMENT for table `pembayarans`
 --
 ALTER TABLE `pembayarans`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `transaksis`
+-- AUTO_INCREMENT for table `transaksis`
 --
 ALTER TABLE `transaksis`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
