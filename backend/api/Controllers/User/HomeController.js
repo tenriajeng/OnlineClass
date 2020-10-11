@@ -1,6 +1,6 @@
 "use strict";
-const GuestModel = require("../Models/admin/Kelas");
-const formRes = require("../Helpers/formRes");
+const GuestModel = require("../../Models/users/Home");
+const formRes = require("../../Helpers/formRes");
 
 module.exports = {
     getAllGuest: (req, res) => {

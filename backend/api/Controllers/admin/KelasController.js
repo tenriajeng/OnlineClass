@@ -1,6 +1,6 @@
 "use strict";
-const kelasModel = require("../Models/admin/Kelas");
-const formRes = require("../Helpers/formRes");
+const kelasModel = require("../../Models/admin/Kelas");
+const formRes = require("../../Helpers/formRes");
 
 module.exports = {
     getAllKelas: (req, res) => {
