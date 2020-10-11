@@ -20,7 +20,7 @@ module.exports = {
         };
         // console.log(body)
         kelasModel
-            .addUser(body)
+            .addKelas(body)
             .then((response) => formRes.resUser(res, response, 200))
             .catch((err) => console.log(err));
     },
@@ -35,7 +35,7 @@ module.exports = {
         };
         // console.log(body)
         kelasModel
-            .updateUser(body, id)
+            .updateKelas(body, id)
             .then((response) => formRes.resUser(res, response, 200))
             .catch((err) => console.log(err));
     },
@@ -49,8 +49,15 @@ module.exports = {
         };
         // console.log(body)
         kelasModel
-            .deleteUser(body, id)
+            .deleteKelas(body, id)
             .then((response) => formRes.resUser(res, response, 200))
             .catch((err) => console.log(err));
     },
+    getOneKelas: (req, res) => {
+        // const bookGenre = req.query.genre
+        kelasModel
+          .showOneKelas(req.params.id)
+          .then((response) => formRes.resUser(res, response, 200))
+          .catch((err) => formRes.resUser(res, err, 404));
+      },
 };

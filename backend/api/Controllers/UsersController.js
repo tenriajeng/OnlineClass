@@ -53,4 +53,11 @@ module.exports = {
       .then((response) => formRes.resUser(res, response, 200))
       .catch((err) => console.log(err));
   },
+   getOneUser: (req, res) => {
+    // const bookGenre = req.query.genre
+    userModel
+      .showOneUser(req.params.id)
+      .then((response) => formRes.resUser(res, response, 200))
+      .catch((err) => formRes.resUser(res, err, 404));
+  },
 };
