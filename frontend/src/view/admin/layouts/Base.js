@@ -58,6 +58,11 @@ class Base extends React.Component {
                             </Menu>
                         </Sider>
                         <Content style={{ margin: "24px 16px 0" }}>
+                            <Breadcrumb style={{ marginBottom: 15 }}>
+                                <Breadcrumb.Item>Home</Breadcrumb.Item>
+                                <Breadcrumb.Item>List</Breadcrumb.Item>
+                                <Breadcrumb.Item>App</Breadcrumb.Item>
+                            </Breadcrumb>
                             <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
                                 <Router />
                             </div>
