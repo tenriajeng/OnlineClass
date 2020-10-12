@@ -128,26 +128,26 @@ class UserTable extends React.Component {
                     </Col>
                 </Row>
                 <Row justify="space-between">
-                    <Col span={8}></Col>
-                    <Col span={1}></Col>
-                    <Table dataSource={this.state.users} pagination={{ pageSize: 10 }} scroll={{ y: 300 }}>
-                        <Column title="Name" dataIndex="name" key="name" />
-                        <Column title="Email" dataIndex="email" key="email" />
-                        <Column
-                            title="Action"
-                            key="action"
-                            render={(text, record) => (
-                                <Space size="middle">
-                                    <Button type="danger" onClick={() => this.showModalHapus(record.id)}>
-                                        <DeleteOutlined />
-                                    </Button>
-                                    <Button type="primary" onClick={() => this.showModalUpdate(record.id)}>
-                                        <EditOutlined />
-                                    </Button>
-                                </Space>
-                            )}
-                        />
-                    </Table>
+                    <Col span={24}>
+                        <Table bordered dataSource={this.state.users} pagination={{ pageSize: 10, position: ["bottomCenter"] }} scroll={{ y: 300 }}>
+                            <Column title="Name" dataIndex="name" key="name" />
+                            <Column title="Email" dataIndex="email" key="email" />
+                            <Column
+                                title="Action"
+                                key="action"
+                                render={(text, record) => (
+                                    <Space size="middle">
+                                        <Button type="danger" onClick={() => this.showModalHapus(record.id)}>
+                                            <DeleteOutlined />
+                                        </Button>
+                                        <Button type="primary" onClick={() => this.showModalUpdate(record.id)}>
+                                            <EditOutlined />
+                                        </Button>
+                                    </Space>
+                                )}
+                            />
+                        </Table>
+                    </Col>
                 </Row>
 
                 <Modal title="Hapus User" visible={this.state.visibleHapus} onOk={this.hapusUser} onCancel={() => this.hideModal("batal")} okText="Hapus" cancelText="Batal">
