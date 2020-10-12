@@ -12,7 +12,7 @@ class Tes extends React.Component {
         return (
             <div>
                 <Row justify="right">
-                    <Col flex="0 1 200px" style={colStyle}>
+                    <Col flex="1 1 240px" style={colStyle}>
                         <Card
                             // className="cardStyle"
                             style={cardStyle}
@@ -22,7 +22,7 @@ class Tes extends React.Component {
                             <Meta title="Card title" description="This is the description" />
                         </Card>
                     </Col>
-                    <Col flex="0 1 200px" style={colStyle}>
+                    <Col flex="1 1 240px" style={colStyle}>
                         <Card
                             // className="cardStyle"
                             style={cardStyle}
@@ -32,7 +32,7 @@ class Tes extends React.Component {
                             <Meta title="Card title" description="This is the description" />
                         </Card>
                     </Col>
-                    <Col flex="0 1 200px" style={colStyle}>
+                    <Col flex="1 1 240px" style={colStyle}>
                         <Card
                             // className="cardStyle"
                             style={cardStyle}
@@ -42,7 +42,7 @@ class Tes extends React.Component {
                             <Meta title="Card title" description="This is the description" />
                         </Card>
                     </Col>
-                    <Col flex="0 1 200px" style={colStyle}>
+                    <Col flex="1 1 240px" style={colStyle}>
                         <Card
                             // className="cardStyle"
                             style={cardStyle}
