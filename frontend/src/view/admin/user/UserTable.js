@@ -1,53 +1,141 @@
 import React from "react";
 import Axios from "axios";
-import { Table, Space, Button, Modal, Input, Form, Row, Col } from "antd";
-import { DeleteOutlined, EditOutlined, EyeTwoTone, PlusOutlined, EyeInvisibleOutlined, ExclamationCircleOutlined, } from "@ant-design/icons";
-import Title from "antd/lib/skeleton/Title";
+import swal from "sweetalert";
+import { Table, Space, Button, Modal, Input, Row, Col } from "antd";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  EyeTwoTone,
+  PlusOutlined,
+  EyeInvisibleOutlined,
+} from "@ant-design/icons";
 
 const { Column } = Table;
 
 class UserTable extends React.Component {
-  state = { users: [], visible: false, formTittle: 'Tambah' };
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [],
+      visible: false,
+      visibleHapus: false,
+      name: "",
+      email: "",
+      password: "",
+      userId: "",
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
 
-  showModal = (title) => {
+  showModal = () => {
     this.setState({
       visible: true,
-      formTittle: title,
+      name: "",
+      email: "",
+      password: "",
     });
   };
 
-  hideModal = () => {
+  showModalUpdate = (id) => {
     this.setState({
+      userId: id,
+      visible: true,
+    });
+    this.getOnedata(id);
+  };
+
+  showModalHapus = (id) => {
+    this.setState({
+      visibleHapus: true,
+      userId: id,
     });
   };
 
-  componentDidMount() {
-    Axios.get('http://localhost:6600/admin/user').then((res) => {
+  hapusUser = () => {
+    Axios.put(
+      `http://localhost:6600/admin/user/delete/${this.state.userId}`
+    ).then((res) => {
+      this.getdata();
+    });
+    this.setState({
+      visibleHapus: false,
+    });
+    swal({
+      title: "Selamat",
+      text: "Berhasil dihapus!",
+      icon: "success",
+      button: "Tutup",
+    });
+  };
+
+  hideModal = (kondisi) => {
+    const data = {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+    };
+
+    if (kondisi === "simpan") {
+      Axios.post("http://localhost:6600/admin/user/create", data).then(
+        (res) => {
+          this.getdata();
+          swal({
+            title: "Selamat",
+            text: "Berhasil ditambahkan!",
+            icon: "success",
+            button: "Tutup",
+          });
+        }
+      );
+    }
+
+    this.setState({
+      visible: false,
+      visibleHapus: false,
+    });
+  };
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  getdata() {
+    Axios.get("http://localhost:6600/admin/user").then((res) => {
       const users = res.data.response;
       this.setState({ users });
     });
   }
 
-  render() {
+  getOnedata(id) {
+    console.log("apa di", this.state.userId);
 
-    function confirm() {
-      Modal.confirm({
-        title: "Confirm",
-        icon: <ExclamationCircleOutlined />,
-        content: "Bla bla ...",
-        okText: "YES",
-        cancelText: "NO",
+    Axios.get(`http://localhost:6600/admin/user/detail/${id}`).then((res) => {
+      const users = res.data.response;
+      this.setState({
+        name: res.data.response.name,
+        email: res.data.response.email,
+        password: res.data.response.password,
       });
-    }
+      console.log(res.data.response);
+    });
+  }
 
+  componentDidMount() {
+    this.getdata();
+  }
+
+  render() {
     return (
       <div>
         <Row justify="space-between" gutter={[8, 8]}>
           <Col span={12}>
-            <Button onClick={this.showModal} type="primary" style={{ marginBottom: 10 }}>
-              <PlusOutlined />
-            </Button>
-            <Button onClick={this.showModal} type="primary" style={{ marginBottom: 10, marginLeft: 10 }}>
+            <Button
+              onClick={this.showModal}
+              type="primary"
+              style={{ marginBottom: 10 }}
+            >
               <PlusOutlined />
             </Button>
           </Col>
@@ -56,12 +144,13 @@ class UserTable extends React.Component {
           </Col>
         </Row>
         <Row justify="space-between">
-          <Col span={8}>
-          </Col>
-          <Col span={1}>
-
-          </Col>
-          <Table dataSource={this.state.users} pagination={{ pageSize: 10 }} scroll={{ y: 300 }}>
+          <Col span={8}></Col>
+          <Col span={1}></Col>
+          <Table
+            dataSource={this.state.users}
+            pagination={{ pageSize: 10 }}
+            scroll={{ y: 300 }}
+          >
             <Column title="Name" dataIndex="name" key="name" />
             <Column title="Email" dataIndex="email" key="email" />
             <Column
@@ -69,36 +158,68 @@ class UserTable extends React.Component {
               key="action"
               render={(text, record) => (
                 <Space size="middle">
-                  <Button type="danger" onClick={confirm}>
+                  <Button
+                    type="danger"
+                    onClick={() => this.showModalHapus(record.id)}
+                  >
                     <DeleteOutlined />
                   </Button>
-                  <Button type="primary" onClick={this.showModal}>
+                  <Button
+                    type="primary"
+                    onClick={() => this.showModalUpdate(record.id)}
+                  >
                     <EditOutlined />
                   </Button>
-                  <Button type="primary">
-                    {/* <EditOutlined /> */}
-                  </Button>
-                  {/* <a>Edit {record.name}</a> */}
                 </Space>
               )}
             />
           </Table>
         </Row>
 
-        <Modal title={this.state.formTittle + " User"}
+        <Modal
+          title="Hapus User"
+          visible={this.state.visibleHapus}
+          onOk={this.hapusUser}
+          onCancel={() => this.hideModal("batal")}
+          okText="Hapus"
+          cancelText="Batal"
+        >
+          <h3>Data tidak dapat dikembalikan lagi</h3>
+        </Modal>
+
+        <Modal
+          title="Tambah User"
           visible={this.state.visible}
-          onOk={this.hideModal}
-          onCancel={this.hideModal}
+          onOk={() => this.hideModal("simpan")}
+          onCancel={() => this.hideModal("batal")}
           okText="Simpan"
-          cancelText="Batal" >
-          <Input style={{ marginBottom: 10 }} placeholder="Name" />
-          <Input style={{ marginBottom: 10 }} placeholder="Email" />
+          cancelText="Batal"
+        >
+          <Input
+            name="name"
+            style={{ marginBottom: 10 }}
+            onChange={this.handleChange}
+            value={this.state.name}
+            placeholder="Name"
+          />
+          <Input
+            name="email"
+            style={{ marginBottom: 10 }}
+            onChange={this.handleChange}
+            value={this.state.email}
+            placeholder="Email"
+          />
           <Input.Password
+            name="password"
             placeholder="Password"
-            iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+            iconRender={(visible) =>
+              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+            }
+            onChange={this.handleChange}
+            value={this.state.password}
           />
         </Modal>
-      </div >
+      </div>
     );
   }
 }

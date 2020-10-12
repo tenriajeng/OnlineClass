@@ -1,91 +1,107 @@
 import React from "react";
 import Axios from "axios";
 import { Table, Space, Button, Modal, Input } from "antd";
-import { DeleteOutlined, EditOutlined, EyeTwoTone, PlusOutlined, EyeInvisibleOutlined, ExclamationCircleOutlined, } from "@ant-design/icons";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  EyeTwoTone,
+  PlusOutlined,
+  EyeInvisibleOutlined,
+  ExclamationCircleOutlined,
+} from "@ant-design/icons";
 
 const { Column } = Table;
 
 class KelasTable extends React.Component {
-    state = { visible: false };
+  state = { visible: false };
 
-    showModal = () => {
-        this.setState({
-            visible: true,
-        });
-    };
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
 
-    hideModal = () => {
-        this.setState({
-            visible: false,
-        });
-    };
+  hideModal = () => {
+    this.setState({
+      visible: false,
+    });
+  };
 
-    state = {
-        kelas: [],
-    };
+  state = {
+    kelas: [],
+  };
 
-    componentDidMount() {
-        Axios.get('http://localhost:6600/admin/kelas').then((res) => {
-            const kelas = res.data.response;
-            this.setState({ kelas });
-        });
+  componentDidMount() {
+    Axios.get("http://localhost:6600/admin/kelas").then((res) => {
+      const kelas = res.data.response;
+      this.setState({ kelas });
+    });
+  }
+
+  render() {
+    function confirm() {
+      Modal.confirm({
+        title: "Confirm",
+        icon: <ExclamationCircleOutlined />,
+        content: "Bla bla ...",
+        okText: "YES",
+        cancelText: "NO",
+      });
     }
 
-    render() {
-
-        function confirm() {
-            Modal.confirm({
-                title: "Confirm",
-                icon: <ExclamationCircleOutlined />,
-                content: "Bla bla ...",
-                okText: "YES",
-                cancelText: "NO",
-            });
-        }
-
-        return (
-            <div>
-                <Button onClick={this.showModal} type="primary" style={{ marginBottom: 16 }}>
-                    <PlusOutlined />
+    return (
+      <div>
+        <Button
+          onClick={this.showModal}
+          type="primary"
+          style={{ marginBottom: 16 }}
+        >
+        <PlusOutlined />
+        </Button>
+        <Table
+          dataSource={this.state.kelas}
+          pagination={{ pageSize: 10 }}
+          scroll={{ y: 300 }}
+        >
+          <Column title="Nama" dataIndex="nama" key="nama" />
+          <Column title="Limit" dataIndex="limit" key="limit" />
+          <Column
+            title="Action"
+            key="action"
+            render={(text, record) => (
+              <Space size="middle">
+                <Button type="danger" onClick={confirm}>
+                  <DeleteOutlined />
                 </Button>
-                <Table dataSource={this.state.kelas} pagination={{ pageSize: 10 }} scroll={{ y: 300 }}>
-                    <Column title="Nama" dataIndex="nama" key="nama" />
-                    <Column title="Limit" dataIndex="limit" key="limit" />
-                    <Column
-                        title="Action"
-                        key="action"
-                        render={(text, record) => (
-                            <Space size="middle">
-                                <Button type="danger" onClick={confirm}>
-                                    <DeleteOutlined />
-                                </Button>
-                                <Button type="primary" onClick={this.showModal}>
-                                    <EditOutlined />
-                                </Button>
-                                <Button type="primary">
-                                    {/* <EditOutlined /> */}
-                                </Button>
-                                {/* <a>Edit {record.name}</a> */}
-                            </Space>
-                        )}
-                    />
-                </Table>
-                <Modal title="Tambah User"
-                    visible={this.state.visible}
-                    onOk={this.hideModal}
-                    onCancel={this.hideModal}
-                    okText="Simpan"
-                    cancelText="Batal" >
-                    <Input style={{ marginBottom: 10 }} placeholder="Name" />
-                    <Input style={{ marginBottom: 10 }} placeholder="Email" />
-                    <Input.Password
-                        placeholder="Password"
-                        iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                    />
-                </Modal>
-            </div >
-        )
-    }
+                <Button type="primary" onClick={this.showModal}>
+                  <EditOutlined />
+                </Button>
+                <Button type="primary">{/* <EditOutlined /> */}</Button>
+                {/* <a>Edit {record.name}</a> */}
+              </Space>
+            )}
+          />
+        </Table>
+        <Modal
+          title="Tambah User"
+          visible={this.state.visible}
+          onOk={this.hideModal}
+          onCancel={this.hideModal}
+          okText="Simpan"
+          cancelText="Batal"
+        >
+          <Input style={{ marginBottom: 10 }} placeholder="Name" />
+          <Input style={{ marginBottom: 10 }} placeholder="Email" />
+          <Input.Password
+            placeholder="Password"
+            iconRender={(visible) =>
+              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+            }
+          />
+        </Modal>
+      </div>
+    );
+  }
 }
 
-export default KelasTable
+export default KelasTable;
