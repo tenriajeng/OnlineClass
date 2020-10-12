@@ -5,6 +5,7 @@ import { Link, Route } from "react-router-dom";
 import KelasTable from "../kelas/KelasTable";
 import UserTable from "../user/UserTable";
 import SubMenu from "antd/lib/menu/SubMenu";
+import Tes from "../tes";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -43,6 +44,9 @@ class Base extends React.Component {
               <Menu.Item key="2" icon={<VideoCameraOutlined />}>
                 <Link to="/admin/kelas">Kelas</Link>
               </Menu.Item>
+              <Menu.Item key="3" icon={<VideoCameraOutlined />}>
+                <Link to="/admin/tes">Tes</Link>
+              </Menu.Item>
               <SubMenu key="sub1" icon={<UserOutlined />} title="User">
                 <Menu.Item key="5">Tom</Menu.Item>
                 <Menu.Item key="6">Bill</Menu.Item>
@@ -65,6 +69,9 @@ class Base extends React.Component {
                 </Route>
                 <Route path="/admin/users">
                   <UserTable />
+                </Route>
+                <Route path="/admin/tes">
+                  <Tes />
                 </Route>
               </div>
             </Content>

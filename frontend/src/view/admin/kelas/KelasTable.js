@@ -56,7 +56,7 @@ class KelasTable extends React.Component {
           type="primary"
           style={{ marginBottom: 16 }}
         >
-          <PlusOutlined />
+        <PlusOutlined />
         </Button>
         <Table
           dataSource={this.state.kelas}

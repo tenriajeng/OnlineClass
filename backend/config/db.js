@@ -3,7 +3,7 @@ var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
-  database: "classonline",
+  database: "onlineclass",
 });
 
 connection.connect();
