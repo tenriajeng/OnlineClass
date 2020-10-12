@@ -55,18 +55,23 @@ class UserTable extends React.Component {
     Axios.put(
       `http://localhost:6600/admin/user/delete/${this.state.userId}`
     ).then((res) => {
+      this.successMessage('dihapus!');
       this.getdata();
     });
     this.setState({
       visibleHapus: false,
     });
+    
+  };
+
+  successMessage(message){
     swal({
       title: "Selamat",
-      text: "Berhasil dihapus!",
+      text: "Berhasil "+message,
       icon: "success",
       button: "Tutup",
     });
-  };
+  }
 
   hideModal = (kondisi) => {
     const data = {
@@ -78,13 +83,8 @@ class UserTable extends React.Component {
     if (kondisi === "simpan") {
       Axios.post("http://localhost:6600/admin/user/create", data).then(
         (res) => {
+          this.successMessage('ditambahkan!');
           this.getdata();
-          swal({
-            title: "Selamat",
-            text: "Berhasil ditambahkan!",
-            icon: "success",
-            button: "Tutup",
-          });
         }
       );
     }

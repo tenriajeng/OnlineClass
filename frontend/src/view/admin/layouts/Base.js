@@ -1,6 +1,6 @@
 import { Breadcrumb, Layout, Menu } from "antd";
 import React from "react";
-import { UserOutlined, VideoCameraOutlined,BgColorsOutlined, } from "@ant-design/icons";
+import { UserOutlined, VideoCameraOutlined,BgColorsOutlined,DatabaseOutlined } from "@ant-design/icons";
 import { Link, Route } from "react-router-dom";
 import KelasTable from "../kelas/KelasTable";
 import UserTable from "../user/UserTable";
@@ -42,7 +42,7 @@ class Base extends React.Component {
               <Menu.Item key="1" icon={<UserOutlined />}>
                 <Link to="/admin/users">Users</Link>
               </Menu.Item>
-              <Menu.Item key="2" icon={<VideoCameraOutlined />}>
+              <Menu.Item key="2" icon={<DatabaseOutlined />}>
                 <Link to="/admin/kelas">Kelas</Link>
               </Menu.Item>
               <Menu.Item key="3" icon={<BgColorsOutlined />}>

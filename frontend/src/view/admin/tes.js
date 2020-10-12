@@ -14,22 +14,22 @@ class Tes extends React.Component {
             <Row>
                 <Col flex="auto" style={colStyle}>
                     <Card title="Card title" bordered={true} style={cardStyle}>
-                        Card content
+                        <Input placeholder="Basic usage" />
                     </Card>
                 </Col>
                 <Col flex="auto" style={colStyle}>
                     <Card title="Card title" bordered={true} style={cardStyle}>
-                        Card content
+                        <Input placeholder="Basic usage" />
                     </Card>
                 </Col>
                 <Col flex="auto" style={colStyle}>
                     <Card title="Card title" bordered={true} style={cardStyle}>
-                        Card content
+                        <Input placeholder="Basic usage" />
                     </Card>
                 </Col>
                 <Col flex="auto" style={colStyle}>
                     <Card title="Card title" bordered={true} style={cardStyle}>
-                        Card content
+                        <Input placeholder="Basic usage" />
                     </Card>
                 </Col>
             </Row>
