@@ -1,6 +1,6 @@
 "use strict";
-const userModel = require("../Models/admin/Users");
-const formRes = require("../Helpers/formRes");
+const userModel = require("../../Models/admin/Users");
+const formRes = require("../../Helpers/formRes");
 
 module.exports = {
   getAllUser: (req, res) => {
@@ -53,7 +53,7 @@ module.exports = {
       .then((response) => formRes.resUser(res, response, 200))
       .catch((err) => console.log(err));
   },
-  getOneUser: (req, res) => {
+   getOneUser: (req, res) => {
     // const bookGenre = req.query.genre
     userModel
       .showOneUser(req.params.id)
