@@ -100,13 +100,13 @@ successMessage(message) {
         (res) => {
         this.successMessage("ditambahkan!");
         this.getAllData();
-        }
-
+        });
+    }
         this.setState({
             visible: false,
             visibleHapus: false,
         });
-    };
+    }
 
     getOnedata(id) {
         console.log("apa di", this.state.userId);
@@ -120,7 +120,7 @@ successMessage(message) {
             });
             console.log(res.data.response);
         });
-    }
+    
 
     this.setState({
       visible: false,
