@@ -77,7 +77,7 @@ class KelasTable extends React.Component {
   showModalHapus = (id) => {
     this.setState({
       visibleHapus: true,
-      user_id: id,
+      id: id,
 
     });
   };
@@ -183,8 +183,8 @@ successMessage(message) {
           pagination={{ pageSize: 10 }}
           scroll={{ y: 300 }}
         >
-          <Column title="User_Id" dataIndex="user_id" key="user_id" />
-          <Column title="Kelas_Id" dataIndex="kelas_id" key="kelas_id" />
+          <Column title="Nama User" dataIndex="usersName" key="usersName" />
+          <Column title="Nama Kelas" dataIndex="kelasNama" key="kelasNama" />
           <Column
             title="Action"
             key="action"
@@ -192,13 +192,13 @@ successMessage(message) {
               <Space size="middle">
                 <Button
                     type="danger"
-                    onClick={() => this.showModalHapus(record.id)}
+                    onClick={() => this.showModalHapus(record.kelasUserId)}
                   >
                     <DeleteOutlined />
                   </Button>
                   <Button
                     type="primary"
-                    onClick={() => this.showModalUpdate(record.id)}
+                    onClick={() => this.showModalUpdate(record.kelasUserId)}
                   >
                     <EditOutlined />
                   </Button>

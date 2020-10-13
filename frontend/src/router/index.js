@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import KelasTable from "../view/admin/kelas/KelasTable";
 import KelasUsersTable from "../view/admin/kelasUsers/KelasUsersTable";
 import Pemateri from "../view/admin/pemateri/PemateriTable";
-import Tes from "../view/admin/tes";
+import Tes from "../view/tes/tes";
 import UserTable from "../view/admin/user/UserTable";
 
 function Router(props) {
