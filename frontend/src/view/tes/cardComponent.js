@@ -1,24 +1,13 @@
 import React from "react";
-import { Input, Checkbox, Row, Col, Card, DatePicker } from "antd";
-import Meta from "antd/lib/card/Meta";
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from "@ant-design/icons";
-import moment from "moment";
+import Meta from "antd/lib/card/Meta";
+import { Card, Row, Col } from "antd";
 
-class Tes extends React.Component {
+class CardComponet extends React.Component {
     render() {
         const style = { background: "#0092ff", padding: "8px 0" };
         const cardStyle = { marginRight: 3, marginLeft: 3 };
         const colStyle = { marginTop: 10 };
-
-        function disabledDate(current) {
-            // Can not select days before today and today
-            return current && current < moment().endOf("day");
-        }
-
-        function onChange(e) {
-            console.log(`checked = ${e.target.checked}`);
-        }
-
         return (
             <div>
                 <Row justify="right">
@@ -63,16 +52,9 @@ class Tes extends React.Component {
                         </Card>
                     </Col>
                 </Row>
-
-                <Row justify="right" style={{ marginTop: 10 }}>
-                    <Col flex="1 1 240px" style={colStyle}>
-                        <Checkbox onChange={onChange}>Checkbox</Checkbox>
-                        <DatePicker format="YYYY-MM-DD HH:mm:ss" disabledDate={disabledDate} showTime={{ defaultValue: moment("00:00:00", "HH:mm:ss") }} />
-                    </Col>
-                </Row>
             </div>
         );
     }
 }
 
-export default Tes;
+export default CardComponet;
