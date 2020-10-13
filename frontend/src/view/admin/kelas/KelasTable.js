@@ -40,7 +40,11 @@ class KelasTable extends React.Component {
       visible: false,
       visibleHapus: false,
       nama: "",
+      limit: "",
+      aktif: "",
+      harga: "",
       id: "",
+      foto:""
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -49,6 +53,10 @@ class KelasTable extends React.Component {
     this.setState({
       visible: true,
       nama: "",
+      limit: "",
+      aktif: "",
+      harga: "",
+      id: "",
     });
   };
 
@@ -68,50 +76,38 @@ class KelasTable extends React.Component {
   };
 
   hapusKelas = () => {
-    Axios.put(
-      `http://localhost:6600/admin/kelas/delete/${this.state.id}`
-    ).then((res) => {
-      this.getdata();
+    Axios.put(`http://localhost:6600/admin/kelas/delete/${this.state.id}`).then((res) => {
+        this.successMessage("dihapus!");
+        this.getAllData();
     });
     this.setState({
-      visibleHapus: false,
+        visibleHapus: false,
     });
+};
+
+successMessage(message) {
     swal({
-      title: "Selamat",
-      text: "Berhasil dihapus!",
-      icon: "success",
-      button: "Tutup",
+        title: "Selamat",
+        text: "Berhasil " + message,
+        icon: "success",
+        button: "Tutup",
     });
-  };
-
-  handleChange(e){
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  }
-
+}
   
-  hideModal = (kondisi) => {
+    hideModal = (kondisi) => {
     const data = {
       nama: this.state.nama,
       limit: this.state.limit,
       aktif: this.state.aktif,
       harga: this.state.harga,
       foto: this.state.foto,
-
-
     };
 
     if (kondisi === "simpan") {
       Axios.post("http://localhost:6600/admin/kelas/create", data).then(
         (res) => {
-          this.getdata();
-          swal({
-            title: "Selamat",
-            text: "Berhasil ditambahkan!",
-            icon: "success",
-            button: "Tutup",
-          });
+        this.successMessage("ditambahkan!");
+        this.getAllData();
         }
       );
     }
@@ -122,17 +118,9 @@ class KelasTable extends React.Component {
     });
   };
 
-  getOnedata(id) {
-    console.log("apa di", this.state.userId);
-
-    Axios.get(`http://localhost:6600/admin/kelas/detail/${id}`).then((res) => {
-      const users = res.data.response;
-      this.setState({
-        name: res.data.response.name,
-        email: res.data.response.email,
-        password: res.data.response.password,
-      });
-      console.log(res.data.response);
+  handleChange(e){
+    this.setState({
+      [e.target.name]: e.target.value,
     });
   }
 
@@ -143,21 +131,26 @@ class KelasTable extends React.Component {
     });
   }
 
+
+  getOnedata(id) {
+    console.log("apa di", this.state.id);
+
+    Axios.get(`http://localhost:6600/admin/kelas/detail/${id}`).then((res) => {
+      this.setState({
+        nama: res.data.response.nama,
+        limit: res.data.response.limit,
+        aktif: res.data.response.aktif,
+        harga: res.data.response.harga,
+      });
+      console.log(res.data.response);
+    });
+  }
+
   componentDidMount() {
     this.getAllData();
   }
 
   render() {
-    function confirm() {
-      Modal.confirm({
-        title: "Confirm",
-        icon: <ExclamationCircleOutlined />,
-        content: "Bla bla ...",
-        okText: "YES",
-        cancelText: "NO",
-      });
-    }
-
     return (
       <div>
         <Button
@@ -198,7 +191,7 @@ class KelasTable extends React.Component {
                   </Button>
                   <Button
                     type="primary"
-                    onClick={() => this.showModal(record.id)}
+                    onClick={() => this.showModalUpdate(record.id)}
                   >
                     <EditOutlined />
                   </Button>
@@ -209,8 +202,8 @@ class KelasTable extends React.Component {
         <Modal
           title="Tambah Kelas"
           visible={this.state.visible}
-          onOk={this.hideModal}
-          onCancel={this.hideModal}
+          onOk={() => this.hideModal("simpan")}
+          onCancel={() => this.hideModal("batal")}
           okText="Simpan"
           cancelText="Batal"
         >
