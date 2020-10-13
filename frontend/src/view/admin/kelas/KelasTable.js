@@ -1,35 +1,27 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Axios from "axios";
 import swal from "sweetalert";
 import { Table, Space, Button, Modal, Input, Upload, message, Image } from "antd";
-import {
-  DeleteOutlined,
-  EditOutlined,
-  EyeTwoTone,
-  PlusOutlined,
-  EyeInvisibleOutlined,
-  ExclamationCircleOutlined,
-  UploadOutlined,
-} from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined, EyeTwoTone, PlusOutlined, EyeInvisibleOutlined, ExclamationCircleOutlined, UploadOutlined } from "@ant-design/icons";
 
 const { Column } = Table;
 
 const props = {
-  name: 'file',
-  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-  headers: {
-    authorization: 'authorization-text',
-  },
-  onChange(info) {
-    if (info.file.status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
-    if (info.file.status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === 'error') {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
+    name: "file",
+    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+    headers: {
+        authorization: "authorization-text",
+    },
+    onChange(info) {
+        if (info.file.status !== "uploading") {
+            console.log(info.file, info.fileList);
+        }
+        if (info.file.status === "done") {
+            message.success(`${info.file.name} file uploaded successfully`);
+        } else if (info.file.status === "error") {
+            message.error(`${info.file.name} file upload failed.`);
+        }
+    },
 };
 
 class KelasTable extends React.Component {
@@ -109,7 +101,25 @@ successMessage(message) {
         this.successMessage("ditambahkan!");
         this.getAllData();
         }
-      );
+
+        this.setState({
+            visible: false,
+            visibleHapus: false,
+        });
+    };
+
+    getOnedata(id) {
+        console.log("apa di", this.state.userId);
+
+        Axios.get(`http://localhost:6600/admin/kelas/detail/${id}`).then((res) => {
+            const users = res.data.response;
+            this.setState({
+                name: res.data.response.name,
+                email: res.data.response.email,
+                password: res.data.response.password,
+            });
+            console.log(res.data.response);
+        });
     }
 
     this.setState({
@@ -232,4 +242,4 @@ successMessage(message) {
   }
 }
 
-export default KelasTable
+export default KelasTable;
