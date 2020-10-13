@@ -1,6 +1,6 @@
 "use strict";
-const userModel = require("../../Models/admin/Users");
-const formRes = require("../../Helpers/formRes");
+const pemateriModel = require("../Models/admin/ksers");
+const formRes = require("../Helpers/formRes");
 
 module.exports = {
   getAllUser: (req, res) => {
@@ -8,7 +8,7 @@ module.exports = {
     userModel
       .showAllUser()
       .then((response) => formRes.resUser(res, response, 200))
-      .catch((err) => console.log(err));
+      .catch((err) => formRes.resUser(res, err, 404));
   },
   addUser: (req, res) => {
     //  const bodyReq = req.body;
@@ -22,7 +22,7 @@ module.exports = {
     userModel
       .addUser(body)
       .then((response) => formRes.resUser(res, response, 200))
-      .catch((err) => console.log(err));
+      .catch((err) => formRes.resUser(res, err, 404));
   },
   updateUser: (req, res) => {
     var date = new Date();
@@ -37,7 +37,7 @@ module.exports = {
     userModel
       .updateUser(body, id)
       .then((response) => formRes.resUser(res, response, 200))
-      .catch((err) => console.log(err));
+      .catch((err) => formRes.resUser(res, err, 404));
   },
   deleteUser: (req, res) => {
     var date = new Date();
@@ -50,13 +50,6 @@ module.exports = {
     // console.log(body)
     userModel
       .deleteUser(body, id)
-      .then((response) => formRes.resUser(res, response, 200))
-      .catch((err) => console.log(err));
-  },
-   getOneUser: (req, res) => {
-    // const bookGenre = req.query.genre
-    userModel
-      .showOneUser(req.params.id)
       .then((response) => formRes.resUser(res, response, 200))
       .catch((err) => formRes.resUser(res, err, 404));
   },
