@@ -1,6 +1,6 @@
 import { Breadcrumb, Layout, Menu } from "antd";
 import React from "react";
-import { UserOutlined, BgColorsOutlined, DatabaseOutlined } from "@ant-design/icons";
+import { UserOutlined, BgColorsOutlined, DatabaseOutlined, ContactsOutlined, TeamOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import SubMenu from "antd/lib/menu/SubMenu";
 import Router from "../../../router";
@@ -47,7 +47,13 @@ class Base extends React.Component {
                                 <Menu.Item key="2" icon={<DatabaseOutlined />}>
                                     <Link to="/admin/kelas">Kelas</Link>
                                 </Menu.Item>
-                                <Menu.Item key="3" icon={<BgColorsOutlined />}>
+                                <Menu.Item key="3" icon={<ContactsOutlined />}>
+                                    <Link to="/admin/kelas-user">Kelas Users</Link>
+                                </Menu.Item>
+                                <Menu.Item key="8" icon={<TeamOutlined />}>
+                                    <Link to="/admin/pemateri">Pemateri</Link>
+                                </Menu.Item>
+                                <Menu.Item key="4" icon={<BgColorsOutlined />}>
                                     <Link to="/admin/tes">Tes</Link>
                                 </Menu.Item>
                                 <SubMenu key="sub1" icon={<UserOutlined />} title="User">
