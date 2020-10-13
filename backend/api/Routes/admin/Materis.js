@@ -1,5 +1,5 @@
 const express = require("express");
-const materiController = require("../../Controllers/MaterisController");
+const materiController = require("../../Controllers/Admin/MaterisController");
 const Router = express.Router();
 
 Router.get("/", materiController.getAllMateri);

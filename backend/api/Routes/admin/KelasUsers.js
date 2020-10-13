@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const KelasUserController = require("../../Controllers/KelasUsersController");
+const KelasUserController = require("../../Controllers/Admin/KelasUsersController");
 const Router = express.Router();
 
 Router.get("/", KelasUserController.getAllKelasUser);
