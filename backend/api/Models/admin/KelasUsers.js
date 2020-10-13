@@ -4,7 +4,7 @@ module.exports = {
     showAllKelasUser: () => {
         return new Promise((resolve, reject) => {
             db.query(
-                "SELECT kelas.*,users.* FROM kelas_users INNER JOIN users ON users.id = kelas_users.user_id INNER JOIN kelas ON kelas.id = kelas_users.kelas_id WHERE kelas_users.deleted_at IS NULL",
+                "SELECT kelas.id as kelasId ,kelas.nama as kelasNama, users.name as usersName, users.id as usersId, kelas_users.id as kelasUserId FROM kelas_users INNER JOIN users ON users.id = kelas_users.user_id INNER JOIN kelas ON kelas.id = kelas_users.kelas_id WHERE kelas_users.deleted_at IS NULL",
                 (err, response) => {
                     if (!err) {
                         resolve(response);
