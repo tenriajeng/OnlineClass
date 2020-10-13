@@ -1,10 +1,10 @@
 const db = require("../../../config/db.js");
 
 module.exports = {
-    showAllKelas: () => {
+    showAllKelasUser: () => {
         return new Promise((resolve, reject) => {
             db.query(
-                "SELECT * FROM kelas WHERE deleted_at IS NULL",
+                "SELECT * FROM kelas_users WHERE deleted_at IS NULL",
                 (err, response) => {
                     if (!err) {
                         resolve(response);
@@ -15,9 +15,9 @@ module.exports = {
             );
         });
     },
-    addKelas: (body) => {
+    addKelasUser: (body) => {
         return new Promise((resolve, reject) => {
-            db.query("INSERT INTO kelas SET ?", [body], (err, response) => {
+            db.query("INSERT INTO kelas_users SET ?", [body], (err, response) => {
                 if (!err) {
                     resolve(response);
                 } else {
@@ -26,10 +26,10 @@ module.exports = {
             });
         });
     },
-    updateKelas: (body, id) => {
+    updateKelasUser: (body, id) => {
         return new Promise((resolve, reject) => {
             db.query(
-                "UPDATE kelas SET ? WHERE id = ?",
+                "UPDATE kelas_users SET ? WHERE id = ?",
                 [body, id],
                 (err, response) => {
                     if (!err) {
@@ -44,7 +44,7 @@ module.exports = {
     deleteKelas: (body, id) => {
         return new Promise((resolve, reject) => {
             db.query(
-                "UPDATE kelas SET ? WHERE id = ?",
+                "UPDATE kelas_users SET ? WHERE id = ?",
                 [body, id],
                 (err, response) => {
                     if (!err) {
@@ -56,18 +56,4 @@ module.exports = {
             );
         });
     },
-    showOneKelas: (id) => {
-        return new Promise((resolve, reject) => {
-          db.query(
-            `SELECT * FROM kelas WHERE deleted_at IS NULL AND id = ${id} ORDER BY updated_at DESC`,
-            (err, response) => {
-              if (!err) {
-                resolve(response);
-              } else {
-                reject(err);
-              }
-            }
-          );
-        });
-      },
 };

@@ -1,16 +1,15 @@
 "use strict";
-const kelasModel = require("../Models/admin/Kelas");
-const formRes = require("../Helpers/formRes");
+const KelasUserModel = require("../../Models/admin/KelasUsers");
+const formRes = require("../../Helpers/formRes");
 
 module.exports = {
-    getAllKelas: (req, res) => {
+    getAllKelasUser: (req, res) => {
         // const bookGenre = req.query.genre
-        kelasModel
-            .showAllKelas()
+        KelasUserModel.showAllKelasUser()
             .then((response) => formRes.resUser(res, response, 200))
-            .catch((err) => console.log(err));
+            .catch((err) => formRes.resUser(res, err, 404));
     },
-    addKelas: (req, res) => {
+    addKelasUser: (req, res) => {
         //  const bodyReq = req.body;
         var date = new Date();
         const body = {
@@ -19,12 +18,11 @@ module.exports = {
             updated_at: date,
         };
         // console.log(body)
-        kelasModel
-            .addUser(body)
+        KelasUserModel.addKelasUser(body)
             .then((response) => formRes.resUser(res, response, 200))
-            .catch((err) => console.log(err));
+            .catch((err) => formRes.resUser(res, err, 404));
     },
-    updateKelas: (req, res) => {
+    updateKelasUser: (req, res) => {
         var date = new Date();
         const id = req.params.id;
 
@@ -34,12 +32,11 @@ module.exports = {
             updated_at: date,
         };
         // console.log(body)
-        kelasModel
-            .updateUser(body, id)
+        KelasUserModel.updateKelasUser(body, id)
             .then((response) => formRes.resUser(res, response, 200))
-            .catch((err) => console.log(err));
+            .catch((err) => formRes.resUser(res, err, 404));
     },
-    deleteKelas: (req, res) => {
+    deleteKelasUser: (req, res) => {
         var date = new Date();
         const id = req.params.id;
         // console.log('ini adalah id:',id)
@@ -48,9 +45,8 @@ module.exports = {
             deleted_at: date,
         };
         // console.log(body)
-        kelasModel
-            .deleteUser(body, id)
+        KelasUserModel.deleteKelasUser(body, id)
             .then((response) => formRes.resUser(res, response, 200))
-            .catch((err) => console.log(err));
+            .catch((err) => formRes.resUser(res, err, 404));
     },
 };
