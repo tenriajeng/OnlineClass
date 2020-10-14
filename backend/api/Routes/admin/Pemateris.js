@@ -1,5 +1,5 @@
 const express = require("express");
-const pemateriController = require("../../Controllers/PematerisControllers");
+const pemateriController = require("../../Controllers/Admin/PematerisControllers");
 const Router = express.Router();
 
 Router.get("/", pemateriController.getAllPemateri);

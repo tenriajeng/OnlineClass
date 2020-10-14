@@ -1,12 +1,11 @@
 "use strict";
-const KelasUserModel = require("../Models/admin/KelasUsers");
-const formRes = require("../Helpers/formRes");
+const KelasUserModel = require("../../Models/admin/KelasUsers");
+const formRes = require("../../Helpers/formRes");
 
 module.exports = {
     getAllKelasUser: (req, res) => {
         // const bookGenre = req.query.genre
-        KelasUserModel
-            .showAllKelasUser()
+        KelasUserModel.showAllKelasUser()
             .then((response) => formRes.resUser(res, response, 200))
             .catch((err) => formRes.resUser(res, err, 404));
     },
@@ -19,8 +18,7 @@ module.exports = {
             updated_at: date,
         };
         // console.log(body)
-        KelasUserModel
-            .addKelasUser(body)
+        KelasUserModel.addKelasUser(body)
             .then((response) => formRes.resUser(res, response, 200))
             .catch((err) => formRes.resUser(res, err, 404));
     },
@@ -34,8 +32,7 @@ module.exports = {
             updated_at: date,
         };
         // console.log(body)
-        KelasUserModel
-            .updateKelasUser(body, id)
+        KelasUserModel.updateKelasUser(body, id)
             .then((response) => formRes.resUser(res, response, 200))
             .catch((err) => formRes.resUser(res, err, 404));
     },
@@ -48,8 +45,7 @@ module.exports = {
             deleted_at: date,
         };
         // console.log(body)
-        KelasUserModel
-            .deleteKelasUser(body, id)
+        KelasUserModel.deleteKelasUser(body, id)
             .then((response) => formRes.resUser(res, response, 200))
             .catch((err) => formRes.resUser(res, err, 404));
     },
