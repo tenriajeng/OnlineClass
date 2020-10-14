@@ -56,4 +56,18 @@ module.exports = {
       );
     });
   },
+  showOneTransaksi: (id) => {
+    return new Promise((resolve, reject) => {
+      db.query(
+        `SELECT * FROM transaksis WHERE deleted_at IS NULL AND id = ${id} ORDER BY updated_at DESC`,
+        (err, response) => {
+          if (!err) {
+            resolve(response);
+          } else {
+            reject(err);
+          }
+        }
+      );
+    });
+  },
 };
