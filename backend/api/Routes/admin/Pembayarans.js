@@ -7,5 +7,6 @@ Router.get("/", pembayaranController.getAllPembayaran);
 Router.post("/create", pembayaranController.addPembayaran);
 Router.put("/:id", pembayaranController.updatePembayaran);
 Router.put("/delete/:id", pembayaranController.deletePembayaran);
+Router.get("/detail/:id", pembayaranController.getOnePembayaran);
 
 module.exports = Router;
