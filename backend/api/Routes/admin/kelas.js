@@ -1,5 +1,4 @@
 const express = require("express");
-const router = express.Router();
 const KelasController = require("../../Controllers/KelasController");
 const Router = express.Router();
 

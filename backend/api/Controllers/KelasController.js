@@ -19,10 +19,10 @@ module.exports = {
             updated_at: date,
         };
         // console.log(body)
-        kelasModel
-            .addUser(body)
+        kelasModel 
+            .addKelas(body)
             .then((response) => formRes.resUser(res, response, 200))
-            .catch((err) => console.log(err));
+            .catch((response) => formRes.resUser(res, response, 404));
     },
     updateKelas: (req, res) => {
         var date = new Date();
