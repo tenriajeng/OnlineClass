@@ -1,5 +1,5 @@
 "use strict";
-const pemateriModel = require("../../Models/admin/kelas");
+const kelasModel = require("../../Models/admin/kelas");
 const formRes = require("../../Helpers/formRes");
 
 module.exports = {
@@ -24,7 +24,7 @@ module.exports = {
             .then((response) => formRes.resUser(res, response, 200))
             .catch((err) => formRes.resUser(res, err, 404));
     },
-    updateKelasr: (req, res) => {
+    updateKelas: (req, res) => {
         var date = new Date();
         const id = req.params.id;
 

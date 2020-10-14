@@ -1,6 +1,6 @@
 #components-layout-demo-responsive .logo {
     height: 32px;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 0, 0, 0.2);
     margin: 16px;
 }
 
@@ -15,4 +15,8 @@
 .gutter-box {
     padding: 8px 0;
     background: #00a0e9;
+}
+
+.cardStyle {
+    width: 100%;
 }

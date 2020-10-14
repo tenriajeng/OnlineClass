@@ -1,5 +1,5 @@
 "use strict";
-const pemateriModel = require("../Models/admin/ksers");
+const userModel = require("../../Models/admin/Users");
 const formRes = require("../../Helpers/formRes");
 
 module.exports = {
@@ -50,6 +50,13 @@ module.exports = {
         // console.log(body)
         userModel
             .deleteUser(body, id)
+            .then((response) => formRes.resUser(res, response, 200))
+            .catch((err) => formRes.resUser(res, err, 404));
+    },
+    getOneUser: (req, res) => {
+        // const bookGenre = req.query.genre
+        userModel
+            .showOneUser(req.params.id)
             .then((response) => formRes.resUser(res, response, 200))
             .catch((err) => formRes.resUser(res, err, 404));
     },
