@@ -1,6 +1,6 @@
 "use strict";
-const kelasModel = require("../Models/admin/Kelas");
-const formRes = require("../Helpers/formRes");
+const kelasModel = require("../../Models/admin/kelas");
+const formRes = require("../../Helpers/formRes");
 
 module.exports = {
     getAllKelas: (req, res) => {
@@ -8,7 +8,7 @@ module.exports = {
         kelasModel
             .showAllKelas()
             .then((response) => formRes.resUser(res, response, 200))
-            .catch((err) => console.log(err));
+            .catch((err) => formRes.resUser(res, err, 404));
     },
     addKelas: (req, res) => {
         //  const bodyReq = req.body;
@@ -19,10 +19,10 @@ module.exports = {
             updated_at: date,
         };
         // console.log(body)
-        kelasModel 
+        kelasModel
             .addKelas(body)
             .then((response) => formRes.resUser(res, response, 200))
-            .catch((response) => formRes.resUser(res, response, 404));
+            .catch((err) => formRes.resUser(res, err, 404));
     },
     updateKelas: (req, res) => {
         var date = new Date();
@@ -35,9 +35,9 @@ module.exports = {
         };
         // console.log(body)
         kelasModel
-            .updateUser(body, id)
+            .updateKelas(body, id)
             .then((response) => formRes.resUser(res, response, 200))
-            .catch((err) => console.log(err));
+            .catch((err) => formRes.resUser(res, err, 404));
     },
     deleteKelas: (req, res) => {
         var date = new Date();
@@ -49,8 +49,8 @@ module.exports = {
         };
         // console.log(body)
         kelasModel
-            .deleteUser(body, id)
+            .deleteKelas(body, id)
             .then((response) => formRes.resUser(res, response, 200))
-            .catch((err) => console.log(err));
+            .catch((err) => formRes.resUser(res, err, 404));
     },
 };
