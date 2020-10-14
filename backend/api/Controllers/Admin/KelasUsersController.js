@@ -49,4 +49,11 @@ module.exports = {
             .then((response) => formRes.resUser(res, response, 200))
             .catch((err) => formRes.resUser(res, err, 404));
     },
+    getOneKelasUser: (req, res) => {
+        // const bookGenre = req.query.genre
+        KelasUserModel
+            .showOneKelasUser(req.params.id)
+            .then((response) => formRes.resUser(res, response, 200))
+            .catch((err) => formRes.resUser(res, err, 404));
+    },
 };
