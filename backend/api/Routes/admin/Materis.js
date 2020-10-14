@@ -7,5 +7,6 @@ Router.get("/", materiController.getAllMateri);
 Router.post("/create", materiController.addMateri);
 Router.put("/:id", materiController.updateMateri);
 Router.put("/delete/:id", materiController.deleteMateri);
+Router.get("/detail/:id", materiController.getOneMateri);
 
 module.exports = Router;
