@@ -1,10 +1,10 @@
 const db = require("../../../config/db.js");
 
 module.exports = {
-  showAllMateri: () => {
+  showAllTransaksi: () => {
     return new Promise((resolve, reject) => {
       db.query(
-        "SELECT * FROM materis WHERE deleted_at IS NULL",
+        "SELECT * FROM transaksis WHERE deleted_at IS NULL",
         (err, response) => {
           if (!err) {
             resolve(response);
@@ -15,9 +15,9 @@ module.exports = {
       );
     });
   },
-  addMateri: (body) => {
+  addTransaksi: (body) => {
     return new Promise((resolve, reject) => {
-      db.query("INSERT INTO materis SET ?", [body], (err, response) => {
+      db.query("INSERT INTO transaksis SET ?", [body], (err, response) => {
         if (!err) {
           resolve(response);
         } else {
@@ -26,10 +26,10 @@ module.exports = {
       });
     });
   },
-  updateMateri: (body, id) => {
+  updateTransaksi: (body, id) => {
     return new Promise((resolve, reject) => {
       db.query(
-        "UPDATE materis SET ? WHERE id = ?",
+        "UPDATE transaksis SET ? WHERE id = ?",
         [body, id],
         (err, response) => {
           if (!err) {
@@ -41,10 +41,10 @@ module.exports = {
       );
     });
   },
-  deleteMateri: (body, id) => {
+  deleteTransaksi: (body, id) => {
     return new Promise((resolve, reject) => {
       db.query(
-        "UPDATE materis SET ? WHERE id = ?",
+        "UPDATE transaksis SET ? WHERE id = ?",
         [body, id],
         (err, response) => {
           if (!err) {
@@ -56,10 +56,10 @@ module.exports = {
       );
     });
   },
-  showOneMateri: (id) => {
+  showOneTransaksi: (id) => {
     return new Promise((resolve, reject) => {
       db.query(
-        `SELECT * FROM materis WHERE deleted_at IS NULL AND id = ${id} ORDER BY updated_at DESC`,
+        `SELECT * FROM transaksis WHERE deleted_at IS NULL AND id = ${id} ORDER BY updated_at DESC`,
         (err, response) => {
           if (!err) {
             resolve(response);

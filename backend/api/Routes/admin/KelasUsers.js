@@ -6,5 +6,6 @@ Router.get("/", KelasUserController.getAllKelasUser);
 Router.post("/create", KelasUserController.addKelasUser);
 Router.put("/:id", KelasUserController.updateKelasUser);
 Router.put("/delete/:id", KelasUserController.deleteKelasUser);
+Router.get("/detail/:id", KelasUserController.getOneKelasUser);
 
 module.exports = Router;
