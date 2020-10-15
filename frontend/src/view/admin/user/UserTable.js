@@ -1,10 +1,11 @@
 import React from "react";
 import Axios from "axios";
 import swal from "sweetalert";
-import { Table, Space, Button, Modal, Input, Row, Col } from "antd";
+import { Table, Space, Button, Modal, Input, Row, Col, Select } from "antd";
 import { DeleteOutlined, EditOutlined, EyeTwoTone, PlusOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 
 const { Column } = Table;
+const { Option } = Select;
 
 class UserTable extends React.Component {
     constructor(props) {
@@ -13,12 +14,16 @@ class UserTable extends React.Component {
             users: [],
             visible: false,
             visibleHapus: false,
+            visibleUpdate:false,
             name: "",
             email: "",
             password: "",
-            userId: "",
+            userId: 0,
+            level: "0",
         };
         this.handleChange = this.handleChange.bind(this);
+        this.levelChange = this.levelChange.bind(this);
+
     }
 
     showModal = () => {
@@ -27,15 +32,16 @@ class UserTable extends React.Component {
             name: "",
             email: "",
             password: "",
-        });
+            level: "",
+       });
     };
 
     showModalUpdate = (id) => {
-        this.setState({
-            userId: id,
-            visible: true,
-        });
+        // console.log('show modal update id = ',id);
         this.getOnedata(id);
+        this.setState({
+            visibleUpdate: true,
+        });
     };
 
     showModalHapus = (id) => {
@@ -55,6 +61,27 @@ class UserTable extends React.Component {
         });
     };
 
+    updateUser = () => {
+        const data = {
+            name: this.state.name,
+            email: this.state.email,
+            password: this.state.password,
+            level: this.state.level,
+
+        
+        };
+
+        Axios.put(`http://localhost:6600/admin/user/${this.state.userId}`, data)
+        .then(res => console.log(res.data));
+        this.successMessage("diubah!");
+        this.getdata();
+        this.setState({
+            visibleUpdate: false,
+        });
+        console.log('update data : ',data);
+    }
+
+
     successMessage(message) {
         swal({
             title: "Selamat",
@@ -69,6 +96,8 @@ class UserTable extends React.Component {
             name: this.state.name,
             email: this.state.email,
             password: this.state.password,
+            level: this.state.level,
+
         };
 
         if (kondisi === "simpan") {
@@ -81,33 +110,57 @@ class UserTable extends React.Component {
         this.setState({
             visible: false,
             visibleHapus: false,
+            visibleUpdate:false,
         });
     };
 
     handleChange(e) {
         this.setState({
-            [e.target.name]: e.target.value,
+            [e.target.name]: e.target.value
         });
     }
+
+    levelChange(e) {
+        this.setState({
+            level: e
+        });
+    }
+    
 
     getdata() {
         Axios.get("http://localhost:6600/admin/user").then((res) => {
             const users = res.data.response;
             this.setState({ users });
+            console.log(res.data);
         });
     }
 
     getOnedata(id) {
         console.log("apa di", this.state.userId);
 
-        Axios.get(`http://localhost:6600/admin/user/detail/${id}`).then((res) => {
-            this.setState({
-                name: res.data.response.name,
-                email: res.data.response.email,
-                password: res.data.response.password,
-            });
-            console.log(res.data.response);
-        });
+        try {
+            Axios.get(`http://localhost:6600/admin/user/detail/${id}`).then((res) => {
+
+            const data = res.data.response[0];
+            console.log('response',data);
+
+                this.setState({
+                    visibleUpdate: true,
+                    userId: id,
+                    name: data.name,
+                    email: data.email,
+                    password: data.password,
+                    level: data.level,
+
+                });
+                console.log('response',data);
+            });    
+        } catch (error) {
+            console.log('error ', error);
+        }
+        
+        // alert(this.state.userId);
+        // alert('get one data',id);
     }
 
     componentDidMount() {
@@ -132,6 +185,9 @@ class UserTable extends React.Component {
                         <Table bordered dataSource={this.state.users} pagination={{ pageSize: 10, position: ["bottomCenter"] }} scroll={{ y: 300 }}>
                             <Column title="Name" dataIndex="name" key="name" />
                             <Column title="Email" dataIndex="email" key="email" />
+                            <Column title="Level" dataIndex="level" key="level" />
+                            <Column title="Updated At" dataIndex="updated_at" key="updated_at" />
+                            
                             <Column
                                 title="Action"
                                 key="action"
@@ -159,12 +215,33 @@ class UserTable extends React.Component {
                     <Input name="email" style={{ marginBottom: 10 }} onChange={this.handleChange} value={this.state.email} placeholder="Email" />
                     <Input.Password
                         name="password"
+                        style={{ marginBottom: 10 }}
                         placeholder="Password"
                         iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                         onChange={this.handleChange}
                         value={this.state.password}
                     />
+                    <Select name="level" defaultValue="0" style={{ width: 472 }} value={this.state.level} onChange={this.levelChange} >
+                        <Option value="0">User</Option>
+                        <Option value="1">Admin</Option>     
+                    </Select>
                 </Modal>
+
+                <Modal title="Update User" visible={this.state.visibleUpdate} onOk={()=>this.updateUser()} onCancel={() => this.hideModal("batal")} okText="Simpan" cancelText="Batal">
+                    <Input name="name" style={{ marginBottom: 10 }} onChange={this.handleChange} defaultValue={this.state.name} value={this.state.name}  />
+                    <Input name="email" style={{ marginBottom: 10 }} onChange={this.handleChange} value={this.state.email}  />
+                    <Input.Password
+                        name="password"
+                        iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+                        onChange={this.handleChange} 
+                        value={this.state.password}
+                    />
+                    <Select name="level" defaultValue="0" style={{ width: 472 }}  onChange={this.levelChange} >
+                        <Option value="0">User</Option>
+                        <Option value="1">Admin</Option>     
+                    </Select>
+                </Modal>
+
             </div>
         );
     }

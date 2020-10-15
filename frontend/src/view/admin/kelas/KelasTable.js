@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Axios from "axios";
 import swal from "sweetalert";
-import { Table, Space, Button, Modal, Input, Upload, message, Image } from "antd";
+import { Table, Space, Button, Modal, Input, Upload, message, Image, InputNumber, Checkbox } from "antd";
 import { DeleteOutlined, EditOutlined, EyeTwoTone, PlusOutlined, EyeInvisibleOutlined, ExclamationCircleOutlined, UploadOutlined } from "@ant-design/icons";
 
 const { Column } = Table;
@@ -31,15 +31,27 @@ class KelasTable extends React.Component {
       kelas: [],
       visible: false,
       visibleHapus: false,
+      visibleUpdate: false,
       nama: "",
       limit: "",
       aktif: "",
       harga: "",
-      id: "",
-      foto:""
+      foto:"",
+      id: 0,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.limitChange = this.limitChange.bind(this);
+    this.hargaChange = this.hargaChange.bind(this);
+
+
   }
+
+  onChangeCheckbox = (e) => {
+      this.setState({
+          aktif: e.target.checked,
+      })
+    console.log(`checked = ${e.target.checked}`);
+}
 
   showModal = () => {
     this.setState({
@@ -48,16 +60,7 @@ class KelasTable extends React.Component {
       limit: "",
       aktif: "",
       harga: "",
-      id: "",
     });
-  };
-
-  showModalUpdate = (id) => {
-    this.setState({
-      id: id,
-      visible: true,
-    });
-    this.getOnedata(id);
   };
 
   showModalHapus = (id) => {
@@ -76,6 +79,34 @@ class KelasTable extends React.Component {
         visibleHapus: false,
     });
 };
+
+showModalUpdate = (id) => {
+  this.getOnedata(id);
+  this.setState({
+    visibleUpdate: true,
+  });
+};
+
+updateKelas = () => {
+  const data = {
+    nama: this.state.nama,
+    limit: this.state.limit,
+    aktif: this.state.aktif,
+    harga: this.state.harga,
+    foto: this.state.foto,
+  };
+
+  Axios.put(`http://localhost:6600/admin/kelas/
+  ${this.state.id}`, data)
+  .then(res => console.log(res.data));
+  this.successMessage("diubah!");
+  this.setState({
+      visibleUpdate: false,
+  });
+  this.getAlldata();
+
+  console.log('update data : ',data);
+}
 
 successMessage(message) {
     swal({
@@ -105,27 +136,8 @@ successMessage(message) {
         this.setState({
             visible: false,
             visibleHapus: false,
+            visibleUpdate: false,
         });
-    }
-
-    getOnedata(id) {
-        console.log("apa di", this.state.userId);
-
-        Axios.get(`http://localhost:6600/admin/kelas/detail/${id}`).then((res) => {
-            const users = res.data.response;
-            this.setState({
-                name: res.data.response.name,
-                email: res.data.response.email,
-                password: res.data.response.password,
-            });
-            console.log(res.data.response);
-        });
-    
-
-    this.setState({
-      visible: false,
-      visibleHapus: false,
-    });
   };
 
   handleChange(e){
@@ -134,10 +146,23 @@ successMessage(message) {
     });
   }
 
+  limitChange(value) {
+    this.setState({
+      limit: value
+  });
+  }
+
+  hargaChange(value) {
+    this.setState({
+      harga: value
+  });
+  }
+
   getAllData(){
     Axios.get("http://localhost:6600/admin/kelas").then((res) => {
       const kelas = res.data.response;
       this.setState({ kelas });
+      console.log(res.data);
     });
   }
 
@@ -145,16 +170,22 @@ successMessage(message) {
   getOnedata(id) {
     console.log("apa di", this.state.id);
 
+    try {
     Axios.get(`http://localhost:6600/admin/kelas/detail/${id}`).then((res) => {
-      this.setState({
+    const data = res.data.response[0];  
+    this.setState({
         nama: res.data.response.nama,
         limit: res.data.response.limit,
         aktif: res.data.response.aktif,
         harga: res.data.response.harga,
       });
-      console.log(res.data.response);
+      console.log('response', data.nama);
     });
+  } catch (error) {
+    console.log('error ', error);
   }
+  
+}
 
   componentDidMount() {
     this.getAllData();
@@ -179,6 +210,7 @@ successMessage(message) {
           <Column title="Limit" dataIndex="limit" key="limit" />
           <Column title="Aktif" dataIndex="aktif" key="aktif" />
           <Column title="Harga" dataIndex="harga" key="harga" />
+          <Column title="Updated At" dataIndex="updated_at" key="updated_at" />
           <Column title="Foto" dataIndex="foto" key="foto" render={(text, record) => (
               <Space size="middle">
                 <Image
@@ -218,9 +250,10 @@ successMessage(message) {
           cancelText="Batal"
         >
           <Input style={{ marginBottom: 10 }} name="nama" onChange={this.handleChange} value={this.state.nama} placeholder="Name" />
-          <Input style={{ marginBottom: 10 }} name="limit" onChange={this.handleChange} value={this.state.limit} placeholder="Limit" />
-          <Input style={{ marginBottom: 10 }} name="aktif" onChange={this.handleChange} value={this.state.aktif} placeholder="Aktif" />
-          <Input style={{ marginBottom: 10 }} name="harga" onChange={this.handleChange} value={this.state.harga} placeholder="Harga" />
+          <InputNumber min={1} max={100} name="limit" placeholder="Limit" style={{ marginBottom: 10, width: 472 }} onChange={this.limitChange} value={this.state.limit} />
+          <InputNumber min={1} max={1000000000} name="harga" placeholder="Harga" style={{ marginBottom: 10, width: 472 }} onChange={this.hargaChange} value={this.state.harga} />
+          <Checkbox onChange={this.onChangeCheckbox}>Aktif</Checkbox>
+          
           <Upload {...props}>
             <Button icon={<UploadOutlined />}>Click to Upload</Button>
           </Upload>
@@ -235,6 +268,44 @@ successMessage(message) {
           cancelText="Batal"
         >
           <h3>Data tidak dapat dikembalikan lagi</h3>
+        </Modal>
+
+        <Modal
+          title="Update Kelas"
+          visible={this.state.visibleUpdate}
+          onOk={() => this.updateKelas()}
+          onCancel={() => this.hideModal("batal")}
+          okText="Simpan"
+          cancelText="Batal"
+        >
+          <Input 
+            style={{ marginBottom: 10 }} 
+            name="nama" 
+            onChange={this.handleChange} 
+            defaultValue={this.state.nama} 
+            value={this.state.nama} 
+            placeholder="Name" />
+          <Input 
+            style={{ marginBottom: 10 }} 
+            name="limit" 
+            onChange={this.handleChange} 
+            value={this.state.limit} 
+            placeholder="Limit" />
+          <Input 
+            style={{ marginBottom: 10 }} 
+            name="aktif" 
+            onChange={this.handleChange} 
+            value={this.state.aktif} 
+            placeholder="Aktif" />
+          <Input 
+            style={{ marginBottom: 10 }} 
+            name="harga" 
+            onChange={this.handleChange} 
+            value={this.state.harga} 
+            placeholder="Harga" />
+          <Upload {...props}>
+            <Button icon={<UploadOutlined />}>Click to Upload</Button>
+          </Upload>
         </Modal>
 
       </div>

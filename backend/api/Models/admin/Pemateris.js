@@ -4,7 +4,7 @@ module.exports = {
   showAllPemateri: () => {
     return new Promise((resolve, reject) => {
       db.query(
-        "SELECT * FROM pemateris WHERE deleted_at IS NULL",
+        "SELECT kelas.id as kelasId ,kelas.nama as kelasNama, users.name as usersName, users.id as usersId, pemateris.id as pematerisId FROM pemateris INNER JOIN users ON users.id = pemateris.user_id INNER JOIN kelas ON kelas.id = pemateris.kelas_id WHERE pemateris.deleted_at IS NULL",
         (err, response) => {
           if (!err) {
             resolve(response);
