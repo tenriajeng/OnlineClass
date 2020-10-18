@@ -14,16 +14,15 @@ class UserTable extends React.Component {
             users: [],
             visible: false,
             visibleHapus: false,
-            visibleUpdate:false,
+            visibleUpdate: false,
             name: "",
             email: "",
             password: "",
             userId: 0,
-            level: "0",
+            level: "",
         };
         this.handleChange = this.handleChange.bind(this);
         this.levelChange = this.levelChange.bind(this);
-
     }
 
     showModal = () => {
@@ -33,7 +32,7 @@ class UserTable extends React.Component {
             email: "",
             password: "",
             level: "",
-       });
+        });
     };
 
     showModalUpdate = (id) => {
@@ -67,20 +66,16 @@ class UserTable extends React.Component {
             email: this.state.email,
             password: this.state.password,
             level: this.state.level,
-
-        
         };
 
-        Axios.put(`http://localhost:6600/admin/user/${this.state.userId}`, data)
-        .then(res => console.log(res.data));
+        Axios.put(`http://localhost:6600/admin/user/${this.state.userId}`, data).then((res) => console.log(res.data));
         this.successMessage("diubah!");
         this.getdata();
         this.setState({
             visibleUpdate: false,
         });
-        console.log('update data : ',data);
-    }
-
+        console.log("update data : ", data);
+    };
 
     successMessage(message) {
         swal({
@@ -97,7 +92,6 @@ class UserTable extends React.Component {
             email: this.state.email,
             password: this.state.password,
             level: this.state.level,
-
         };
 
         if (kondisi === "simpan") {
@@ -110,22 +104,21 @@ class UserTable extends React.Component {
         this.setState({
             visible: false,
             visibleHapus: false,
-            visibleUpdate:false,
+            visibleUpdate: false,
         });
     };
 
     handleChange(e) {
         this.setState({
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         });
     }
 
     levelChange(e) {
         this.setState({
-            level: e
+            level: e,
         });
     }
-    
 
     getdata() {
         Axios.get("http://localhost:6600/admin/user").then((res) => {
@@ -140,9 +133,8 @@ class UserTable extends React.Component {
 
         try {
             Axios.get(`http://localhost:6600/admin/user/detail/${id}`).then((res) => {
-
-            const data = res.data.response[0];
-            console.log('response',data);
+                const data = res.data.response[0];
+                console.log("response", data);
 
                 this.setState({
                     visibleUpdate: true,
@@ -151,14 +143,13 @@ class UserTable extends React.Component {
                     email: data.email,
                     password: data.password,
                     level: data.level,
-
                 });
-                console.log('response',data);
-            });    
+                console.log("response", data);
+            });
         } catch (error) {
-            console.log('error ', error);
+            console.log("error ", error);
         }
-        
+
         // alert(this.state.userId);
         // alert('get one data',id);
     }
@@ -187,7 +178,7 @@ class UserTable extends React.Component {
                             <Column title="Email" dataIndex="email" key="email" />
                             <Column title="Level" dataIndex="level" key="level" />
                             <Column title="Updated At" dataIndex="updated_at" key="updated_at" />
-                            
+
                             <Column
                                 title="Action"
                                 key="action"
@@ -221,27 +212,21 @@ class UserTable extends React.Component {
                         onChange={this.handleChange}
                         value={this.state.password}
                     />
-                    <Select name="level" defaultValue="0" style={{ width: 472 }} value={this.state.level} onChange={this.levelChange} >
+                    <Select name="level" defaultValue="0" style={{ width: 472 }} onChange={this.levelChange}>
                         <Option value="0">User</Option>
-                        <Option value="1">Admin</Option>     
+                        <Option value="1">Admin</Option>
                     </Select>
                 </Modal>
 
-                <Modal title="Update User" visible={this.state.visibleUpdate} onOk={()=>this.updateUser()} onCancel={() => this.hideModal("batal")} okText="Simpan" cancelText="Batal">
-                    <Input name="name" style={{ marginBottom: 10 }} onChange={this.handleChange} defaultValue={this.state.name} value={this.state.name}  />
-                    <Input name="email" style={{ marginBottom: 10 }} onChange={this.handleChange} value={this.state.email}  />
-                    <Input.Password
-                        name="password"
-                        iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
-                        onChange={this.handleChange} 
-                        value={this.state.password}
-                    />
-                    <Select name="level" defaultValue="0" style={{ width: 472 }}  onChange={this.levelChange} >
+                <Modal title="Update User" visible={this.state.visibleUpdate} onOk={() => this.updateUser()} onCancel={() => this.hideModal("batal")} okText="Simpan" cancelText="Batal">
+                    <Input name="name" style={{ marginBottom: 10 }} onChange={this.handleChange} defaultValue={this.state.name} value={this.state.name} />
+                    <Input name="email" style={{ marginBottom: 10 }} onChange={this.handleChange} value={this.state.email} />
+                    <Input.Password name="password" iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} onChange={this.handleChange} value={this.state.password} />
+                    <Select name="level" defaultValue="0" style={{ width: 472 }} onChange={this.levelChange}>
                         <Option value="0">User</Option>
-                        <Option value="1">Admin</Option>     
+                        <Option value="1">Admin</Option>
                     </Select>
                 </Modal>
-
             </div>
         );
     }

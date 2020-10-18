@@ -53,4 +53,11 @@ module.exports = {
             .then((response) => formRes.resUser(res, response, 200))
             .catch((err) => formRes.resUser(res, err, 404));
     },
+    getOneMateri: (req, res) => {
+        // const bookGenre = req.query.genre
+        materiModel
+            .showOneMateri(req.params.id)
+            .then((response) => formRes.resUser(res, response, 200))
+            .catch((err) => formRes.resUser(res, err, 404));
+    },
 };

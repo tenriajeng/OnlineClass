@@ -184,7 +184,7 @@ class KelasTableUser extends React.Component {
                 <Modal title="Tambah User-Kelas" visible={this.state.visible} onOk={() => this.hideModal("simpan")} onCancel={() => this.hideModal("batal")} okText="Simpan" cancelText="Batal">
                     <Select
                         showSearch
-                        style={{ width: 472, marginBottom:10 }}
+                        style={{ width: 472, marginBottom: 10 }}
                         placeholder="Select User"
                         optionFilterProp="children"
                         onChange={this.onChangeUser}
@@ -199,7 +199,7 @@ class KelasTableUser extends React.Component {
 
                     <Select
                         showSearch
-                        style={{ width: 472, marginBottom:10 }}
+                        style={{ width: 472, marginBottom: 10 }}
                         placeholder="Select Kelas"
                         optionFilterProp="children"
                         onChange={this.onChangeKelas}

@@ -183,7 +183,7 @@ class PemateriTable extends React.Component {
                 <Modal title="Tambah User-Kelas" visible={this.state.visible} onOk={() => this.hideModal("simpan")} onCancel={() => this.hideModal("batal")} okText="Simpan" cancelText="Batal">
                     <Select
                         showSearch
-                        style={{ width: 472, marginBottom:10 }}
+                        style={{ width: 472, marginBottom: 10 }}
                         placeholder="Select User"
                         optionFilterProp="children"
                         onChange={this.onChangeUser}
@@ -198,7 +198,7 @@ class PemateriTable extends React.Component {
 
                     <Select
                         showSearch
-                        style={{ width: 472, marginBottom:10 }}
+                        style={{ width: 472, marginBottom: 10 }}
                         placeholder="Select Kelas"
                         optionFilterProp="children"
                         onChange={this.onChangeKelas}
@@ -212,7 +212,7 @@ class PemateriTable extends React.Component {
                     </Select>
                 </Modal>
 
-                <Modal title="Hapus Kelas" visible={this.state.visibleHapus} onOk={this.hapusKelas} onCancel={() => this.hideModal("batal")} okText="Hapus" cancelText="Batal">
+                <Modal title="Hapus Pemateri" visible={this.state.visibleHapus} onOk={this.hapusKelas} onCancel={() => this.hideModal("batal")} okText="Hapus" cancelText="Batal">
                     <h3>Data tidak dapat dikembalikan lagi</h3>
                 </Modal>
             </div>
