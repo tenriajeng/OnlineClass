@@ -1,7 +1,5 @@
-import { Breadcrumb, Layout, Menu } from "antd";
+import { Layout } from "antd";
 import React from "react";
-import { Link } from "react-router-dom";
-import SubMenu from "antd/lib/menu/SubMenu";
 import Router from "../../../router";
 import HeaderComponet from "./HeaderComponet";
 import SiderComponent from "./SiderComponent";
@@ -11,42 +9,42 @@ import FooterComponent from "./FooterComponent";
 const { Content } = Layout;
 
 class Base extends React.Component {
-    state = {
-        collapsed: false,
-    };
+	state = {
+		collapsed: false,
+	};
 
-    toggle = () => {
-        this.setState({
-            collapsed: !this.state.collapsed,
-        });
-    };
+	toggle = () => {
+		this.setState({
+			collapsed: !this.state.collapsed,
+		});
+	};
 
-    render() {
-        return (
-            <div>
-                <Layout>
-                    {/* Header */}
-                    <HeaderComponet />
+	render() {
+		return (
+			<div>
+				<Layout>
+					{/* Header */}
+					<HeaderComponet />
 
-                    <Layout>
-                        {/* sider */}
-                        <SiderComponent />
+					<Layout>
+						{/* sider */}
+						<SiderComponent />
 
-                        <Content style={{ margin: "24px 16px 0" }}>
-                            {/* Breadcrumb */}
+						<Content style={{ margin: "24px 16px 0" }}>
+							{/* Breadcrumb */}
 
-                            <BreadcrumbComponent />
-                            <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-                                <Router />
-                            </div>
-                            {/* footer */}
-                            <FooterComponent />
-                        </Content>
-                    </Layout>
-                </Layout>
-            </div>
-        );
-    }
+							<BreadcrumbComponent />
+							<div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
+								<Router />
+							</div>
+							{/* footer */}
+							<FooterComponent />
+						</Content>
+					</Layout>
+				</Layout>
+			</div>
+		);
+	}
 }
 
 export default Base;
