@@ -1,16 +1,16 @@
 "use strict";
-const kelasModel = require("../../Models/admin/kelas");
+const pembayaranModel = require("../../Models/admin/Pembayarans");
 const formRes = require("../../Helpers/formRes");
 
 module.exports = {
-    getAllKelas: (req, res) => {
+    getAllPembayaran: (req, res) => {
         // const bookGenre = req.query.genre
-        kelasModel
-            .showAllKelas()
+        pembayaranModel
+            .showAllPembayaran()
             .then((response) => formRes.resUser(res, response, 200))
             .catch((err) => formRes.resUser(res, err, 404));
     },
-    addKelas: (req, res) => {
+    addPembayaran: (req, res) => {
         //  const bodyReq = req.body;
         var date = new Date();
         const body = {
@@ -19,12 +19,12 @@ module.exports = {
             updated_at: date,
         };
         // console.log(body)
-        kelasModel
-            .addKelas(body)
+        pembayaranModel
+            .addPembayaran(body)
             .then((response) => formRes.resUser(res, response, 200))
             .catch((err) => formRes.resUser(res, err, 404));
     },
-    updateKelas: (req, res) => {
+    updatePembayaran: (req, res) => {
         var date = new Date();
         const id = req.params.id;
 
@@ -34,12 +34,12 @@ module.exports = {
             updated_at: date,
         };
         // console.log(body)
-        kelasModel
-            .updateKelas(body, id)
+        pembayaranModel
+            .updatePembayaran(body, id)
             .then((response) => formRes.resUser(res, response, 200))
             .catch((err) => formRes.resUser(res, err, 404));
     },
-    deleteKelas: (req, res) => {
+    deletePembayaran: (req, res) => {
         var date = new Date();
         const id = req.params.id;
         // console.log('ini adalah id:',id)
@@ -48,15 +48,15 @@ module.exports = {
             deleted_at: date,
         };
         // console.log(body)
-        kelasModel
-            .deleteKelas(body, id)
+        pembayaranModel
+            .deletePembayaran(body, id)
             .then((response) => formRes.resUser(res, response, 200))
             .catch((err) => formRes.resUser(res, err, 404));
     },
-    getOneKelas: (req, res) => {
+    getOnePembayaran: (req, res) => {
         // const bookGenre = req.query.genre
-        kelasModel
-            .showOneKelas(req.params.id)
+        pembayaranModel
+            .showOnePembayaran(req.params.id)
             .then((response) => formRes.resUser(res, response, 200))
             .catch((err) => formRes.resUser(res, err, 404));
     },

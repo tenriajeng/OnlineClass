@@ -4,7 +4,7 @@ module.exports = {
   showAllUser: () => {
     return new Promise((resolve, reject) => {
       db.query(
-        "SELECT * FROM users WHERE deleted_at IS NULL ORDER BY updated_at DESC",
+        `SELECT id,name,email,IF(level=1,"ADMIN","USER") as level,DATE_FORMAT(updated_at,"%d-%m-%Y") AS updated_at FROM users WHERE deleted_at IS NULL ORDER BY updated_at DESC`,
         (err, response) => {
           if (!err) {
             resolve(response);
