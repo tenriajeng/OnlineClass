@@ -102,11 +102,8 @@ class KelasTable extends React.Component {
 		this.setState({
 			visibleUpdate: false,
 		});
-		Axios.get("http://localhost:6600/admin/kelas").then((res) => {
-			const kelas = res.data.response;
-			this.setState({ kelas });
-			//   console.log(res.data);
-		});
+		this.getAllData();
+
 		console.log("update data : ", data);
 	};
 
@@ -131,6 +128,7 @@ class KelasTable extends React.Component {
 		if (kondisi === "simpan") {
 			Axios.post("http://localhost:6600/admin/kelas/create", data).then((res) => {
 				this.successMessage("ditambahkan!");
+				this.getAllData();
 			});
 		}
 		this.setState({
