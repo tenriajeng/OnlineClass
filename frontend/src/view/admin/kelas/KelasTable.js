@@ -238,8 +238,18 @@ class KelasTable extends React.Component {
 					cancelText="Batal"
 				>
 					<Input style={{ marginBottom: 10 }} name="nama" onChange={this.handleChange} value={this.state.nama} placeholder="Name" />
-					<InputNumber min={1} max={100} name="limit" placeholder="Limit" style={{ marginBottom: 10, width: 472 }} onChange={this.limitChange} value={this.state.limit} />
 					<InputNumber
+						type="number"
+						min={1}
+						max={100}
+						name="limit"
+						placeholder="Limit"
+						style={{ marginBottom: 10, width: 472 }}
+						onChange={this.limitChange}
+						value={this.state.limit}
+					/>
+					<InputNumber
+						type="number"
 						min={1}
 						max={1000000000}
 						name="harga"
@@ -269,9 +279,19 @@ class KelasTable extends React.Component {
 				>
 					<Input style={{ marginBottom: 10 }} name="nama" onChange={this.handleChange} defaultValue={this.state.nama} value={this.state.nama} placeholder="Name" />
 
-					<InputNumber min={1} max={100} name="limit" placeholder="Limit" style={{ marginBottom: 10, width: 472 }} onChange={this.limitChange} value={this.state.limit} />
+					<InputNumber
+						type="number"
+						min={1}
+						max={100}
+						name="limit"
+						placeholder="Limit"
+						style={{ marginBottom: 10, width: 472 }}
+						onChange={this.limitChange}
+						value={this.state.limit}
+					/>
 
 					<InputNumber
+						type="number"
 						min={1}
 						max={1000000000}
 						name="harga"
