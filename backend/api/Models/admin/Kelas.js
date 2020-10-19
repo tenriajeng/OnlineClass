@@ -4,7 +4,7 @@ module.exports = {
 	showAllKelas: () => {
 		return new Promise((resolve, reject) => {
 			db.query(
-				`SELECT id, nama, kelas.limit, aktif, harga, foto, deleted_at, created_at, DATE_FORMAT(updated_at,"%d-%m-%Y %H:%i:%s") AS updated_at FROM kelas WHERE deleted_at IS NULL`,
+				`SELECT id, nama, kelas.limit, aktif, harga, foto, deleted_at, created_at, DATE_FORMAT(updated_at,"%d-%m-%Y %H:%i:%s") AS updated_at FROM kelas WHERE deleted_at IS NULL ORDER BY updated_at DESC`,
 				(err, response) => {
 					if (!err) {
 						resolve(response);
