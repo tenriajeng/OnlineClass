@@ -8,5 +8,4 @@ Router.put("/:id", KelasController.updateKelas);
 Router.put("/delete/:id", KelasController.deleteKelas);
 Router.get("/detail/:id", KelasController.getOneKelas);
 
-
 module.exports = Router;
