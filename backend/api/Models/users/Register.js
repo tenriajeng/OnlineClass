@@ -2,7 +2,7 @@ const db = require("../../../config/db.js");
 
 module.exports = {
 
-UserRegister: (body) => {
+  RegisterUser: (body) => {
     return new Promise((resolve, reject) => {
       db.query("INSERT INTO users SET ?", [body], (err, response) => {
         if (!err) {
