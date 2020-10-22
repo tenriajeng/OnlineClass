@@ -8,10 +8,9 @@ module.exports = {
         const body = {
             ...req.body,
         };
-        
         loginModel
             .loginUser(body)
             .then((response) => formRes.resUser(res, response, 200))
-            .catch((response) => formRes.resUser(res, response, 404));
+            .catch((err) => formRes.resUser(res, err, 404));
     },
 };

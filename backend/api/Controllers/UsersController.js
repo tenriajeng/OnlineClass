@@ -21,8 +21,8 @@ module.exports = {
     // console.log(body)
     userModel
       .addUser(body)
-      .then((response) => formRes.resUser(res, response, 200))
-      .catch((err) => console.log(err));
+      .then((response) => formRes.resUser(res, response, "berhasil"))
+      .catch((response) => formRes.resUser(res, response, "fuck up"));
   },
   updateUser: (req, res) => {
     var date = new Date();
