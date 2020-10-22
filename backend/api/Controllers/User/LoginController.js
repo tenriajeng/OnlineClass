@@ -1,15 +1,15 @@
 "use strict";
-const registerModel = require("../Models/users/Register");
-const formRes = require("../Helpers/formRes");
+const loginModel = require("../../Models/users/Login");
+const formRes = require("../../Helpers/formRes");
 
 module.exports = {
-    UserRegister: (req, res) => {
+    loginUser: (req, res) => {
         // const bookGenre = req.query.genre
         const body = {
             ...req.body,
         };
-        registerModel
-            .RegisterUser(body)
+        loginModel
+            .loginUser(body)
             .then((response) => formRes.resUser(res, response, 200))
             .catch((err) => formRes.resUser(res, err, 404));
     },
