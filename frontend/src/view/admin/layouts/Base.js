@@ -1,19 +1,14 @@
-import { Breadcrumb, Layout, Menu } from 'antd'
-import React from 'react'
-import {
-    UserOutlined,
-    UploadOutlined,
-    VideoCameraOutlined
-} from "@ant-design/icons";
-import { Link, Route } from 'react-router-dom';
-import KelasTable from '../kelas/KelasTable';
-import UserTable from '../user/UserTable';
-import SubMenu from 'antd/lib/menu/SubMenu';
+import { Breadcrumb, Layout, Menu } from "antd";
+import React from "react";
+// import { UserOutlined, BgColorsOutlined, DatabaseOutlined } from "@ant-design/icons";
+import { UserOutlined, BgColorsOutlined, DatabaseOutlined , PicLeftOutlined} from "@ant-design/icons";
+import { Link } from "react-router-dom";
+import SubMenu from "antd/lib/menu/SubMenu";
+import Router from "../../../router";
 
 const { Header, Content, Footer, Sider } = Layout;
 
 class Base extends React.Component {
-
     state = {
         collapsed: false,
     };
@@ -25,55 +20,66 @@ class Base extends React.Component {
     };
 
     render() {
-
         return (
             <div>
                 <Layout>
-                    <Sider
-                        breakpoint="lg"
-                        collapsedWidth="0"
-                        onBreakpoint={broken => {
-                            console.log(broken);
-                        }}
-                        onCollapse={(collapsed, type) => {
-                            console.log(collapsed, type);
-                        }}
-                    >
-                        <div style={{ margin: '24px 16px 13px' }} className="logo">
-                            <h1 style={{ color: 'white' }}>Admin Panel</h1>
+                    <Header theme="dark" style={{ padding: 0 }}>
+                        <div style={{ marginLeft: 10 }} className="logo">
+                            <h1 style={{ color: "white" }}>Admin Panel</h1>
                         </div>
-                        <Menu theme="dark" mode="inline">
-                            <Menu.Item key="1" icon={<UserOutlined />}>
-                                <Link to="/admin/users">Users</Link>
-                            </Menu.Item>
-                            <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-                                <Link to="/admin/kelas">Kelas</Link>
-                            </Menu.Item>
-                            <SubMenu key="sub1" icon={<UserOutlined />} title="User">
-                                <Menu.Item key="5">Tom</Menu.Item>
-                                <Menu.Item key="6">Bill</Menu.Item>
-                                <Menu.Item key="7">Alex</Menu.Item>
-                            </SubMenu>
-                        </Menu>
-                    </Sider>
+                    </Header>
+
                     <Layout>
-                        <Header className="site-layout-sub-header-background" style={{ padding: 0 }} />
-                        <Content style={{ margin: '24px 16px 0' }}>
+                        <Sider
+                            className="site-layout-background"
+                            breakpoint="lg"
+                            collapsedWidth="0"
+                            onBreakpoint={(broken) => {
+                                console.log(broken);
+                            }}
+                            onCollapse={(collapsed, type) => {
+                                console.log(collapsed, type);
+                            }}
+                        >
+                            <Menu theme="light" mode="inline">
+                                <Menu.Item key="1" icon={<UserOutlined />}>
+                                    <Link to="/admin/users">Users</Link>
+                                </Menu.Item>
+                                <Menu.Item key="2" icon={<DatabaseOutlined />}>
+                                    <Link to="/admin/kelas">Kelas</Link>
+                                </Menu.Item>
+                                <Menu.Item key="3" icon={<BgColorsOutlined />}>
+                                    <Link to="/admin/tes">Tes</Link>
+                                </Menu.Item>
+
+
+                                <Menu.Item key="4" icon={<PicLeftOutlined />}>
+                                    <Link to="/admin/materies">Materi</Link>
+                                </Menu.Item>
+
+                                <SubMenu key="sub1" icon={<UserOutlined />} title="User">
+                                    <Menu.Item key="5">Tom</Menu.Item>
+                                    <Menu.Item key="6">Bill</Menu.Item>
+                                    <Menu.Item key="7">Alex</Menu.Item>
+                                </SubMenu>
+                            </Menu>
+                        </Sider>
+                        <Content style={{ margin: "24px 16px 0" }}>
+                            <Breadcrumb style={{ marginBottom: 15 }}>
+                                <Breadcrumb.Item>Home</Breadcrumb.Item>
+                                <Breadcrumb.Item>List</Breadcrumb.Item>
+                                <Breadcrumb.Item>App</Breadcrumb.Item>
+                            </Breadcrumb>
                             <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-                                <Route exact path="/admin/kelas" >
-                                    <KelasTable />
-                                </Route>
-                                <Route path="/admin/users" >
-                                    <UserTable />
-                                </Route>
+                                <Router />
                             </div>
+                            <Footer style={{ textAlign: "center" }}>Ant Design ©2018 Created by Ant UED</Footer>
                         </Content>
-                        <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
                     </Layout>
                 </Layout>
-            </div >
-        )
+            </div>
+        );
     }
 }
 
-export default Base
+export default Base;
