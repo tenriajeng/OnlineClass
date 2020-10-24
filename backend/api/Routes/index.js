@@ -1,9 +1,8 @@
 const express = require("express");
 const Router = express.Router();
+//admin
 const kelas = require("./admin/kelas");
 const user = require("./admin/users");
-const Login = require("./user/login");
-const home = require("./user/home.js");
 const materi = require("./admin/materis");
 const pemateri = require("./admin/pemateris");
 const KelasUser = require("./admin/KelasUsers");
