@@ -1,12 +1,15 @@
 const express = require("express");
 const Router = express.Router();
+//admin
 const kelas = require("./admin/kelas");
 const user = require("./admin/users");
-const Login = require("./user/login");
-const home = require("./user/home.js");
 const materi = require("./admin/materis");
 const pemateri = require("./admin/pemateris");
 const KelasUser = require("./admin/KelasUsers");
+
+//home
+const home = require("./user/home.js");
+const Login = require("./user/login");
 const Register = require("./user/register");
 const userkelas = require("./user/indexuser.js");
 const pembayaran = require("./admin/Pembayarans");
@@ -16,6 +19,8 @@ const profile = require("./user/profile");
 const transaksi = require("./user/transaksi");
 const ReadMore = require("./user/readmore");
 
+
+//routes>>>>>>>
 // admin
 Router.use("/admin/kelas", kelas);
 Router.use("/admin/user", user);
