@@ -11,6 +11,10 @@ const KelasUser = require("./admin/KelasUsers");
 const home = require("./user/home.js");
 const Login = require("./user/login");
 const Register = require("./user/register");
+const userkelas = require("./user/indexuser.js");
+const pembayaran = require("./admin/Pembayarans");
+const transaksi = require("./admin/Transaksis");
+const Register = require("./user/register");
 const profile = require("./user/profile");
 const transaksi = require("./user/transaksi");
 const ReadMore = require("./user/readmore");
@@ -22,6 +26,8 @@ Router.use("/admin/kelas", kelas);
 Router.use("/admin/user", user);
 Router.use("/admin/materi", materi);
 Router.use("/admin/pemateri", pemateri);
+Router.use("/admin/pembayaran", pembayaran);
+Router.use("/admin/transaksi", transaksi);
 Router.use("/admin/kelas-user", KelasUser);
 
 // home
@@ -31,5 +37,6 @@ Router.use("/register", Register);
 Router.use("/profile", profile);
 Router.use("/transaksi", transaksi);
 Router.use("/readmore", ReadMore);
+Router.use("/user/kelas", userkelas);
 
 module.exports = Router;
