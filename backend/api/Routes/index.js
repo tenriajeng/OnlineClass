@@ -6,21 +6,13 @@ const user = require("./admin/users");
 const materi = require("./admin/materis");
 const pemateri = require("./admin/pemateris");
 const KelasUser = require("./admin/KelasUsers");
-
-//home
-const home = require("./user/home.js");
-const Login = require("./user/login");
-const Register = require("./user/register");
 const userkelas = require("./user/indexuser.js");
 const pembayaran = require("./admin/Pembayarans");
 const transaksi = require("./admin/Transaksis");
 const Register = require("./user/register");
 const profile = require("./user/profile");
-const transaksi = require("./user/transaksi");
 const ReadMore = require("./user/readmore");
 
-
-//routes>>>>>>>
 // admin
 Router.use("/admin/kelas", kelas);
 Router.use("/admin/user", user);
