@@ -5,6 +5,8 @@ import HeaderComponet from "./HeaderComponet";
 import SiderComponent from "./SiderComponent";
 import BreadcrumbComponent from "./BreadcrumbComponent";
 import FooterComponent from "./FooterComponent";
+import NavbarComponent from "../../../Components/Navbar";
+import AdminNavbarComponent from "./navbar";
 
 const { Content } = Layout;
 
@@ -24,7 +26,8 @@ class Base extends React.Component {
 			<div>
 				<Layout>
 					{/* Header */}
-					<HeaderComponet />
+					{/* <HeaderComponet /> */}
+					<AdminNavbarComponent />
 
 					<Layout>
 						{/* sider */}
