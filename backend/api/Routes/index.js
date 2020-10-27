@@ -9,9 +9,12 @@ const KelasUser = require("./admin/KelasUsers");
 const userkelas = require("./user/indexuser.js");
 const pembayaran = require("./admin/Pembayarans");
 const transaksi = require("./admin/Transaksis");
+//user
 const Register = require("./user/register");
 const profile = require("./user/profile");
 const ReadMore = require("./user/readmore");
+const Login = require("./user/login");
+const home = require("./user/home");
 
 // admin
 Router.use("/admin/kelas", kelas);
