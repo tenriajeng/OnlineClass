@@ -6,6 +6,7 @@ const user = require("./admin/users");
 const materi = require("./admin/materis");
 const pemateri = require("./admin/pemateris");
 const KelasUser = require("./admin/KelasUsers");
+const transaksis = require("./admin/Transaksis");
 
 //home
 const home = require("./user/home.js");
@@ -14,10 +15,10 @@ const Register = require("./user/register");
 const userkelas = require("./user/indexuser.js");
 const pembayaran = require("./admin/Pembayarans");
 const transaksi = require("./admin/Transaksis");
-const Register = require("./user/register");
 const profile = require("./user/profile");
-const transaksi = require("./user/transaksi");
+const Transaksi = require("./user/transaksi");
 const ReadMore = require("./user/readmore");
+const MoreMateri = require("./user/moremateri");
 
 
 //routes>>>>>>>
@@ -27,7 +28,7 @@ Router.use("/admin/user", user);
 Router.use("/admin/materi", materi);
 Router.use("/admin/pemateri", pemateri);
 Router.use("/admin/pembayaran", pembayaran);
-Router.use("/admin/transaksi", transaksi);
+Router.use("/admin/transaksis", transaksis);
 Router.use("/admin/kelas-user", KelasUser);
 
 // home
@@ -35,8 +36,9 @@ Router.use("/home", home);
 Router.use("/login", Login);
 Router.use("/register", Register);
 Router.use("/profile", profile);
-Router.use("/transaksi", transaksi);
+Router.use("/user/Transaksi", Transaksi);
 Router.use("/readmore", ReadMore);
 Router.use("/user/kelas", userkelas);
+Router.use("/moremateri", MoreMateri);
 
 module.exports = Router;
