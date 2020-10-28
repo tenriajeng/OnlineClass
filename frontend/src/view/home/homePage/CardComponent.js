@@ -1,10 +1,12 @@
-import { Card, Col, Row } from "antd";
+import { Card, Col, Row, Image } from "antd";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-function CardComponent(props) {
+function CardComponent() {
 	const { Meta } = Card;
 	const [data, setData] = useState([]);
+	const routeCourses = "/courses/";
 
 	const getData = async () => {
 		try {
@@ -16,12 +18,13 @@ function CardComponent(props) {
 		}
 	};
 
+	const clickCard = (e) => {
+		// alert(e);
+	};
+
 	useEffect(() => {
 		getData();
 	}, []);
-
-	// const response = data;
-	// console.log("ini mi datanya kah ? : ", response);
 
 	return (
 		<div>
@@ -29,9 +32,11 @@ function CardComponent(props) {
 				{data.map((val) => {
 					return (
 						<Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }}>
-							<Card hoverable cover={<img alt="Modern Design" src="https://placekitten.com/300/200" />}>
-								<Meta title={val.nama} />
-							</Card>
+							<Link to={routeCourses + val.id}>
+								<Card onClick={() => clickCard(val.nama)} hoverable cover={<img src="https://placekitten.com/300/200" />}>
+									<Meta title={val.nama} />
+								</Card>
+							</Link>
 						</Col>
 					);
 				})}
