@@ -6,6 +6,7 @@ import Pemateri from "../view/admin/pemateri/PemateriTable";
 import Pembayaran from "../view/admin/pembayaran/PembayaranTable";
 import Tes from "../view/tes/tes";
 import UserTable from "../view/admin/user/UserTable";
+import Materi from "../view/admin/materies/Materi";
 
 function Router(props) {
     return (
@@ -24,6 +25,9 @@ function Router(props) {
             </Route>
             <Route path="/admin/pembayaran">
                 <Pembayaran />
+            </Route>
+            <Route path="/admin/materies">
+              <Materi />
             </Route>
             <Route path="/admin/tes">
                 <Tes />
