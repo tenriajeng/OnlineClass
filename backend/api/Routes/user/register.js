@@ -1,7 +1,27 @@
 const express = require("express");
 const RegisterController = require("../../Controllers/User/RegisterController");
 const Router = express.Router();
+const {check} = require("express-validator");
 
-Router.post("/", RegisterController.UserRegister);
+Router.post(
+    "/",
+    [
+        check("email").custom((email) => {
+            if (alreadyHaveEmail(email)) {
+                throw new Error("Email already registered");
+            }
+        }),
+        check("name")
+            .isLength({min: 5})
+            .withMessage("Name must have more than 5 characters"),
+        check(
+            "password",
+            "Your password must be at least 5 characters"
+        ).isLength({
+            min: 5,
+        }),
+    ],
+    RegisterController.UserRegister
+);
 
 module.exports = Router;

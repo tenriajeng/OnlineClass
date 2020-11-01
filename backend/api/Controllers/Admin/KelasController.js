@@ -1,6 +1,7 @@
 "use strict";
 const kelasModel = require("../../Models/admin/kelas");
 const formRes = require("../../Helpers/formRes");
+const { validationResult } = require("express-validator");
 
 module.exports = {
 	getAllKelas: (req, res) => {
@@ -10,26 +11,33 @@ module.exports = {
 			.then((response) => formRes.resUser(res, response, 200))
 			.catch((err) => formRes.resUser(res, err, 404));
 	},
-	addKelas: (req, res, next) => {
-		console.log("ini reqnya? : ", req.body.nama);
-		try {
-			// const bodyReq = req.body;
-			var date = new Date();
-			const body = {
-				...req.body,
-				created_at: date,
-				updated_at: date,
-			};
-			// console.log(body)
-			kelasModel
-				.addKelas(body)
-				.then((response) => formRes.resUser(res, response, 200))
-				.catch((err) => formRes.resUser(res, err, 404));
-		} catch (error) {
-			console.error(error);
+	addKelas: (req, res) => {
+		const errors = validationResult(req);
+		console.log(req.body);
+
+		if (!errors.isEmpty()) {
+			return res.status(422).jsonp(errors.array());
 		}
+		//  const bodyReq = req.body;
+		var date = new Date();
+		const body = {
+			...req.body,
+			created_at: date,
+			updated_at: date,
+		};
+		// console.log(body)
+		kelasModel
+			.addKelas(body)
+			.then((response) => formRes.resUser(res, response, 200))
+			.catch((err) => formRes.resUser(res, err, 404));
 	},
 	updateKelas: (req, res) => {
+		const errors = validationResult(req);
+		console.log(req.body);
+
+		if (!errors.isEmpty()) {
+			return res.status(422).jsonp(errors.array());
+		}
 		var date = new Date();
 		const id = req.params.id;
 
