@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import LeftMenu from "./LeftMenu";
 import RightMenu from "./RightMenu";
 import { Drawer, Button } from "antd";
+import { Link } from "react-router-dom";
 
 class NavbarComponent extends Component {
 	state = {
@@ -22,9 +23,11 @@ class NavbarComponent extends Component {
 
 	render() {
 		return (
-			<nav className="menuBar">
+			<nav className="menuBar" style={{ background: "#7952b3" }}>
 				<div className="logo">
-					<a href="">ONCOURSES</a>
+					<Link to="/" style={{ color: "white" }}>
+						ONCOURSES
+					</Link>
 				</div>
 				<div className="menuCon">
 					<div className="leftMenu">
