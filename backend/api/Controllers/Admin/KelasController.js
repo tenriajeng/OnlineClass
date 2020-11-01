@@ -15,37 +15,6 @@ module.exports = {
         const errors = validationResult(req);
         console.log(req.body);
 
-        const fs = require("fs");
-        const path = require("path");
-        const image = files.image;
-        console.log(image.name); // pony.png
-        console.log(image.type); // image/png
-
-        // Get the tmp file path
-        const tmpFilePath = image.path; // /tmp/<randomstring>
-
-        // Rename and relocate the file
-        fs.rename(
-            tmpFilePath,
-            path.join(`${__dirname}/uploads/${image.name}`),
-            (error) => {
-                if (error) {
-                    res.status(500);
-                    console.log(error);
-                    res.json({
-                        error,
-                    });
-                    return false;
-                }
-                res.status(201);
-                res.json({
-                    success: true,
-                    upload_date: new Date(),
-                });
-                // Do all kinds of MySQL stuff lol
-            }
-        );
-
         if (!errors.isEmpty()) {
             return res.status(422).jsonp(errors.array());
         }
