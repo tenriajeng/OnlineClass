@@ -1,14 +1,25 @@
 import React, { Component } from "react";
-// import { Layout, Menu, Breadcrumb } from "antd";
-// import "./base.css";
-
-// const { Header, Content, Footer } = Layout;
+import { Layout } from "antd";
+import NavbarComponent from "../../../Components/Navbar";
+import HomePage from "../homePage/HomePage";
+import LandingUser from "../../../router/LandingUser";
+const { Footer } = Layout;
 
 class Base extends Component {
 	render() {
+		const contentStyle = {
+			height: "550px",
+			color: "#fff",
+			lineHeight: "550px",
+			textAlign: "center",
+			background: "https://placekitten.com/1500/500",
+		};
+
 		return (
 			<div>
-				<h1></h1>
+				<NavbarComponent />
+				<LandingUser />
+				<Footer style={{ textAlign: "center" }}>Ant Design ©2018 Created by Ant UED</Footer>
 			</div>
 		);
 	}
