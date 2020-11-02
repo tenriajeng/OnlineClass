@@ -10,21 +10,15 @@ const transaksi = require("./admin/Transaksis");
 
 //home
 const home = require("./user/home.js");
-const Login = require("./user/login");
-const Register = require("./user/register");
-const userkelas = require("./user/indexuser.js");
-const pembayaran = require("./admin/Pembayarans");
-const profile = require("./user/profile");
 const Transaksi = require("./user/transaksi");
 const MoreMateri = require("./user/moremateri");
-const userkelas = require("./user/indexuser.js");
+const userkelas = require("./user/indexuser");
 const pembayaran = require("./admin/Pembayarans");
 //user
 const Register = require("./user/register");
 const profile = require("./user/profile");
 const ReadMore = require("./user/readmore");
 const Login = require("./user/login");
-const home = require("./user/home");
 
 // admin
 Router.use("/admin/kelas", kelas);
