@@ -1,6 +1,6 @@
 "use strict";
-const loginModel = require("../Models/users/Login");
-const formRes = require("../Helpers/formRes");
+const loginModel = require("../../Models/users/Login");
+const formRes = require("../../Helpers/formRes");
 const { validationResult } = require("express-validator");
 
 module.exports = {
