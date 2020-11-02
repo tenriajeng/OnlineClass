@@ -1,6 +1,7 @@
 "use strict";
 const userModel = require("../../Models/admin/Users");
 const formRes = require("../../Helpers/formRes");
+const {validationResult} = require("express-validator");
 
 module.exports = {
     getAllUser: (req, res) => {
@@ -11,6 +12,12 @@ module.exports = {
             .catch((err) => formRes.resUser(res, err, 404));
     },
     addUser: (req, res) => {
+        const errors = validationResult(req);
+        console.log(req.body);
+
+        if (!errors.isEmpty()) {
+            return res.status(422).jsonp(errors.array());
+        }
         //  const bodyReq = req.body;
         var date = new Date();
         const body = {
@@ -25,8 +32,13 @@ module.exports = {
             .catch((err) => formRes.resUser(res, err, 404));
     },
     updateUser: (req, res) => {
+        const errors = validationResult(req);
         var date = new Date();
         const id = req.params.id;
+
+        if (!errors.isEmpty()) {
+            return res.status(422).jsonp(errors.array());
+        }
 
         // console.log('ini adalah id:',id)
         const body = {
