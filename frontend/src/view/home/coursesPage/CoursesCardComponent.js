@@ -3,7 +3,7 @@ import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-function CardComponent() {
+function CoursesCardComponent() {
 	const { Meta } = Card;
 	const [data, setData] = useState([]);
 	const routeCourses = "/courses/";
@@ -28,11 +28,11 @@ function CardComponent() {
 
 	return (
 		<div>
-			<Row style={{ margin: "24px 16px 0" }} gutter={[16, 16]}>
+			<Row style={{ margin: "10px 10px 0" }} gutter={[16, 16]}>
 				{data.map((val) => {
 					return (
 						<Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }}>
-							<Link to={routeCourses + val.id}>
+							<Link to={`/courses/${val.id}`}>
 								<Card onClick={() => clickCard(val.nama)} hoverable cover={<img src="https://placekitten.com/g/300/200" />}>
 									<Meta title={val.nama} />
 								</Card>
@@ -45,4 +45,4 @@ function CardComponent() {
 	);
 }
 
-export default CardComponent;
+export default CoursesCardComponent;

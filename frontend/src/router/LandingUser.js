@@ -9,6 +9,9 @@ function LandingUser(props) {
 				<Route exact path="/">
 					<HomePage />
 				</Route>
+				<Route path="/courses">
+					<HomePage />
+				</Route>
 			</Switch>
 		</>
 	);

@@ -155,6 +155,13 @@ class KelasTable extends React.Component {
 			harga: value,
 		});
 	}
+	getAllData() {
+		Axios.get("http://localhost:6600/admin/kelas").then((res) => {
+			const kelas = res.data.response;
+			this.setState({ kelas });
+			//   console.log(res.data);
+		});
+	}
 
 	getAllData() {
 		Axios.get("http://localhost:6600/admin/kelas").then((res) => {
@@ -195,7 +202,7 @@ class KelasTable extends React.Component {
 				<Button onClick={this.showModal} type="primary" style={{ marginBottom: 16 }}>
 					<PlusOutlined />
 				</Button>
-				<Table dataSource={this.state.kelas} pagination={{ pageSize: 10 }} scroll={{ x: 1000, y: 300 }}>
+				<Table dataSource={this.state.kelas} pagination={{ pageSize: 10 }} scroll={{ x: 1000, y: 350 }}>
 					<Column title="Nama" width="400" fixed="left" dataIndex="nama" key="nama" />
 					<Column title="Limit" dataIndex="limit" key="limit" />
 					<Column title="Aktif" dataIndex="aktif" key="aktif" />

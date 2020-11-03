@@ -173,8 +173,8 @@ class UserTable extends React.Component {
 				</Row>
 				<Row justify="space-between">
 					<Col span={24}>
-						<Table bordered dataSource={this.state.users} pagination={{ pageSize: 10, position: ["bottomCenter"] }} scroll={{ y: 300 }}>
-							<Column title="Name" dataIndex="name" key="name" />
+						<Table bordered dataSource={this.state.users} pagination={{ pageSize: 10, position: ["bottomCenter"] }} scroll={{ x: 1000, y: 300 }}>
+							<Column title="Name" dataIndex="name" fixed="left" key="name" />
 							<Column title="Email" dataIndex="email" key="email" />
 							<Column title="Level" dataIndex="level" key="level" />
 							<Column title="Updated At" dataIndex="updated_at" key="updated_at" />
