@@ -59,4 +59,15 @@ module.exports = {
 			});
 		});
 	},
+	postFoto: body => {
+        return new Promise((resolve, reject) => {
+          db.query("INSERT INTO kelas SET ?", [body], (err, response) => {
+            if (!err) {
+              resolve(response);
+            } else {
+              reject(err);
+            }
+          });
+        });
+      },
 };
