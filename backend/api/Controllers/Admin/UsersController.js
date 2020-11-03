@@ -69,7 +69,7 @@ module.exports = {
 			.then((response) => formRes.resUser(res, response, 200))
 			.catch((err) => formRes.resUser(res, err, 404));
 	},
-	postFoto: (req, res) => {
+	addUser: (req, res) => {
 		var date = new Date();
 		upload.single("foto")(req, res, async err => {
 		  if (err) {
@@ -86,7 +86,7 @@ module.exports = {
 			  };
 			  // console.log(body)
 			  userModel
-				.postFoto(body)
+				.addUser(body)
 				.then(response => formRes.resUser(res, response, 200))
 				.catch(err => console.log(err));
 			} else {
@@ -101,7 +101,7 @@ module.exports = {
 					  foto: result.url
 					};
 					userModel
-					  .postFoto(body)
+					  .addUser(body)
 					  .then(response => formRes.resUser(res, response, 200))
 					  .catch(err => console.log(err));
 				  });
