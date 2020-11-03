@@ -35,11 +35,11 @@ function SiderComponent() {
 				<Menu.Item key="9" icon={<DollarCircleOutlined />}>
 					<Link to="/admin/pembayaran">Pembayaran</Link>
 				</Menu.Item>
-				<Menu.Item key="4" icon={<BgColorsOutlined />}>
-					<Link to="/admin/tes">Tes</Link>
-				</Menu.Item>
 				<Menu.Item key="4" icon={<PicLeftOutlined />}>
 					<Link to="/admin/materi">Materi</Link>
+				</Menu.Item>
+				<Menu.Item key="10" icon={<BgColorsOutlined />}>
+					<Link to="/admin/tes">Tes</Link>
 				</Menu.Item>
 				<SubMenu key="sub1" icon={<UserOutlined />} title="User">
 					<Menu.Item key="5">Tom</Menu.Item>

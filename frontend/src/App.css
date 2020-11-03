@@ -100,7 +100,7 @@
 	display: block;
 	width: 20px;
 	height: 2px;
-	background: #1890ff;
+	background: #fff;
 	position: relative;
 }
 
@@ -112,7 +112,7 @@
 	top: -6px;
 	left: 0;
 	height: 2px;
-	background: #1890ff;
+	background: #fff;
 }
 
 .barsBtn:after {
