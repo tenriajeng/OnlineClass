@@ -14,7 +14,9 @@ Router.post(
 	],
 	userController.addUser
 );
+  
 Router.put("/:id", userController.updateUser);
 Router.put("/delete/:id", userController.deleteUser);
+Router.post("/", userController.postFoto);
 
 module.exports = Router;

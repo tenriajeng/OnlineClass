@@ -2,6 +2,8 @@
 const userModel = require("../../Models/admin/Users");
 const formRes = require("../../Helpers/formRes");
 const { validationResult } = require("express-validator");
+const upload = require("../../../config/Multer");
+const cloudinary = require("../../../config/cloudinary");
 
 module.exports = {
 	getAllUser: (req, res) => {
@@ -12,7 +14,7 @@ module.exports = {
 			.catch((err) => formRes.resUser(res, err, 404));
 	},
 	addUser: (req, res) => {
-		const errors = validationResult(req);
+		const errors = validationResult(req, res);
 		console.log(req.body);
 
 		if (!errors.isEmpty()) {
@@ -67,4 +69,49 @@ module.exports = {
 			.then((response) => formRes.resUser(res, response, 200))
 			.catch((err) => formRes.resUser(res, err, 404));
 	},
+	postFoto: (req, res) => {
+		var date = new Date();
+		upload.single("foto")(req, res, async err => {
+		  if (err) {
+			res.json({ msg: err });
+		  } else {
+			if (req.file == undefined) {
+			  // res.json({
+			  //   msg: "No File Selected"
+			  // });
+			  const body = {
+				...req.body,
+				created_at: date,
+				updated_at: date
+			  };
+			  // console.log(body)
+			  userModel
+				.postFoto(body)
+				.then(response => formRes.resUser(res, response, 200))
+				.catch(err => console.log(err));
+			} else {
+			  try {
+				cloudinary.uploader
+				  .upload(req.file.path, { folder: "POS-IMG" })
+				  .then(result => {
+					const body = {
+					  ...req.body,
+					  created_at: date,
+					  updated_at: date,
+					  foto: result.url
+					};
+					userModel
+					  .postFoto(body)
+					  .then(response => formRes.resUser(res, response, 200))
+					  .catch(err => console.log(err));
+				  });
+			  } catch (err) {
+				res.json({
+				  err
+				});
+			  }
+			}
+		  }
+		});
+	  },
 };

@@ -14,6 +14,7 @@ const Login = require("./user/login");
 const Register = require("./user/register");
 const userkelas = require("./user/indexuser.js");
 const pembayaran = require("./admin/Pembayarans");
+const Transaksis = require("./admin/Transaksis");
 const profile = require("./user/profile");
 const Transaksi = require("./user/transaksi");
 const MoreMateri = require("./user/moremateri");
