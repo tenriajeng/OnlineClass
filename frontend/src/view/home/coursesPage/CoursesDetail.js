@@ -1,5 +1,4 @@
-import { Avatar, Card, Col, Image, Row, Skeleton, Space } from "antd";
-import { List } from "antd/lib/form/Form";
+import { Avatar, Card, Col, Image, List, Row, Skeleton, Space } from "antd";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -39,12 +38,26 @@ function CoursesDetail() {
 	return (
 		<div className="site-layout-background" style={{ padding: 24, minHeight: 480 }}>
 			<Row style={{ margin: "10px 10px 0" }} gutter={[16, 16]}>
-				<Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }}>
-					<h1>judul</h1>
+				<Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 12 }}>
+					<Image preview={false} width="100%" src="https://placekitten.com/g/300/200" />
 				</Col>
-				<Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }}>
-					{/* <Card hoverable cover={<img src="https://placekitten.com/g/300/200" />}></Card> */}
-					<Image width={200} src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png" />
+				<Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 12 }}>
+					<List
+						itemLayout="horizontal"
+						bordered
+						dataSource={courses}
+						renderItem={(item) => (
+							<List.Item
+								actions={[
+									<Link to={`/courses/${item.nama_kelas}/${item.materi_id}`} key="list-loadmore-more">
+										Read
+									</Link>,
+								]}
+							>
+								<List.Item.Meta title={<Link to={`/courses/${item.nama_kelas}/${item.materi_id}`}>{item.nama_materi}</Link>} />
+							</List.Item>
+						)}
+					/>
 				</Col>
 			</Row>
 		</div>
