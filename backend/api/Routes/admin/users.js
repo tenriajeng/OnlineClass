@@ -1,5 +1,5 @@
 const express = require("express");
-const userController = require("../../Controllers/Admin/UsersController");
+const userController = require("../../Controllers/admin/UsersController");
 const Router = express.Router();
 const { check } = require("express-validator");
 
@@ -9,21 +9,13 @@ Router.post(
 	"/create",
 	[
 		check("email", "Your email is not valid").isEmail(),
-		check("name").isLength({ min: 5 }).withMessage("Name must have more than 5 characters"),
-		check("password", "Your password must be at least 5 characters").isLength({ min: 5 }),
+		check("name").not().isEmpty().withMessage("Name must have more than 5 characters"),
+		check("password", "Your password must be at least 5 characters").not().isEmpty(),
 	],
 	userController.addUser
 );
-Router.put(
-	"/:id",
-	[
-		check("email", "Your email is not valid").isEmail(),
-		check("name").isLength({ min: 5 }).withMessage("Name must have more than 5 characters"),
-		check("password", "Your password must be at least 5 characters").isLength({ min: 5 }),
-	],
-	userController.updateUser
-);
-
+  
+Router.put("/:id", userController.updateUser);
 Router.put("/delete/:id", userController.deleteUser);
 
 module.exports = Router;
