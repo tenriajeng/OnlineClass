@@ -27,7 +27,7 @@ Router.use("/admin/user", user);
 Router.use("/admin/materi", materi);
 Router.use("/admin/pemateri", pemateri);
 Router.use("/admin/pembayaran", pembayaran);
-Router.use("/admin/transaksis", transaksi);
+Router.use("/admin/transaksis", Transaksis);
 Router.use("/admin/kelas-user", KelasUser);
 
 // home route
