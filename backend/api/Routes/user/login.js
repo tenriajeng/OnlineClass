@@ -7,6 +7,15 @@ const jwt = require("jsonwebtoken");
 //Check to make sure header is not undefined, if so, return Forbidden (403)
 const checkToken = (req, res, next) => {
     const header = req.headers["authorization"];
+    const {check} = require("express-validator");
+    const LoginController = require("../../Controllers/LoginController");
+    const Router = express.Router();
+
+    Router.post(
+        "/",
+        [check("email", "Your email is not valid").isEmail()],
+        LoginController.loginUser
+    );
 
     if (typeof header !== "undefined") {
         const bearer = header.split(" ");

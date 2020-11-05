@@ -63,48 +63,50 @@ module.exports = {
             .catch((err) => formRes.resUser(res, err, 404));
     },
     addKelas: (req, res) => {
-		var date = new Date();
-		upload.single("foto")(req, res, async err => {
-		  if (err) {
-			res.json({ msg: err });
-		  } else {
-			if (req.file == undefined) {
-			  // res.json({
-			  //   msg: "No File Selected"
-			  // });
-			  const body = {
-				...req.body,
-				created_at: date,
-				updated_at: date
-			  };
-			  // console.log(body)
-			  kelasModel
-				.addKelas(body)
-				.then(response => formRes.resUser(res, response, 200))
-				.catch(err => console.log(err));
-			} else {
-			  try {
-				cloudinary.uploader
-				  .upload(req.file.path, { folder: "POS-IMG" })
-				  .then(result => {
-					const body = {
-					  ...req.body,
-					  created_at: date,
-					  updated_at: date,
-					  foto: result.url
-					};
-					kelasModel
-					  .addKelas(body)
-					  .then(response => formRes.resUser(res, response, 200))
-					  .catch(err => console.log(err));
-				  });
-			  } catch (err) {
-				res.json({
-				  err
-				});
-			  }
-			}
-		  }
-		});
-	  },
+        var date = new Date();
+        upload.single("foto")(req, res, async (err) => {
+            if (err) {
+                res.json({msg: err});
+            } else {
+                if (req.file == undefined) {
+                    // res.json({
+                    //   msg: "No File Selected"
+                    // });
+                    const body = {
+                        ...req.body,
+                        created_at: date,
+                        updated_at: date,
+                    };
+                    // console.log(body)
+                    kelasModel
+                        .addKelas(body)
+                        .then((response) => formRes.resUser(res, response, 200))
+                        .catch((err) => console.log(err));
+                } else {
+                    try {
+                        cloudinary.uploader
+                            .upload(req.file.path, {folder: "POS-IMG"})
+                            .then((result) => {
+                                const body = {
+                                    ...req.body,
+                                    created_at: date,
+                                    updated_at: date,
+                                    foto: result.url,
+                                };
+                                kelasModel
+                                    .addKelas(body)
+                                    .then((response) =>
+                                        formRes.resUser(res, response, 200)
+                                    )
+                                    .catch((err) => console.log(err));
+                            });
+                    } catch (err) {
+                        res.json({
+                            err,
+                        });
+                    }
+                }
+            }
+        });
+    },
 };
