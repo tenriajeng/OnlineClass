@@ -32,14 +32,13 @@ function CoursesDetail() {
 		getDataClass();
 	}, [indetifier]);
 
-	console.log("data materi : ", courses);
-	console.log("data kelas : ", dataclass);
-
 	return (
 		<div className="site-layout-background" style={{ padding: 24, minHeight: 480 }}>
 			<Row style={{ margin: "10px 10px 0" }} gutter={[16, 16]}>
 				<Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 12 }}>
-					<Image preview={false} width="100%" src="https://placekitten.com/g/300/200" />
+					{dataclass.map((item) => (
+						<Image preview={false} width="100%" src={item.foto} />
+					))}
 				</Col>
 				<Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 12 }}>
 					<List

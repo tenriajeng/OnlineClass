@@ -17,12 +17,12 @@ const RightMenu = () => {
 					Signin
 				</Link>
 			</Menu.Item>
-			<Menu.Item key="app">
+			<Menu.Item>
 				<Link style={menuColor} to="/">
 					Signup
 				</Link>
 			</Menu.Item>
-			<SubMenu key="sub1" title={<span style={menuColor}>Username</span>}>
+			<SubMenu title={<span style={menuColor}>Username</span>}>
 				<MenuItemGroup title="Account">
 					<Menu.Item key="1">Profile</Menu.Item>
 					<Menu.Item key="2">Courses</Menu.Item>
