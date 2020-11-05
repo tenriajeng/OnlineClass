@@ -33,7 +33,7 @@ function CardComponent() {
 					return (
 						<Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }}>
 							<Link to={routeCourses + val.id}>
-								<Card onClick={() => clickCard(val.nama)} hoverable cover={<img src="https://placekitten.com/g/300/200" />}>
+								<Card onClick={() => clickCard(val.nama)} hoverable cover={<img src={val.foto} />}>
 									<Meta title={val.nama} />
 								</Card>
 							</Link>

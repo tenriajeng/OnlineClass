@@ -1,7 +1,7 @@
 import { Menu, Layout } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
-import { UserOutlined, BgColorsOutlined, DatabaseOutlined, ContactsOutlined, IdcardOutlined, DollarCircleOutlined, PicLeftOutlined } from "@ant-design/icons";
+import { UserOutlined, HomeOutlined, BgColorsOutlined, DatabaseOutlined, ContactsOutlined, IdcardOutlined, DollarCircleOutlined, PicLeftOutlined } from "@ant-design/icons";
 import SubMenu from "antd/lib/menu/SubMenu";
 
 const { Sider } = Layout;
@@ -20,6 +20,10 @@ function SiderComponent() {
 			}}
 		>
 			<Menu theme="light" mode="inline">
+				<Menu.Item key="11" icon={<HomeOutlined />}>
+					<Link to="/admin">Dashboard</Link>
+				</Menu.Item>
+
 				<Menu.Item key="1" icon={<UserOutlined />}>
 					<Link to="/admin/users">Users</Link>
 				</Menu.Item>
