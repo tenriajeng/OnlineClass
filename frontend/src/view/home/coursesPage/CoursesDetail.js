@@ -39,6 +39,7 @@ function CoursesDetail() {
 					{dataclass.map((item) => (
 						<Image preview={false} width="100%" src={item.foto} />
 					))}
+					{/* <Image preview={false} width="100%" src={response.foto} /> */}
 				</Col>
 				<Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 12 }}>
 					<List
