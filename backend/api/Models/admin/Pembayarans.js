@@ -3,13 +3,16 @@ const db = require("../../../config/db.js");
 module.exports = {
 	showAllPembayaran: () => {
 		return new Promise((resolve, reject) => {
-			db.query('SELECT id,nama,DATE_FORMAT(updated_at,"%d-%m-%Y") AS updated_at FROM pembayarans WHERE deleted_at IS NULL ORDER BY updated_at DESC', (err, response) => {
-				if (!err) {
-					resolve(response);
-				} else {
-					reject(err);
+			db.query(
+				'SELECT id,nama,DATE_FORMAT(updated_at,"%d-%m-%Y %H:%i:%s") AS updated_at FROM pembayarans WHERE deleted_at IS NULL ORDER BY updated_at DESC',
+				(err, response) => {
+					if (!err) {
+						resolve(response);
+					} else {
+						reject(err);
+					}
 				}
-			});
+			);
 		});
 	},
 	addPembayaran: (body) => {
