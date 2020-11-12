@@ -19,26 +19,23 @@ class Register extends React.Component {
     }
 
     onOk = () => {
-
         this.setState({
             visibleUpdate: true,
             name: data.name,
             email: data.email,
             password: data.password,
         });
-        
-        cons data={
-            name=this.state.name,
-            email=this.state.email,
-            password=this.state.password,
-        }
 
+        const data = {
+            name: this.state.name,
+            email: this.state.email,
+            password: this.state.password,
+        };
 
         Axios.post("http://localhost:6600/register", data).then((res) => {
             const data = res.data.response[0];
             console.log("response", data);
 
-           
             console.log("response", data);
         });
     };
