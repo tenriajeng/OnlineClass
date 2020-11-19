@@ -10,15 +10,20 @@ const LeftMenu = () => {
 	const { md } = useBreakpoint();
 	const menuColor = { color: "white" };
 	return (
-		<Menu mode={md ? "horizontal" : "inline"} style={{ background: "#7952b3" }}>
-			<Menu.Item key="mail">
+		<Menu mode={md ? "horizontal" : "inline"} style={{ background: "#342ead" }}>
+			<Menu.Item>
 				<Link style={menuColor} to="/">
 					Home
 				</Link>
 			</Menu.Item>
-			<Menu.Item key="alipay">
+			<Menu.Item>
 				<Link style={menuColor} to="/courses">
 					Courses
+				</Link>
+			</Menu.Item>
+			<Menu.Item>
+				<Link style={menuColor} to="/team">
+					Team
 				</Link>
 			</Menu.Item>
 		</Menu>
