@@ -3,6 +3,7 @@ const logger = require("morgan");
 const bodyParser = require("body-parser");
 const router = require("./api/Routes/index");
 const app = express();
+const jwt = require("jsonwebtoken");
 var multer = require("multer");
 var path = require("path");
 var cors = require("cors");
