@@ -18,40 +18,42 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                {/* user route */}
-                <Route exact path="/">
-                    <NavbarComponent />
-                    <HomePage />
-                    <FooterUserComponent />
-                </Route>
+                <Switch>
+                    {/* user route */}
+                    <Route exact path="/">
+                        <NavbarComponent />
+                        <HomePage />
+                        <FooterUserComponent />
+                    </Route>
 
-                <Route exact path="/courses">
-                    <NavbarComponent />
-                    <HeaderPageComponent />
-                    <CoursesCardComponent />
-                    <FooterUserComponent />
-                </Route>
-                <Route exact path="/team">
-                    <NavbarComponent />
-                    <TeamCardComponet />
-                    <FooterUserComponent />
-                </Route>
-                <Route path="/courses/:indetifier">
-                    <NavbarComponent />
-                    <CoursesDetail />
-                    <FooterUserComponent />
-                </Route>
-                <Route path="/login">
-                    <NavbarComponent />
-                    <Login />
-                    <FooterUserComponent />
-                </Route>
-                <Route path="/register">
-                    <NavbarComponent />
-                    <Register />
-                    <FooterUserComponent />
-                </Route>
-                {/* end user route */}
+                    <Route exact path="/courses">
+                        <NavbarComponent />
+                        <HeaderPageComponent />
+                        <CoursesCardComponent />
+                        <FooterUserComponent />
+                    </Route>
+                    <Route exact path="/team">
+                        <NavbarComponent />
+                        <TeamCardComponet />
+                        <FooterUserComponent />
+                    </Route>
+                    <Route path="/courses/:indetifier">
+                        <NavbarComponent />
+                        <CoursesDetail />
+                        <FooterUserComponent />
+                    </Route>
+                    <Route path="/login">
+                        <NavbarComponent />
+                        <Login />
+                        <FooterUserComponent />
+                    </Route>
+                    <Route path="/register">
+                        <NavbarComponent />
+                        <Register />
+                        <FooterUserComponent />
+                    </Route>
+                    {/* end user route */}
+                </Switch>
 
                 {/* admin route */}
                 <Route path="/admin">
