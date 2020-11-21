@@ -2,7 +2,7 @@
 const loginModel = require("../../Models/users/Login");
 const formRes = require("../../Helpers/formRes");
 const jwt = require("jsonwebtoken");
-const {validationResult} = require("express-validator");
+const { validationResult } = require("express-validator");
 
 module.exports = {
     loginUser: async (req, res, next) => {
@@ -13,7 +13,7 @@ module.exports = {
             if (!errors.isEmpty()) {
                 return res.status(422).jsonp(errors.array());
             }
-            const {email, password} = req.body;
+            const { email, password } = req.body;
             await loginModel
                 .loginUser(email)
                 .then((response) => {
@@ -24,9 +24,9 @@ module.exports = {
                     } else {
                         if (password == response[0].password) {
                             let token = jwt.sign(
-                                {response: response[0]}, //level: "user"
+                                { response: response[0] }, //level: "user"
                                 "process.env.SECRET_KEY",
-                                {expiresIn: "60m"}
+                                { expiresIn: "60m" }
                             );
                             res.json({
                                 sucess: true,
@@ -34,7 +34,7 @@ module.exports = {
                                 token,
                             });
                             // res.send(token);
-                            console.log({msg: "berhasil login"});
+                            console.log({ msg: "berhasil login" });
                         } else {
                             res.status(400).json({
                                 message: "Wrong password or Email",
