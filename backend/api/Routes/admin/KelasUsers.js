@@ -1,5 +1,5 @@
 const express = require("express");
-const KelasUserController = require("../../Controllers/Admin/KelasUsersController");
+const KelasUserController = require("../../Controllers/admin/KelasUsersController");
 const Router = express.Router();
 
 Router.get("/", KelasUserController.getAllKelasUser);

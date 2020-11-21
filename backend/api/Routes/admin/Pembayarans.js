@@ -1,5 +1,5 @@
 const express = require("express");
-const pembayaranController = require("../../Controllers/Admin/PembayaransControllers");
+const pembayaranController = require("../../Controllers/admin/PembayaransControllers");
 const Router = express.Router();
 
 Router.get("/", pembayaranController.getAllPembayaran);

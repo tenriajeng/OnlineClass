@@ -1,5 +1,5 @@
 "use strict";
-const kelasModel = require("../../Models/admin/kelas");
+const kelasModel = require("../../Models/admin/Kelas");
 const formRes = require("../../Helpers/formRes");
 const upload = require("../../../config/Multer");
 const cloudinary = require("../../../config/cloudinary");

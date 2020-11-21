@@ -1,5 +1,5 @@
 const express = require("express");
-const transaksiController = require("../../Controllers/Admin/TransaksisController");
+const transaksiController = require("../../Controllers/admin/TransaksisController");
 const Router = express.Router();
 
 Router.get("/", transaksiController.getAllTransaksi);

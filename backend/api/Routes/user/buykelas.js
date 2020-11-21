@@ -1,5 +1,5 @@
 const express = require("express");
-const BuyKelasController = require("../../Controllers/User/BuyKelasController");
+const BuyKelasController = require("../../Controllers/user/BuyKelasController");
 const Router = express.Router();
 
 Router.get("/detail/:id", BuyKelasController.getOneKelas);
