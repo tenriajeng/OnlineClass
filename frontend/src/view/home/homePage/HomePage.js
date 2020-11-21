@@ -4,12 +4,12 @@ import CardComponent from "./CardComponent";
 import CarouselComponent from "./CarouselComponent";
 
 function HomePage(props) {
-	return (
-		<div>
-			<CarouselComponent />
-			<CardComponent />
-		</div>
-	);
+    return (
+        <div>
+            <CarouselComponent />
+            <CardComponent />
+        </div>
+    );
 }
 
 export default HomePage;

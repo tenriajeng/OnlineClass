@@ -1,7 +1,7 @@
 "use strict";
 const registerModel = require("../Models/users/Register");
 const formRes = require("../Helpers/formRes");
-const {validationResult} = require("express-validator");
+const { validationResult } = require("express-validator");
 
 module.exports = {
     UserRegister: (req, res) => {
