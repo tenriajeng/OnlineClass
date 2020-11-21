@@ -1,5 +1,5 @@
 const express = require("express");
-const KelasController = require("../../Controllers/admin/KelasController");
+const KelasController = require("../../Controllers/Admin/KelasController");
 const Router = express.Router();
 const { check } = require("express-validator");
 
