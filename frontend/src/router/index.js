@@ -11,6 +11,9 @@ import MateriTable from "../view/admin/materies/Materi";
 function Router(props) {
 	return (
 		<Switch>
+			<Route exact path="/admin">
+				<KelasTable />
+			</Route>
 			<Route exact path="/admin/kelas">
 				<KelasTable />
 			</Route>
