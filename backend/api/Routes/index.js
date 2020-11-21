@@ -20,6 +20,7 @@ const Register = require("./user/register");
 const profile = require("./user/profile");
 const ReadMore = require("./user/readmore");
 const Login = require("./user/login");
+const Buykelas = require("./user/buykelas");
 
 
 // admin
@@ -40,5 +41,6 @@ Router.use("/user/Transaksi", Transaksi);
 Router.use("/readmore", ReadMore);
 Router.use("/user/kelas", userkelas);
 Router.use("/moremateri", MoreMateri);
+Router.use("/buykelas", Buykelas);
 
 module.exports = Router;

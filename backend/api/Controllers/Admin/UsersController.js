@@ -22,16 +22,49 @@ module.exports = {
 		}
 		//  const bodyReq = req.body;
 		var date = new Date();
-		const body = {
-			...req.body,
-			created_at: date,
-			updated_at: date,
-		};
-		// console.log(body)
-		userModel
-			.addUser(body)
-			.then((response) => formRes.resUser(res, response, 200))
-			.catch((err) => formRes.resUser(res, err, 404));
+		upload.single("foto")(req, res, async err => {
+			  if (err) {
+				res.json({ msg: err });
+			  } else {
+				if (req.file == undefined) {
+				  // res.json({
+				  //   msg: "No File Selected"
+				  // });
+				  const body = {
+					...req.body,
+					created_at: date,
+					updated_at: date
+				  };
+				  // console.log(body)
+				  userModel
+					.addUser(body)
+					.then(response => formRes.resUser(res, response, 200))
+					.catch(err => console.log(err));
+				} else {
+				  try {
+					cloudinary.uploader
+					  .upload(req.file.path, { folder: "POS-IMG" })
+					  .then(result => {
+						const body = {
+						  ...req.body,
+						  created_at: date,
+						  updated_at: date,
+						  foto: result.url
+						};
+						userModel
+						  .addUser(body)
+						  .then(response => formRes.resUser(res, response, 200))
+						  .catch(err => console.log(err));
+					  });
+				  } catch (err) {
+					res.json({
+					  err
+					});
+				  }
+				}
+			  }
+			});
+	
 	},
 	updateUser: (req, res) => {
 		var date = new Date();
@@ -69,49 +102,4 @@ module.exports = {
 			.then((response) => formRes.resUser(res, response, 200))
 			.catch((err) => formRes.resUser(res, err, 404));
 	},
-	addUser: (req, res) => {
-		var date = new Date();
-		upload.single("foto")(req, res, async err => {
-		  if (err) {
-			res.json({ msg: err });
-		  } else {
-			if (req.file == undefined) {
-			  // res.json({
-			  //   msg: "No File Selected"
-			  // });
-			  const body = {
-				...req.body,
-				created_at: date,
-				updated_at: date
-			  };
-			  // console.log(body)
-			  userModel
-				.addUser(body)
-				.then(response => formRes.resUser(res, response, 200))
-				.catch(err => console.log(err));
-			} else {
-			  try {
-				cloudinary.uploader
-				  .upload(req.file.path, { folder: "POS-IMG" })
-				  .then(result => {
-					const body = {
-					  ...req.body,
-					  created_at: date,
-					  updated_at: date,
-					  foto: result.url
-					};
-					userModel
-					  .addUser(body)
-					  .then(response => formRes.resUser(res, response, 200))
-					  .catch(err => console.log(err));
-				  });
-			  } catch (err) {
-				res.json({
-				  err
-				});
-			  }
-			}
-		  }
-		});
-	  },
 };
