@@ -19,6 +19,7 @@ const MoreMateri = require("./user/moremateri");
 const Register = require("./user/register");
 const profile = require("./user/profile");
 const ReadMore = require("./user/readmore");
+const Logout = require("./user/logout");
 const Login = require("./user/login");
 
 // admin route
@@ -33,6 +34,7 @@ Router.use("/admin/kelas-user", KelasUser);
 // home route
 Router.use("/home", home);
 Router.use("/login", Login);
+Router.use("/logout", Logout);
 Router.use("/register", Register);
 Router.use("/profile", profile);
 Router.use("/user/Transaksi", Transaksi);
