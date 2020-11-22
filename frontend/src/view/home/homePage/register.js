@@ -30,7 +30,7 @@ class Register extends React.Component {
             email: this.state.email,
             password: this.state.password,
         };
-        Axios.post("http://127.0.0.1:6600/register", data)
+        Axios.post("http://localhost:6600/register", data)
             .then((response) => {
                 console.log("good : ", response);
             })
@@ -50,63 +50,57 @@ class Register extends React.Component {
                         <h3>REGISTER</h3>
                     </center>
                     <Form name="register">
-                        <Form.Item>
-                            <Input
-                                name="name"
-                                label="Name"
-                                value={name}
-                                onChange={this.changeHandler}
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: "Please input your Name!",
-                                    },
-                                ]}
-                            />
+                        <Form.Item
+                            name="name"
+                            label="Name"
+                            value={name}
+                            onChange={this.changeHandler}
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please input your Name!",
+                                },
+                            ]}
+                        >
+                            <Input name="name" label="Name" value={name} onChange={this.changeHandler} />
                         </Form.Item>
-                        <Form.Item>
-                            <Input
-                                name="email"
-                                label="E-mail"
-                                value={email}
-                                onChange={this.changeHandler}
-                                rules={[
-                                    {
-                                        type: "email",
-                                        message: "The input is not valid E-mail!",
-                                    },
-                                    {
-                                        required: true,
-                                        message: "Please input your E-mail!",
-                                    },
-                                ]}
-                            />
+                        <Form.Item
+                            name="email"
+                            label="E-mail"
+                            value={email}
+                            onChange={this.changeHandler}
+                            rules={[
+                                {
+                                    type: "email",
+                                    message: "The input is not valid E-mail!",
+                                },
+                                {
+                                    required: true,
+                                    message: "Please input your E-mail!",
+                                },
+                            ]}
+                        >
+                            <Input name="email" label="E-mail" value={email} onChange={this.changeHandler} />
+                        </Form.Item>
+
+                        <Form.Item
+                            name="password"
+                            label="Password"
+                            value={password}
+                            onChange={this.changeHandler}
+                            rules={[
+                                {
+                                    required: true,
+                                    message: "Please input your password!",
+                                },
+                            ]}
+                            hasFeedback
+                        >
+                            <Input.Password name="password" label="Password" value={password} onChange={this.changeHandler} />
                         </Form.Item>
 
                         <Form.Item>
-                            <Input.Password
-                                name="password"
-                                label="Password"
-                                value={password}
-                                onChange={this.changeHandler}
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: "Please input your password!",
-                                    },
-                                ]}
-                                hasFeedback
-                            />
-                        </Form.Item>
-
-                        <Form.Item>
-                            <Button
-                                type="primary"
-                                htmlType="submit"
-                                className="register-form-button"
-                                onClick={() => this.submitHandler()}
-                                // onSubmit={this.submitHandler}
-                            >
+                            <Button type="primary" htmlType="submit" className="register-form-button" onClick={() => this.submitHandler()}>
                                 Register
                             </Button>
                         </Form.Item>
