@@ -27,7 +27,7 @@ function CoursesCardComponent() {
     }, []);
 
     return (
-        <div>
+        <div style={{ padding: "0.5rem calc((100vw - 1200px) / 2)" }}>
             <Row style={{ margin: "10px 10px 0" }} gutter={[16, 16]}>
                 {data.map((val) => {
                     return (

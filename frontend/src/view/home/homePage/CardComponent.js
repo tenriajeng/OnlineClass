@@ -27,7 +27,7 @@ function CardComponent() {
     }, []);
 
     return (
-        <div style={{ marginTop: 40 }}>
+        <div style={{ marginTop: 40, padding: "0.5rem calc((100vw - 1200px) / 2)" }}>
             <div style={{ textAlign: "center" }}>
                 <h1>New Courses</h1>
             </div>
