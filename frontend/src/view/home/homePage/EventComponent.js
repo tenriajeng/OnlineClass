@@ -1,9 +1,10 @@
-import { Card, Col, Row, Image } from "antd";
+import { Card, Col, Row } from "antd";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import CardComponent from "./CardComponent";
 
-function CardComponent() {
+function EventComponent() {
     const { Meta } = Card;
     const [data, setData] = useState([]);
     const routeCourses = "/courses/";
@@ -29,7 +30,7 @@ function CardComponent() {
     return (
         <div style={{ marginTop: 40 }}>
             <div style={{ textAlign: "center" }}>
-                <h1>New Courses</h1>
+                <h1>Interactive Courses </h1>
             </div>
             <Row style={{ margin: "24px 16px 0" }} gutter={[16, 16]}>
                 {data.map((val) => {
@@ -48,4 +49,4 @@ function CardComponent() {
     );
 }
 
-export default CardComponent;
+export default EventComponent;

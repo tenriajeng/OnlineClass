@@ -13,6 +13,7 @@ import CoursesDetail from "./view/home/coursesPage/CoursesDetail";
 import Login from "./view/home/homePage/login";
 import Register from "./view/home/homePage/register";
 import TeamCardComponet from "./view/home/team/TeamCardComponet";
+import NewNavbar from "./Components/NewNavbar";
 
 class App extends React.Component {
     render() {
@@ -21,34 +22,41 @@ class App extends React.Component {
                 <Switch>
                     {/* user route */}
                     <Route exact path="/">
-                        <NavbarComponent />
+                        <NewNavbar />
+                        <HomePage />
+                        <FooterUserComponent />
+                    </Route>
+
+                    <Route path="/home">
+                        <NewNavbar />
                         <HomePage />
                         <FooterUserComponent />
                     </Route>
 
                     <Route exact path="/courses">
-                        <NavbarComponent />
+                        <NewNavbar />
                         <HeaderPageComponent />
                         <CoursesCardComponent />
                         <FooterUserComponent />
                     </Route>
-                    <Route exact path="/team">
-                        <NavbarComponent />
+                    <Route path="/team">
+                        <NewNavbar />
                         <TeamCardComponet />
                         <FooterUserComponent />
                     </Route>
                     <Route path="/courses/:indetifier">
-                        <NavbarComponent />
+                        <NewNavbar />
+                        <HeaderPageComponent />
                         <CoursesDetail />
                         <FooterUserComponent />
                     </Route>
                     <Route path="/login">
-                        <NavbarComponent />
+                        <NewNavbar />
                         <Login />
                         <FooterUserComponent />
                     </Route>
                     <Route path="/register">
-                        <NavbarComponent />
+                        <NewNavbar />
                         <Register />
                         <FooterUserComponent />
                     </Route>
