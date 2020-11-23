@@ -39,6 +39,12 @@ const NewNavbar = () => {
                     <NavLink to="/courses" activeStyle>
                         Courses
                     </NavLink>
+                    <NavLink to="/interactive-courses" activeStyle>
+                        Interactive&nbsp;Courses
+                    </NavLink>
+                    <NavLink to="/blog" activeStyle>
+                        Blog
+                    </NavLink>
                     <NavLink to="/team" activeStyle>
                         Team
                     </NavLink>

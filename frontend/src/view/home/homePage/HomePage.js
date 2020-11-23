@@ -5,8 +5,18 @@ import CarouselComponent from "./CarouselComponent";
 import EventComponent from "./EventComponent";
 
 function HomePage(props) {
+    const mainStyle = {
+        overflow: "hidden",
+        display: "block",
+        background: "#fafafa",
+        minHeight: "100vh",
+        position: "relative",
+        paddingBottom: "100px",
+        height: "100%",
+    };
+
     return (
-        <div style={{ background: "#fafafa" }}>
+        <div style={mainStyle}>
             <CarouselComponent />
             <CardComponent />
             <EventComponent />

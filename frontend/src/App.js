@@ -14,6 +14,9 @@ import Login from "./view/home/homePage/login";
 import Register from "./view/home/homePage/register";
 import TeamCardComponet from "./view/home/team/TeamCardComponet";
 import NewNavbar from "./Components/NewNavbar";
+import InteractiveHeaderPageComponent from "./view/home/interactiveCoursesPage/InteractiveHeaderPageComponent";
+import InteractiveCoursesCardComponent from "./view/home/interactiveCoursesPage/InteractiveCoursesCardComponent";
+import InteractiveCoursesDetail from "./view/home/interactiveCoursesPage/InteractiveCoursesDetail";
 
 class App extends React.Component {
     render() {
@@ -37,6 +40,18 @@ class App extends React.Component {
                         <NewNavbar />
                         <HeaderPageComponent />
                         <CoursesCardComponent />
+                        <FooterUserComponent />
+                    </Route>
+                    <Route exact path="/interactive-courses">
+                        <NewNavbar />
+                        <InteractiveHeaderPageComponent />
+                        <InteractiveCoursesCardComponent />
+                        <FooterUserComponent />
+                    </Route>
+                    <Route exact path="/interactive-courses/:indetifier">
+                        <NewNavbar />
+                        <InteractiveHeaderPageComponent />
+                        <InteractiveCoursesDetail />
                         <FooterUserComponent />
                     </Route>
                     <Route path="/team">
