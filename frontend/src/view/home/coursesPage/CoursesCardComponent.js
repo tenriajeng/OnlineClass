@@ -1,7 +1,8 @@
-import { Card, Col, Row, Image } from "antd";
+import { Card, Col, Row, Image, Avatar } from "antd";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { ShoppingCartOutlined, EditOutlined, EllipsisOutlined } from "@ant-design/icons";
 
 function CoursesCardComponent() {
     const { Meta } = Card;
@@ -33,8 +34,17 @@ function CoursesCardComponent() {
                     return (
                         <Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }}>
                             <Link to={`/courses/${val.id}`}>
-                                <Card onClick={() => clickCard(val.nama)} hoverable cover={<img src={val.foto} />}>
-                                    <Meta title={val.nama} />
+                                <Card
+                                    onClick={() => clickCard(val.nama)}
+                                    hoverable
+                                    cover={<img alt="example" src={val.foto} />}
+                                    actions={[
+                                        <Link to={`/courses/beli`}>
+                                            <ShoppingCartOutlined style={{ fontSize: "26px", color: "#08c" }} />
+                                        </Link>,
+                                    ]}
+                                >
+                                    <Meta title={val.nama} description="This is the description" />
                                 </Card>
                             </Link>
                         </Col>

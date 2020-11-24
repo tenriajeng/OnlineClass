@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import LeftMenu from "../Navbar/LeftMenu";
 import RightMenu from "../Navbar/RightMenu";
 import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink } from "./NavbarElements";
-
+import Logo from "../../images/logo.svg";
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 const { useBreakpoint } = Grid;
@@ -29,7 +29,7 @@ const NewNavbar = () => {
             <Nav>
                 <NavLink to="/">
                     {/* Logo */}
-                    <img src={require("../../images/logo.svg")} alt="logo" />
+                    <img src={Logo} alt="logo" />
                 </NavLink>
                 <Bars onClick={showDrawer} />
                 <NavMenu>

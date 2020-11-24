@@ -12,55 +12,6 @@ module.exports = {
             .then((response) => formRes.resUser(res, response, 200))
             .catch((err) => formRes.resUser(res, err, 404));
     },
-    addKelas: (req, res) => {
-        //  const bodyReq = req.body;
-        var date = new Date();
-        // console.log(body)
-        kelasModel
-            .addKelas(body)
-            .then((response) => formRes.resUser(res, response, 200))
-            .catch((err) => formRes.resUser(res, err, 404));
-        upload.single("foto")(req, res, async (err) => {
-            if (err) {
-                res.json({ msg: err });
-            } else {
-                if (req.file == undefined) {
-                    // res.json({
-                    //   msg: "No File Selected"
-                    // });
-                    const body = {
-                        ...req.body,
-                        created_at: date,
-                        updated_at: date,
-                    };
-                    // console.log(body)
-                    kelasModel
-                        .addKelas(body)
-                        .then((response) => formRes.resUser(res, response, 200))
-                        .catch((err) => console.log(err));
-                } else {
-                    try {
-                        cloudinary.uploader.upload(req.file.path, { folder: "POS-IMG" }).then((result) => {
-                            const body = {
-                                ...req.body,
-                                created_at: date,
-                                updated_at: date,
-                                foto: result.url,
-                            };
-                            kelasModel
-                                .addKelas(body)
-                                .then((response) => formRes.resUser(res, response, 200))
-                                .catch((err) => console.log(err));
-                        });
-                    } catch (err) {
-                        res.json({
-                            err,
-                        });
-                    }
-                }
-            }
-        });
-    },
     updateKelas: (req, res) => {
         var date = new Date();
         const id = req.params.id;
@@ -112,7 +63,7 @@ module.exports = {
                         created_at: date,
                         updated_at: date,
                     };
-                    // console.log(body)
+                    console.log(body);
                     kelasModel
                         .addKelas(body)
                         .then((response) => formRes.resUser(res, response, 200))
@@ -126,6 +77,8 @@ module.exports = {
                                 updated_at: date,
                                 foto: result.url,
                             };
+                            console.log(body);
+
                             kelasModel
                                 .addKelas(body)
                                 .then((response) => formRes.resUser(res, response, 200))

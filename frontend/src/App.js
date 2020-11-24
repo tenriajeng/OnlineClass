@@ -42,13 +42,14 @@ class App extends React.Component {
                         <CoursesCardComponent />
                         <FooterUserComponent />
                     </Route>
+
                     <Route exact path="/interactive-courses">
                         <NewNavbar />
                         <InteractiveHeaderPageComponent />
                         <InteractiveCoursesCardComponent />
                         <FooterUserComponent />
                     </Route>
-                    <Route exact path="/interactive-courses/:indetifier">
+                    <Route path="/interactive-courses/:indetifier">
                         <NewNavbar />
                         <InteractiveHeaderPageComponent />
                         <InteractiveCoursesDetail />
