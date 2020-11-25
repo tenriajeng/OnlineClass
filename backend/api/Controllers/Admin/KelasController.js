@@ -21,7 +21,7 @@ module.exports = {
             ...req.body,
             updated_at: date,
         };
-        // console.log(body)
+        console.log(body);
         kelasModel
             .updateKelas(body, id)
             .then((response) => formRes.resUser(res, response, 200))

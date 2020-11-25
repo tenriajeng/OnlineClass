@@ -4,6 +4,7 @@ import swal from "sweetalert";
 import { Table, Space, Button, Modal, Input, Upload, message, Image, InputNumber, Checkbox } from "antd";
 import { DeleteOutlined, EditOutlined, EyeTwoTone, PlusOutlined, EyeInvisibleOutlined, ExclamationCircleOutlined, UploadOutlined } from "@ant-design/icons";
 import ImgCrop from "antd-img-crop";
+import { tuple } from "antd/lib/_util/type";
 
 const { Column } = Table;
 
@@ -62,6 +63,9 @@ class KelasTable extends React.Component {
             limit: "",
             aktif: "",
             harga: "",
+            previewVisible: false,
+            fileList: [],
+            foto: "",
         });
     };
 
@@ -86,19 +90,36 @@ class KelasTable extends React.Component {
         this.getOnedata(id);
         this.setState({
             visibleUpdate: true,
+            previewVisible: false,
+            fileList: [],
+            foto: "",
         });
     };
 
     updateKelas = () => {
-        const data = {
-            nama: this.state.nama,
-            limit: this.state.limit,
-            aktif: this.state.aktif,
-            harga: this.state.harga,
-            foto: this.state.foto,
-        };
+        // const data = {
+        //     nama: this.state.nama,
+        //     limit: this.state.limit,
+        //     aktif: this.state.aktif,
+        //     harga: this.state.harga,
+        //     foto: this.state.foto,
+        // };
 
-        Axios.put(`http://localhost:6600/admin/kelas/${this.state.id}`, data).then((res) => {
+        const updateClass = new FormData();
+        updateClass.append("nama", this.state.nama);
+        updateClass.append("limit", this.state.limit);
+        updateClass.append("aktif", this.state.aktif);
+        updateClass.append("harga", this.state.harga);
+        console.log("new class update : ", updateClass);
+
+        if (this.state.fileList.length > 0) {
+            updateClass.append("foto", this.state.fileList[0].originFileObj);
+        } else {
+            updateClass.append("foto", this.state.foto);
+        }
+        console.log("new class update : ", updateClass);
+
+        Axios.put(`http://localhost:6600/admin/kelas/${this.state.id}`, updateClass).then((res) => {
             console.log(res.data);
             // this.getAlldata();
         });
@@ -108,7 +129,7 @@ class KelasTable extends React.Component {
         });
         this.getAllData();
 
-        console.log("update data : ", data);
+        console.log("update data : ", updateClass);
     };
 
     successMessage(message) {
@@ -121,35 +142,24 @@ class KelasTable extends React.Component {
     }
 
     hideModal = (kondisi) => {
-        // const fileFoto = new FormData();
-        // fileFoto.append("foto", this.state.foto);
-        // console.log("file", this.state.foto);
-        // const data = {
-        //     nama: this.state.nama,
-        //     limit: this.state.limit,
-        //     aktif: this.state.aktif,
-        //     harga: this.state.harga,
-        //     foto: this.state.foto,
-        // };
-
-        const menuNew = new FormData();
-        menuNew.append("nama", this.state.nama);
-        menuNew.append("limit", this.state.limit);
-        menuNew.append("aktif", this.state.aktif);
-        menuNew.append("harga", this.state.harga);
-        console.log("menu new", menuNew);
+        const newClass = new FormData();
+        newClass.append("nama", this.state.nama);
+        newClass.append("limit", this.state.limit);
+        newClass.append("aktif", this.state.aktif);
+        newClass.append("harga", this.state.harga);
+        console.log("new class", newClass);
 
         if (this.state.fileList.length > 0) {
-            menuNew.append("foto", this.state.fileList[0].originFileObj);
+            newClass.append("foto", this.state.fileList[0].originFileObj);
         } else {
-            menuNew.append("foto", this.state.foto);
+            newClass.append("foto", this.state.foto);
         }
-        console.log("menu new", menuNew);
+        console.log("new class", newClass);
 
         // console.log("simpan file foto :", this.state.foto);
 
         if (kondisi === "simpan") {
-            Axios.post("http://localhost:6600/admin/kelas/create", menuNew).then((res) => {
+            Axios.post("http://localhost:6600/admin/kelas/create", newClass).then((res) => {
                 console.log(res.data);
                 this.successMessage("ditambahkan!");
                 this.getAllData();
@@ -252,7 +262,7 @@ class KelasTable extends React.Component {
                     <Column title="Limit" dataIndex="limit" key="limit" />
                     <Column title="Aktif" dataIndex="aktif" key="aktif" />
                     <Column title="Harga" dataIndex="harga" key="harga" />
-                    <Column title="Updated At" dataIndex="updated_at" key="updated_at" />
+                    <Column title="Last Update" dataIndex="updated_at" key="updated_at" />
                     <Column
                         title="Foto"
                         dataIndex="foto"
@@ -294,7 +304,7 @@ class KelasTable extends React.Component {
                     />
 
                     <Upload
-                        disabled={this.state.foto === "" ? true : false}
+                        disabled={this.state.foto === "" ? false : true}
                         listType="picture-card"
                         fileList={fileList}
                         onPreview={this.handlePreview}
@@ -335,14 +345,19 @@ class KelasTable extends React.Component {
                         onChange={this.hargaChange}
                         value={this.state.harga}
                     />
-
+                    <Upload
+                        disabled={this.state.foto === "" ? false : true}
+                        listType="picture-card"
+                        fileList={fileList}
+                        onPreview={this.handlePreview}
+                        onChange={this.handleUpload}
+                        beforeUpload={() => false} // return false so that antd doesn't upload the picture right away
+                    >
+                        {uploadButton}
+                    </Upload>
                     <Checkbox onChange={this.onChangeCheckbox} checked={this.state.aktif}>
                         Aktif
                     </Checkbox>
-
-                    <Upload {...props}>
-                        <Button icon={<UploadOutlined />}>Click to Upload</Button>
-                    </Upload>
                 </Modal>
             </div>
         );
