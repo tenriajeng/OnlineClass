@@ -3,7 +3,7 @@ import React from "react";
 
 function HeaderPageComponent(props) {
     return (
-        <div style={{ margin: "10px 10px 0", padding: "0.5rem calc((100vw - 1200px) / 2)" }}>
+        <div style={{ padding: "0.5rem calc((100vw - 1200px) / 2)", background: "#f5f5f5" }}>
             <PageHeader
                 className="site-page-header"
                 title="Title"

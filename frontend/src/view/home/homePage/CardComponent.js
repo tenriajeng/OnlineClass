@@ -4,6 +4,8 @@ import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { URLAPI } from "../../../Components/ApiUrl";
+
 function CardComponent() {
     const { Meta } = Card;
     const [data, setData] = useState([]);
@@ -11,9 +13,9 @@ function CardComponent() {
 
     const getData = async () => {
         try {
-            let res = await Axios.get("http://localhost:6600/admin/kelas");
+            let res = await Axios.get(`${URLAPI}/admin/kelas`);
             setData(res.data.response);
-            console.log("ini mi datanya : ", res);
+            console.log("ini mi datanya : ", URLAPI);
         } catch (error) {
             console.log(error.message);
         }

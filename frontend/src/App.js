@@ -17,6 +17,7 @@ import NewNavbar from "./Components/NewNavbar";
 import InteractiveHeaderPageComponent from "./view/home/interactiveCoursesPage/InteractiveHeaderPageComponent";
 import InteractiveCoursesCardComponent from "./view/home/interactiveCoursesPage/InteractiveCoursesCardComponent";
 import InteractiveCoursesDetail from "./view/home/interactiveCoursesPage/InteractiveCoursesDetail";
+import NewFooter from "./Components/NewFooter/Footer";
 
 class App extends React.Component {
     render() {
@@ -27,54 +28,54 @@ class App extends React.Component {
                     <Route exact path="/">
                         <NewNavbar />
                         <HomePage />
-                        <FooterUserComponent />
+                        <NewFooter />
                     </Route>
 
                     <Route path="/home">
                         <NewNavbar />
                         <HomePage />
-                        <FooterUserComponent />
+                        <NewFooter />
                     </Route>
 
                     <Route exact path="/courses">
                         <NewNavbar />
                         <HeaderPageComponent />
                         <CoursesCardComponent />
-                        <FooterUserComponent />
+                        <NewFooter />
                     </Route>
 
                     <Route exact path="/interactive-courses">
                         <NewNavbar />
                         <InteractiveHeaderPageComponent />
                         <InteractiveCoursesCardComponent />
-                        <FooterUserComponent />
+                        <NewFooter />
                     </Route>
                     <Route path="/interactive-courses/:indetifier">
                         <NewNavbar />
                         <InteractiveHeaderPageComponent />
                         <InteractiveCoursesDetail />
-                        <FooterUserComponent />
+                        <NewFooter />
                     </Route>
                     <Route path="/team">
                         <NewNavbar />
                         <TeamCardComponet />
-                        <FooterUserComponent />
+                        <NewFooter />
                     </Route>
                     <Route path="/courses/:indetifier">
                         <NewNavbar />
                         <HeaderPageComponent />
                         <CoursesDetail />
-                        <FooterUserComponent />
+                        <NewFooter />
                     </Route>
                     <Route path="/login">
                         <NewNavbar />
                         <Login />
-                        <FooterUserComponent />
+                        <NewFooter />
                     </Route>
                     <Route path="/register">
                         <NewNavbar />
                         <Register />
-                        <FooterUserComponent />
+                        <NewFooter />
                     </Route>
                     {/* end user route */}
                 </Switch>

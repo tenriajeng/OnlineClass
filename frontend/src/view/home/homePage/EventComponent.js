@@ -3,6 +3,7 @@ import { Card, Col, Row } from "antd";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { URLAPI } from "../../../Components/ApiUrl";
 import CardComponent from "./CardComponent";
 
 function EventComponent() {
@@ -12,7 +13,7 @@ function EventComponent() {
 
     const getData = async () => {
         try {
-            let res = await Axios.get("http://localhost:6600/admin/kelas");
+            let res = await Axios.get(`${URLAPI}/admin/kelas`);
             setData(res.data.response);
             console.log("ini mi datanya : ", res);
         } catch (error) {

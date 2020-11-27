@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Input, Button, Row, Col } from "antd";
 import Axios from "axios";
+import { URLAPI } from "../../../Components/ApiUrl";
 
 class Register extends React.Component {
     constructor(props) {
@@ -30,7 +31,7 @@ class Register extends React.Component {
             email: this.state.email,
             password: this.state.password,
         };
-        Axios.post("http://localhost:6600/register", data)
+        Axios.post(`${URLAPI}/register`, data)
             .then((response) => {
                 console.log("good : ", response);
             })
@@ -43,11 +44,11 @@ class Register extends React.Component {
         const { name, email, password } = this.state;
 
         return (
-            <Row justify="center" style={{ marginLeft: 10, marginRight: 10 }} align="bottom">
+            <Row justify="center" style={{ marginLeft: 10, marginRight: 10, height: "565px" }} align="middle">
                 <Col xl={5}>
                     <center>
                         <br></br>
-                        <h3>REGISTER</h3>
+                        <h2>REGISTER</h2>
                     </center>
                     <Form name="register">
                         <Form.Item
@@ -62,7 +63,7 @@ class Register extends React.Component {
                                 },
                             ]}
                         >
-                            <Input name="name" label="Name" value={name} onChange={this.changeHandler} />
+                            <Input size="large" name="name" label="Name" value={name} onChange={this.changeHandler} />
                         </Form.Item>
                         <Form.Item
                             name="email"
@@ -80,10 +81,11 @@ class Register extends React.Component {
                                 },
                             ]}
                         >
-                            <Input name="email" label="E-mail" value={email} onChange={this.changeHandler} />
+                            <Input size="large" name="email" label="E-mail" value={email} onChange={this.changeHandler} />
                         </Form.Item>
 
                         <Form.Item
+                            size="large"
                             name="password"
                             label="Password"
                             value={password}
@@ -96,11 +98,11 @@ class Register extends React.Component {
                             ]}
                             hasFeedback
                         >
-                            <Input.Password name="password" label="Password" value={password} onChange={this.changeHandler} />
+                            <Input.Password size="large" name="password" label="Password" value={password} onChange={this.changeHandler} />
                         </Form.Item>
 
                         <Form.Item>
-                            <Button type="primary" htmlType="submit" className="register-form-button" onClick={() => this.submitHandler()}>
+                            <Button size="large" type="primary" htmlType="submit" className="register-form-button" onClick={() => this.submitHandler()}>
                                 Register
                             </Button>
                         </Form.Item>

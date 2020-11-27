@@ -2,6 +2,7 @@ import { Avatar, Card, Col, Image, List, Row, Skeleton, Space } from "antd";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { URLAPI } from "../../../Components/ApiUrl";
 
 function InteractiveCoursesDetail() {
     const [courses, setCourses] = useState([]);
@@ -11,7 +12,7 @@ function InteractiveCoursesDetail() {
 
     const getCourses = async () => {
         try {
-            let res = await Axios.get(`http://localhost:6600/readmore/detail/${indetifier}`);
+            let res = await Axios.get(`${URLAPI}/readmore/detail/${indetifier}`);
             setCourses(res.data.response);
         } catch (error) {
             console.log(error.message);
@@ -20,7 +21,7 @@ function InteractiveCoursesDetail() {
 
     const getDataClass = async () => {
         try {
-            let res = await Axios.get(`http://localhost:6600/admin/kelas/detail/${indetifier}`);
+            let res = await Axios.get(`${URLAPI}/admin/kelas/detail/${indetifier}`);
             setDataClass(res.data.response);
         } catch (error) {
             console.log(error.message);

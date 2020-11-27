@@ -3,6 +3,8 @@ import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Row, Col, Space } from "antd";
 import Axios from "axios";
+import { Link } from "react-router-dom";
+import { URLAPI } from "../../../Components/ApiUrl";
 
 class Login extends React.Component {
     constructor(props) {
@@ -27,7 +29,7 @@ class Login extends React.Component {
             email: this.state.email,
             password: this.state.password,
         };
-        Axios.post("http://localhost:6600/login/", data)
+        Axios.post(`${URLAPI}/login/`, data)
             .then((response) => {
                 console.log("good : ", response);
             })
@@ -39,18 +41,26 @@ class Login extends React.Component {
     render() {
         const { email, password } = this.state;
         return (
-            <Row justify="center" align="bottom">
+            <Row justify="center" align="middle" style={{ height: "565px" }}>
                 <Col xl={5}>
                     <center>
                         <br></br>
-                        <h3>SIGN IN</h3>
+                        <h2>SIGN IN</h2>
                     </center>
                     <Form name="normal_login" className="login-form" initialValues={{ remember: true }}>
                         <Form.Item name="email" rules={[{ required: true, message: "Please input your Email!" }]}>
-                            <Input prefix={<UserOutlined className="site-form-item-icon" />} type="email" placeholder="Email" name="email" value={email} onChange={this.changeHandler} />
+                            <Input size="large" prefix={<UserOutlined className="site-form-item-icon" />} type="email" placeholder="Email" name="email" value={email} onChange={this.changeHandler} />
                         </Form.Item>
                         <Form.Item name="password" rules={[{ required: true, message: "Please input your Password!" }]}>
-                            <Input prefix={<LockOutlined className="site-form-item-icon" />} type="password" placeholder="Password" name="password" value={password} onChange={this.changeHandler} />
+                            <Input
+                                size="large"
+                                prefix={<LockOutlined className="site-form-item-icon" />}
+                                type="password"
+                                placeholder="Password"
+                                name="password"
+                                value={password}
+                                onChange={this.changeHandler}
+                            />
                         </Form.Item>
                         <Form.Item>
                             <Form.Item name="remember" valuePropName="checked" noStyle>
@@ -63,10 +73,10 @@ class Login extends React.Component {
                         </Form.Item>
 
                         <Form.Item>
-                            <Button type="primary" htmlType="submit" className="login-form-button" onClick={() => this.submitHandler()}>
+                            <Button size="large" type="primary" htmlType="submit" className="login-form-button" onClick={() => this.submitHandler()}>
                                 Sig in
                             </Button>
-                            Or <a href="">register now!</a>
+                            Or <Link to="/register">register now!</Link>
                         </Form.Item>
                     </Form>
                 </Col>
