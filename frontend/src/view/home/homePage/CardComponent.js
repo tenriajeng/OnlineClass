@@ -1,5 +1,5 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import { Card, Col, Row, Image } from "antd";
+import { Card, Col, Row, Image, Button, Tooltip } from "antd";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -39,17 +39,26 @@ function CardComponent() {
                     return (
                         <Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }}>
                             <Link to={routeCourses + val.id}>
-                                <Card
-                                    onClick={() => clickCard(val.nama)}
-                                    hoverable
-                                    cover={<img alt="example" src={val.foto} />}
-                                    actions={[
-                                        <Link to={`/courses/beli`}>
-                                            <ShoppingCartOutlined style={{ fontSize: "26px", color: "#08c" }} />
-                                        </Link>,
-                                    ]}
-                                >
-                                    <Meta title={val.nama} description="This is the description" />
+                                <Card hoverable onClick={() => clickCard(val.nama)} cover={<img alt="example" src={val.foto} />} actions={[,]}>
+                                    <Meta
+                                        title={val.nama}
+                                        description={
+                                            <div>
+                                                <label>This is the description</label>
+                                            </div>
+                                        }
+                                    />
+                                    <br />
+                                    <Row justify="space-between">
+                                        <strong>Pendaftar</strong>
+                                        <Link hoverable to={`/courses/beli`}>
+                                            <Tooltip title="Buy" color="blue" key="blue">
+                                                <Button block>
+                                                    <ShoppingCartOutlined style={{ fontSize: "26px", color: "#08c" }} />
+                                                </Button>
+                                            </Tooltip>
+                                        </Link>
+                                    </Row>
                                 </Card>
                             </Link>
                         </Col>

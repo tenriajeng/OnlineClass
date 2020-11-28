@@ -1,4 +1,5 @@
-import { Card, Col, Row, Image } from "antd";
+import { ShoppingCartOutlined } from "@ant-design/icons";
+import { Card, Col, Row, Image, Tooltip, Button } from "antd";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -36,6 +37,17 @@ function InteractiveCoursesCardComponent() {
                             <Link to={`/interactive-courses/${val.id}`}>
                                 <Card onClick={() => clickCard(val.nama)} hoverable cover={<img src={val.foto} />}>
                                     <Meta title={val.nama} />
+                                    <br />
+                                    <Row justify="space-between">
+                                        <strong>Pendaftar</strong>
+                                        <Link hoverable to={`/courses/beli`}>
+                                            <Tooltip title="Buy" color="blue" key="blue">
+                                                <Button block>
+                                                    <ShoppingCartOutlined style={{ fontSize: "26px", color: "#08c" }} />
+                                                </Button>
+                                            </Tooltip>
+                                        </Link>
+                                    </Row>
                                 </Card>
                             </Link>
                         </Col>

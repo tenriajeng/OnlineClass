@@ -1,4 +1,4 @@
-import { Card, Col, Row, Image, Avatar, Button } from "antd";
+import { Card, Col, Row, Image, Avatar, Button, Tooltip } from "antd";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -35,17 +35,19 @@ function CoursesCardComponent() {
                     return (
                         <Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }}>
                             <Link to={`/courses/${val.id}`}>
-                                <Card
-                                    onClick={() => clickCard(val.nama)}
-                                    hoverable
-                                    cover={<img alt="example" src={val.foto} />}
-                                    actions={[
-                                        <Link to={`/courses/beli`}>
-                                            <ShoppingCartOutlined style={{ fontSize: "26px", color: "#08c" }} />
-                                        </Link>,
-                                    ]}
-                                >
+                                <Card onClick={() => clickCard(val.nama)} hoverable cover={<img alt="example" src={val.foto} />} actions={[,]}>
                                     <Meta title={val.nama} description={val.deskripsi} />
+                                    <br />
+                                    <Row justify="space-between">
+                                        <strong>Pendaftar</strong>
+                                        <Link hoverable to={`/courses/beli`}>
+                                            <Tooltip title="Buy" color="blue" key="blue">
+                                                <Button block>
+                                                    <ShoppingCartOutlined style={{ fontSize: "26px", color: "#08c" }} />
+                                                </Button>
+                                            </Tooltip>
+                                        </Link>
+                                    </Row>
                                 </Card>
                             </Link>
                         </Col>

@@ -58,6 +58,7 @@ class App extends React.Component {
                     </Route>
                     <Route path="/team">
                         <NewNavbar />
+                        <HeaderPageComponent />
                         <TeamCardComponet />
                         <NewFooter />
                     </Route>
