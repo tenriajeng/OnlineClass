@@ -70,12 +70,12 @@ module.exports = {
             .catch((err) => formRes.resUser(res, err, 404));
     },
     addUser: (req, res) => {
-        const errors = validationResult(req, res);
+        // const errors = validationResult(req, res);
         console.log(req.body);
 
-        if (!errors.isEmpty()) {
-            return res.status(422).jsonp(errors.array());
-        }
+        // if (!errors.isEmpty()) {
+        //     return res.status(422).jsonp(errors.array());
+        // }
 
         var date = new Date();
         upload.single("foto")(req, res, async (err) => {

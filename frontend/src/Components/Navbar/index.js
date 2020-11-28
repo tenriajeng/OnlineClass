@@ -38,7 +38,7 @@ class NavbarComponent extends Component {
                     <Button className="barsMenu" type="dashed" onClick={this.showDrawer}>
                         <span className="barsBtn"></span>
                     </Button>
-                    <Drawer drawerStyle={{ color: "#342ead" }} title="Basic Drawer" placement="right" closable={false} onClose={this.onClose} visible={this.state.visible}>
+                    <Drawer title="Multi-level drawer" drawerStyle={{ color: "#342ead" }} placement="right" closable={false} onClose={this.onClose} visible={this.state.visible}>
                         <LeftMenu />
                         <RightMenu />
                     </Drawer>
