@@ -1,8 +1,9 @@
 "use strict";
-const kelasModel = require("../../Models/admin/kelas");
+const kelasModel = require("../../Models/admin/Kelas");
 const formRes = require("../../Helpers/formRes");
 const upload = require("../../../config/Multer");
 const cloudinary = require("../../../config/cloudinary");
+const {validationResult} = require("express-validator");
 
 module.exports = {
     getAllKelas: (req, res) => {
@@ -13,20 +14,71 @@ module.exports = {
             .catch((err) => formRes.resUser(res, err, 404));
     },
     addKelas: (req, res) => {
+        const errors = validationResult(req);
+        console.log(req.body);
+
+        if (!errors.isEmpty()) {
+            return res.status(422).jsonp(errors.array());
+        }
         //  const bodyReq = req.body;
         var date = new Date();
-        const body = {
-            ...req.body,
-            created_at: date,
-            updated_at: date,
-        };
-        // console.log(body)
+        console.log(body);
         kelasModel
             .addKelas(body)
             .then((response) => formRes.resUser(res, response, 200))
             .catch((err) => formRes.resUser(res, err, 404));
+        upload.single("foto")(req, res, async (err) => {
+            if (err) {
+                res.json({msg: err});
+            } else {
+                if (req.file == undefined) {
+                    // res.json({
+                    //   msg: "No File Selected"
+                    // });
+                    const body = {
+                        ...req.body,
+                        created_at: date,
+                        updated_at: date,
+                    };
+                    console.log(body);
+                    kelasModel
+                        .addKelas(body)
+                        .then((response) => formRes.resUser(res, response, 200))
+                        .catch((err) => console.log(err));
+                } else {
+                    try {
+                        cloudinary.uploader
+                            .upload(req.file.path, {folder: "POS-IMG"})
+                            .then((result) => {
+                                const body = {
+                                    ...req.body,
+                                    created_at: date,
+                                    updated_at: date,
+                                    foto: result.url,
+                                };
+                                kelasModel
+                                    .addKelas(body)
+                                    .then((response) =>
+                                        formRes.resUser(res, response, 200)
+                                    )
+                                    .catch((err) => console.log(err));
+                            });
+                    } catch (err) {
+                        res.json({
+                            err,
+                        });
+                    }
+                }
+            }
+        });
     },
     updateKelas: (req, res) => {
+        const errors = validationResult(req);
+        console.log(req.body);
+
+        if (!errors.isEmpty()) {
+            return res.status(422).jsonp(errors.array());
+        }
         var date = new Date();
         const id = req.params.id;
 
@@ -66,7 +118,7 @@ module.exports = {
         var date = new Date();
         upload.single("foto")(req, res, async (err) => {
             if (err) {
-                res.json({ msg: err });
+                res.json({msg: err});
             } else {
                 if (req.file == undefined) {
                     // res.json({
@@ -84,18 +136,22 @@ module.exports = {
                         .catch((err) => console.log(err));
                 } else {
                     try {
-                        cloudinary.uploader.upload(req.file.path, { folder: "POS-IMG" }).then((result) => {
-                            const body = {
-                                ...req.body,
-                                created_at: date,
-                                updated_at: date,
-                                foto: result.url,
-                            };
-                            kelasModel
-                                .addKelas(body)
-                                .then((response) => formRes.resUser(res, response, 200))
-                                .catch((err) => console.log(err));
-                        });
+                        cloudinary.uploader
+                            .upload(req.file.path, {folder: "POS-IMG"})
+                            .then((result) => {
+                                const body = {
+                                    ...req.body,
+                                    created_at: date,
+                                    updated_at: date,
+                                    foto: result.url,
+                                };
+                                kelasModel
+                                    .addKelas(body)
+                                    .then((response) =>
+                                        formRes.resUser(res, response, 200)
+                                    )
+                                    .catch((err) => console.log(err));
+                            });
                     } catch (err) {
                         res.json({
                             err,
