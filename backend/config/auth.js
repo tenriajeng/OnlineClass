@@ -14,7 +14,23 @@ module.exports = {
             } else {
                 res.status(401).json({message: "You are not authenticated"});
             }
-            console.log(adminpemateri.response.level);
+        } catch (error) {
+            res.status(401).json({message: "You are not authenticated"});
+        }
+    },
+    verifyUserPemateri: (req, res, next) => {
+        try {
+            const token = req.headers.authorization.split(" ")[1].toString();
+            const userpemateri = jwt.verify(token, "process.env.SECRET_KEY");
+            // console.log(userpemateri.response.level);
+            if (
+                userpemateri.response.level == 2 ||
+                userpemateri.response.level == 3
+            ) {
+                next();
+            } else {
+                res.status(401).json({message: "You are not authenticated"});
+            }
         } catch (error) {
             res.status(401).json({message: "You are not authenticated"});
         }
