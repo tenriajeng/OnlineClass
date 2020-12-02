@@ -18,6 +18,7 @@ import InteractiveHeaderPageComponent from "./view/home/interactiveCoursesPage/I
 import InteractiveCoursesCardComponent from "./view/home/interactiveCoursesPage/InteractiveCoursesCardComponent";
 import InteractiveCoursesDetail from "./view/home/interactiveCoursesPage/InteractiveCoursesDetail";
 import NewFooter from "./Components/NewFooter/Footer";
+import LoginRecoil from "./view/home/homePage/LoginRecoil";
 
 class App extends React.Component {
     render() {
@@ -68,11 +69,13 @@ class App extends React.Component {
                         <CoursesDetail />
                         <NewFooter />
                     </Route>
+
                     <Route path="/login">
                         <NewNavbar />
-                        <Login />
+                        <LoginRecoil />
                         <NewFooter />
                     </Route>
+
                     <Route path="/register">
                         <NewNavbar />
                         <Register />
