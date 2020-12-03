@@ -3,7 +3,7 @@ import { Button, Col, Form, Input, Row } from "antd";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import GoogleLogin from "react-google-login";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { URLAPI } from "../../../Components/ApiUrl";
 import { AuthAtom } from "../../../Components/Auth/AuthAtom";
@@ -29,6 +29,7 @@ function LoginRecoil() {
             setLogin(true);
             setAuthUser(true);
             setStore(store);
+            <Redirect to="/home" />;
         }
 
         console.log("store : ", store);
@@ -56,6 +57,7 @@ function LoginRecoil() {
                         token: response.data.token,
                     })
                 );
+                <Redirect to="/" />;
             })
             .catch((error) => {
                 setAuthUser(false);
@@ -98,7 +100,7 @@ function LoginRecoil() {
 
                             <Form.Item>
                                 <Button size="large" type="primary" htmlType="submit" className="login-form-button" onClick={() => submitHandler()}>
-                                    Sig in
+                                    Sign In
                                 </Button>
                             </Form.Item>
                             <Form.Item>
@@ -109,11 +111,13 @@ function LoginRecoil() {
                                     //         <GoogleOutlined style={{ fontSize: "26px", color: "#08c" }} />
                                     //     </Button>
                                     // )}
+                                    theme="dark"
                                     clientId="302960530396-ep7jo95005em4nd6ebberf1cj6le2j96.apps.googleusercontent.com"
                                     // buttonText="Login"}
                                     onSuccess={responseGoogle}
                                     onFailure={responseGoogle}
                                     cookiePolicy={"single_host_origin"}
+                                    responseType="code,token"
                                 />
                             </Form.Item>
                             <Form.Item>
@@ -122,7 +126,7 @@ function LoginRecoil() {
                         </Form>
                     </Col>
                 ) : (
-                    <h1>SUDAH LOGIN</h1>
+                    <Redirect to="/home" />
                 )}
             </Row>
         </div>

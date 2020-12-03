@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Base from "./view/admin/layouts/Base";
 import NavbarComponent from "./Components/Navbar";
 import HomePage from "./view/home/homePage/HomePage";
@@ -19,79 +19,81 @@ import InteractiveCoursesCardComponent from "./view/home/interactiveCoursesPage/
 import InteractiveCoursesDetail from "./view/home/interactiveCoursesPage/InteractiveCoursesDetail";
 import NewFooter from "./Components/NewFooter/Footer";
 import LoginRecoil from "./view/home/homePage/LoginRecoil";
+import { AuthAtom } from "./Components/Auth/AuthAtom";
+import { useRecoilState } from "recoil";
 
-class App extends React.Component {
-    render() {
-        return (
-            <div>
-                <Switch>
-                    {/* user route */}
-                    <Route exact path="/">
-                        <NewNavbar />
-                        <HomePage />
-                        <NewFooter />
-                    </Route>
+function App() {
+    const [authUser, setAuthUser] = useRecoilState(AuthAtom);
 
-                    <Route path="/home">
-                        <NewNavbar />
-                        <HomePage />
-                        <NewFooter />
-                    </Route>
-
-                    <Route exact path="/courses">
-                        <NewNavbar />
-                        <HeaderPageComponent />
-                        <CoursesCardComponent />
-                        <NewFooter />
-                    </Route>
-
-                    <Route exact path="/interactive-courses">
-                        <NewNavbar />
-                        <InteractiveHeaderPageComponent />
-                        <InteractiveCoursesCardComponent />
-                        <NewFooter />
-                    </Route>
-                    <Route path="/interactive-courses/:indetifier">
-                        <NewNavbar />
-                        <InteractiveHeaderPageComponent />
-                        <InteractiveCoursesDetail />
-                        <NewFooter />
-                    </Route>
-                    <Route path="/team">
-                        <NewNavbar />
-                        <HeaderPageComponent />
-                        <TeamCardComponet />
-                        <NewFooter />
-                    </Route>
-                    <Route path="/courses/:indetifier">
-                        <NewNavbar />
-                        <HeaderPageComponent />
-                        <CoursesDetail />
-                        <NewFooter />
-                    </Route>
-
-                    <Route path="/login">
-                        <NewNavbar />
-                        <LoginRecoil />
-                        <NewFooter />
-                    </Route>
-
-                    <Route path="/register">
-                        <NewNavbar />
-                        <Register />
-                        <NewFooter />
-                    </Route>
-                    {/* end user route */}
-                </Switch>
-
-                {/* admin route */}
-                <Route path="/admin">
-                    <Base />
+    return (
+        <div>
+            <Switch>
+                {/* user route */}
+                <Route exact path="/">
+                    <NewNavbar />
+                    <HomePage />
+                    <NewFooter />
                 </Route>
-                {/* end admin route */}
-            </div>
-        );
-    }
+
+                <Route path="/home">
+                    <NewNavbar />
+                    <HomePage />
+                    <NewFooter />
+                </Route>
+
+                <Route exact path="/courses">
+                    <NewNavbar />
+                    <HeaderPageComponent />
+                    <CoursesCardComponent />
+                    <NewFooter />
+                </Route>
+
+                <Route exact path="/interactive-courses">
+                    <NewNavbar />
+                    <InteractiveHeaderPageComponent />
+                    <InteractiveCoursesCardComponent />
+                    <NewFooter />
+                </Route>
+                <Route path="/interactive-courses/:indetifier">
+                    <NewNavbar />
+                    <InteractiveHeaderPageComponent />
+                    <InteractiveCoursesDetail />
+                    <NewFooter />
+                </Route>
+                <Route path="/team">
+                    <NewNavbar />
+                    <HeaderPageComponent />
+                    <TeamCardComponet />
+                    <NewFooter />
+                </Route>
+                <Route path="/courses/:indetifier">
+                    <NewNavbar />
+                    <HeaderPageComponent />
+                    <CoursesDetail />
+                    <NewFooter />
+                </Route>
+
+                <Route path="/login">
+                    <NewNavbar />
+                    {authUser ? <Redirect to="/home" /> : <LoginRecoil />}
+                    <NewFooter />
+                </Route>
+
+                <Route path="/register">
+                    <NewNavbar />
+                    {authUser ? <Redirect to="/home" /> : <Register />}
+                    <NewFooter />
+                </Route>
+                {/* end user route */}
+            </Switch>
+
+            {/* admin route */}
+            <Route path="/admin">
+                <Base />
+            </Route>
+            {/* end admin route */}
+        </div>
+    );
 }
 
 export default App;
