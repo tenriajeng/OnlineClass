@@ -1,7 +1,7 @@
 "use strict";
 const materiModel = require("../../Models/admin/Materis");
 const formRes = require("../../Helpers/formRes");
-const {validationResult} = require("express-validator");
+// const {validationResult, body} = require("express-validator");
 const upload = require("../../../config/multer");
 const cloudinary = require("../../../config/cloudinary");
 
@@ -13,16 +13,21 @@ module.exports = {
             .then((response) => formRes.resUser(res, response, 200))
             .catch((err) => formRes.resUser(res, err, 404));
     },
-    addMateri: (req, res) => {
-        const errors = validationResult(req);
-        console.log(req.body);
+    addMateri: (req, res, body) => {
+        // const errors = validationResult(req);
+        // console.log(req.body);
 
-        if (!errors.isEmpty()) {
-            return res.status(422).jsonp(errors.array());
-        }
+        // if (!errors.isEmpty()) {
+        //     return res.status(422).jsonp(errors.array());
+        // }
         //  const bodyReq = req.body;
         var date = new Date();
-        upload.single("foto")(req, res, async err => {
+        // // console.log(body)
+        // materiModel
+        //     .addMateri(body)
+        //     .then((response) => formRes.resUser(res, response, 200))
+        //     .catch((err) => formRes.resUser(res, err, 404));
+        upload.single("file")(req, res, async err => {
             if (err) {
               res.json({ msg: err });
             } else {
@@ -42,14 +47,12 @@ module.exports = {
                   .catch(err => console.log(err));
               } else {
                 try {
-                  cloudinary.uploader
-                    .upload(req.file.path, { folder: "POS-IMG" })
-                    .then(result => {
+                  cloudinary.uploader.upload(req.file.path, { folder: "POS-IMG" }).then(result => {
                       const body = {
                         ...req.body,
                         created_at: date,
                         updated_at: date,
-                        foto: result.url
+                        file: result.url
                       };
                       materiModel
                         .addMateri(body)

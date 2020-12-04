@@ -1,8 +1,7 @@
 "use strict";
 const pemateriModel = require("../../Models/admin/Pemateris");
 const formRes = require("../../Helpers/formRes");
-const upload = require("../../../config/multer");
-const cloudinary = require("../../../config/cloudinary");
+
 
 module.exports = {
     getAllPemateri: (req, res) => {
@@ -13,53 +12,11 @@ module.exports = {
             .catch((err) => formRes.resUser(res, err, 404));
     },
     addPemateri: (req, res, body) => {
-        //  const bodyReq = req.body;
-        var date = new Date();
-        // console.log(body)
+        //  const book genre = req.query.genre
         pemateriModel
             .addPemateri(body)
             .then((response) => formRes.resUser(res, response, 200))
-            .catch((err) => formRes.resUser(res, err, 404));
-        upload.single("foto")(req, res, async (err) =>{
-            if (err) {
-                res.json({ msg: err });
-            } else {
-                if (req.file == undefined) {
-                    // res.json({
-                    //   msg: "No File Selected"
-                    // });
-                    const body = {
-                        ...req.body,
-                        created_at: date,
-                        updated_at: date,
-                    };
-                    // console.log(body)
-                    pemateriModel
-                        .addPemateri(body)
-                        .then((response) => formRes.resUser(res, response, 200))
-                        .catch((err) => console.log(err));
-                } else {
-                    try {
-                        cloudinary.uploader.upload(req.file.path, { folder: "POS-IMG" }).then((result) => {
-                            const body = {
-                                ...req.body,
-                                created_at: date,
-                                updated_at: date,
-                                foto: result.url,
-                            };
-                            pemateriModel
-                                .addPemateri(body)
-                                .then((response) => formRes.resUser(res, response, 200))
-                                .catch((err) => console.log(err));
-                        });
-                    } catch (err) {
-                        res.json({
-                            err,
-                        });
-                    }
-                }
-            }
-        });      
+            .catch((err) => formRes.resUser(res, err, 404));     
     },
 
     updatePemateri: (req, res) => {
