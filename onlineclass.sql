@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2020 at 11:13 PM
+-- Generation Time: Dec 06, 2020 at 09:04 AM
 -- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.34
+-- PHP Version: 7.2.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `onlineclass`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `kelas_id` int(11) NOT NULL,
+  `harga` double NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `user_id`, `kelas_id`, `harga`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 8, 10000, '2020-12-06 06:08:29', '2020-12-06 06:08:29', NULL),
+(2, 1, 9, 10000, '2020-12-06 06:18:09', '2020-12-06 06:18:09', NULL);
 
 -- --------------------------------------------------------
 
@@ -237,12 +261,18 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `level`, `foto`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'ilham', 'ilham@gmail.com', NULL, 'ilham', 3, NULL, NULL, NULL, '2020-10-07 05:53:05', NULL),
+(1, 'ilham', 'ilham@gmail.com', NULL, 'ilham', 1, NULL, NULL, NULL, '2020-10-07 05:53:05', NULL),
 (38, 'tenriajeng', 'tenriajeng@gmail.com', NULL, 'tenriajeng', 1, NULL, NULL, '2020-11-28 20:48:16', '2020-11-28 20:48:16', NULL);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -308,6 +338,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
