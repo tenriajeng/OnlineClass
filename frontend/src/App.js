@@ -23,77 +23,72 @@ import { AuthAtom } from "./Components/Auth/AuthAtom";
 import { useRecoilState } from "recoil";
 
 function App() {
-    const [authUser, setAuthUser] = useRecoilState(AuthAtom);
+	const [authUser, setAuthUser] = useRecoilState(AuthAtom);
 
-    return (
-        <div>
-            <Switch>
-                {/* user route */}
-                <Route exact path="/">
-                    <NewNavbar />
-                    <HomePage />
-                    <NewFooter />
-                </Route>
+	return (
+		<div>
+			<Switch>
+				{/* user route */}
+				<Route exact path="/">
+					<NewNavbar />
+					<HomePage />
+					<NewFooter />
+				</Route>
+				<Route path="/home">
+					<NewNavbar />
+					<HomePage />
+					<NewFooter />
+				</Route>
+				<Route exact path="/courses">
+					<NewNavbar />
+					<HeaderPageComponent />
+					<CoursesCardComponent />
+					<NewFooter />
+				</Route>
+				<Route exact path="/interactive-courses">
+					<NewNavbar />
+					<InteractiveHeaderPageComponent />
+					<InteractiveCoursesCardComponent />
+					<NewFooter />
+				</Route>
+				<Route path="/interactive-courses/:indetifier">
+					<NewNavbar />
+					<InteractiveHeaderPageComponent />
+					<InteractiveCoursesDetail />
+					<NewFooter />
+				</Route>
+				<Route path="/team">
+					<NewNavbar />
+					<HeaderPageComponent />
+					<TeamCardComponet />
+					<NewFooter />
+				</Route>
+				<Route path="/courses/:indetifier">
+					<NewNavbar />
+					<HeaderPageComponent />
+					<CoursesDetail />
+					<NewFooter />
+				</Route>
+				<Route path="/login">
+					<NewNavbar />
+					{authUser ? <Redirect to="/home" /> : <LoginRecoil />}
+					<NewFooter />
+				</Route>
+				<Route path="/register">
+					<NewNavbar />
+					{authUser ? <Redirect to="/home" /> : <Register />}
+					<NewFooter />
+				</Route>
+				{/* end user route */}
+			</Switch>
 
-                <Route path="/home">
-                    <NewNavbar />
-                    <HomePage />
-                    <NewFooter />
-                </Route>
-
-                <Route exact path="/courses">
-                    <NewNavbar />
-                    <HeaderPageComponent />
-                    <CoursesCardComponent />
-                    <NewFooter />
-                </Route>
-
-                <Route exact path="/interactive-courses">
-                    <NewNavbar />
-                    <InteractiveHeaderPageComponent />
-                    <InteractiveCoursesCardComponent />
-                    <NewFooter />
-                </Route>
-                <Route path="/interactive-courses/:indetifier">
-                    <NewNavbar />
-                    <InteractiveHeaderPageComponent />
-                    <InteractiveCoursesDetail />
-                    <NewFooter />
-                </Route>
-                <Route path="/team">
-                    <NewNavbar />
-                    <HeaderPageComponent />
-                    <TeamCardComponet />
-                    <NewFooter />
-                </Route>
-                <Route path="/courses/:indetifier">
-                    <NewNavbar />
-                    <HeaderPageComponent />
-                    <CoursesDetail />
-                    <NewFooter />
-                </Route>
-
-                <Route path="/login">
-                    <NewNavbar />
-                    {authUser ? <Redirect to="/home" /> : <LoginRecoil />}
-                    <NewFooter />
-                </Route>
-
-                <Route path="/register">
-                    <NewNavbar />
-                    {authUser ? <Redirect to="/home" /> : <Register />}
-                    <NewFooter />
-                </Route>
-                {/* end user route */}
-            </Switch>
-
-            {/* admin route */}
-            <Route path="/admin">
-                <Base />
-            </Route>
-            {/* end admin route */}
-        </div>
-    );
+			{/* admin route */}
+			<Route path="/admin">
+				<Base />
+			</Route>
+			{/* end admin route */}
+		</div>
+	);
 }
 
 export default App;
