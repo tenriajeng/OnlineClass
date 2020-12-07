@@ -164,7 +164,7 @@ class PemateriTable extends React.Component {
                 <Table dataSource={this.state.kelasUser} pagination={{ pageSize: 10 }} scroll={{ y: 300 }}>
                     <Column title="Nama User" dataIndex="usersName" key="usersName" />
                     <Column title="Nama Kelas" dataIndex="kelasNama" key="kelasNama" />
-                    <Column title="Updated At" dataIndex="updated_at" key="updated_at" />
+                    <Column title="Last Update" dataIndex="updated_at" key="updated_at" />
                     <Column
                         title="Action"
                         key="action"

@@ -1,5 +1,5 @@
 const express = require("express");
-const MoreMateriController = require("../../Controllers/User/MoreMaterisController");
+const MoreMateriController = require("../../Controllers/user/MoreMaterisController");
 const Router = express.Router();
 
 Router.get("/detail/:id", MoreMateriController.getAllMoreMateri);

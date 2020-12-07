@@ -1,5 +1,5 @@
 const express = require("express");
-const TransaksiController = require("../../Controllers/User/TransaksiController");
+const TransaksiController = require("../../Controllers/user/TransaksiController");
 const Router = express.Router();
 
 Router.post("/create", TransaksiController.addTransaksi);

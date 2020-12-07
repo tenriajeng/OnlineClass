@@ -154,7 +154,7 @@ class PembayaranTable extends React.Component {
                 </Button>
                 <Table dataSource={this.state.Pembayaran} pagination={{ pageSize: 10 }} scroll={{ y: 300 }}>
                     <Column title="Nama" dataIndex="nama" key="nama" />
-                    <Column title="Updated At" dataIndex="updated_at" key="updated_at" />
+                    <Column title="Last Update" dataIndex="updated_at" key="updated_at" />
                     <Column
                         title="Action"
                         key="action"

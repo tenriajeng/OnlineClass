@@ -22,6 +22,7 @@ const ReadMore = require("./user/readmore");
 const Logout = require("./user/logout");
 const Login = require("./user/login");
 const Buykelas = require("./user/buykelas");
+const Cart = require("./user/cart");
 
 // admin route
 Router.use("/admin/kelas", kelas);
@@ -29,7 +30,7 @@ Router.use("/admin/user", user);
 Router.use("/admin/materi", materi);
 Router.use("/admin/pemateri", pemateri);
 Router.use("/admin/pembayaran", pembayaran);
-Router.use("/admin/transaksis", Transaksi);
+Router.use("/admin/transaksis", transaksi);
 Router.use("/admin/kelas-user", KelasUser);
 
 // home route
@@ -43,5 +44,6 @@ Router.use("/readmore", ReadMore);
 Router.use("/user/kelas", userkelas);
 Router.use("/moremateri", MoreMateri);
 Router.use("/buykelas", Buykelas);
+Router.use("/cart", Cart);
 
 module.exports = Router;
