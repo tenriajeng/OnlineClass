@@ -1,8 +1,10 @@
 const express = require("express");
-const { check } = require("express-validator");
 const materiController = require("../../Controllers/admin/MaterisController");
+const { check } = require("express-validator");
+// const materiController = require("../../Controllers/Admin/MaterisController");
 const Router = express.Router();
 const auth = require("../../../config/auth");
+// use auth.verifyToken for secure route
 
 Router.get("/", auth.verifyAdminPemateri, materiController.getAllMateri);
 // Router.get('/:_id', userController.read_data);

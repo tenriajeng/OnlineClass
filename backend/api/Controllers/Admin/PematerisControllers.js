@@ -2,6 +2,7 @@
 const pemateriModel = require("../../Models/admin/Pemateris");
 const formRes = require("../../Helpers/formRes");
 
+
 module.exports = {
     getAllPemateri: (req, res) => {
         // const bookGenre = req.query.genre
@@ -10,20 +11,14 @@ module.exports = {
             .then((response) => formRes.resUser(res, response, 200))
             .catch((err) => formRes.resUser(res, err, 404));
     },
-    addPemateri: (req, res) => {
-        //  const bodyReq = req.body;
-        var date = new Date();
-        const body = {
-            ...req.body,
-            created_at: date,
-            updated_at: date,
-        };
-        // console.log(body)
+    addPemateri: (req, res, body) => {
+        //  const book genre = req.query.genre
         pemateriModel
             .addPemateri(body)
             .then((response) => formRes.resUser(res, response, 200))
-            .catch((err) => formRes.resUser(res, err, 404));
+            .catch((err) => formRes.resUser(res, err, 404));     
     },
+
     updatePemateri: (req, res) => {
         var date = new Date();
         const id = req.params.id;
