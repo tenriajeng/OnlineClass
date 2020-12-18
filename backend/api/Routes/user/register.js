@@ -1,16 +1,12 @@
 const express = require("express");
-const RegisterController = require("../../Controllers/User/RegisterController");
+const RegisterController = require("../../Controllers/RegisterController");
 const Router = express.Router();
 const {check} = require("express-validator");
 
 Router.post(
     "/",
     [
-        check("email").custom((email) => {
-            if (alreadyHaveEmail(email)) {
-                throw new Error("Email already registered");
-            }
-        }),
+        check("email").isEmail,
         check("name")
             .isLength({min: 5})
             .withMessage("Name must have more than 5 characters"),
