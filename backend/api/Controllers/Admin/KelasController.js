@@ -3,7 +3,6 @@ const kelasModel = require("../../Models/admin/Kelas");
 const formRes = require("../../Helpers/formRes");
 const upload = require("../../../config/Multer");
 const cloudinary = require("../../../config/cloudinary");
-const {validationResult} = require("express-validator");
 
 module.exports = {
     getAllKelas: (req, res) => {
@@ -13,20 +12,9 @@ module.exports = {
             .then((response) => formRes.resUser(res, response, 200))
             .catch((err) => formRes.resUser(res, err, 404));
     },
-    addKelas: (req, res) => {
-        const errors = validationResult(req);
-        console.log(req.body);
-
-        if (!errors.isEmpty()) {
-            return res.status(422).jsonp(errors.array());
-        }
-        //  const bodyReq = req.body;
+    updateKelas: (req, res) => {
         var date = new Date();
-        console.log(body);
-        kelasModel
-            .addKelas(body)
-            .then((response) => formRes.resUser(res, response, 200))
-            .catch((err) => formRes.resUser(res, err, 404));
+        const id = req.params.id;
         upload.single("foto")(req, res, async (err) => {
             if (err) {
                 res.json({msg: err});
@@ -40,9 +28,10 @@ module.exports = {
                         created_at: date,
                         updated_at: date,
                     };
-                    console.log(body);
+                    console.log(body, id);
+
                     kelasModel
-                        .addKelas(body)
+                        .updateKelas(body, id)
                         .then((response) => formRes.resUser(res, response, 200))
                         .catch((err) => console.log(err));
                 } else {
@@ -56,8 +45,27 @@ module.exports = {
                                     updated_at: date,
                                     foto: result.url,
                                 };
+                                const {nama, aktif, limit, harga} = req.body;
+                                if (nama.length < 6) {
+                                    res.status(400).json({
+                                        msg: "Nama must than 6 characters",
+                                    });
+                                } else if (Number.isNaN(parseInt(aktif))) {
+                                    res.status(400).json({
+                                        msg: "Aktif must be number",
+                                    });
+                                } else if (Number.isNaN(parseInt(limit))) {
+                                    res.status(400).json({
+                                        msg: "Limit must be number",
+                                    });
+                                } else if (Number.isNaN(parseInt(harga))) {
+                                    res.status(400).json({
+                                        msg: "harga must be number",
+                                    });
+                                }
+                                console.log(body, id);
                                 kelasModel
-                                    .addKelas(body)
+                                    .updateKelas(body, id)
                                     .then((response) =>
                                         formRes.resUser(res, response, 200)
                                     )
@@ -71,27 +79,6 @@ module.exports = {
                 }
             }
         });
-    },
-    updateKelas: (req, res) => {
-        const errors = validationResult(req);
-        console.log(req.body);
-
-        if (!errors.isEmpty()) {
-            return res.status(422).jsonp(errors.array());
-        }
-        var date = new Date();
-        const id = req.params.id;
-
-        // console.log('ini adalah id:',id)
-        const body = {
-            ...req.body,
-            updated_at: date,
-        };
-        // console.log(body)
-        kelasModel
-            .updateKelas(body, id)
-            .then((response) => formRes.resUser(res, response, 200))
-            .catch((err) => formRes.resUser(res, err, 404));
     },
     deleteKelas: (req, res) => {
         var date = new Date();
@@ -130,6 +117,7 @@ module.exports = {
                         updated_at: date,
                     };
                     // console.log(body)
+
                     kelasModel
                         .addKelas(body)
                         .then((response) => formRes.resUser(res, response, 200))
@@ -145,6 +133,25 @@ module.exports = {
                                     updated_at: date,
                                     foto: result.url,
                                 };
+                                const {nama, aktif, limit, harga} = req.body;
+                                if (nama.length < 6) {
+                                    res.status(400).json({
+                                        msg: "Nama must than 6 characters",
+                                    });
+                                } else if (Number.isNaN(parseInt(aktif))) {
+                                    res.status(400).json({
+                                        msg: "Aktif must be number",
+                                    });
+                                } else if (Number.isNaN(parseInt(limit))) {
+                                    res.status(400).json({
+                                        msg: "Limit must be number",
+                                    });
+                                } else if (Number.isNaN(parseInt(harga))) {
+                                    res.status(400).json({
+                                        msg: "harga must be number",
+                                    });
+                                }
+                                console.log(body);
                                 kelasModel
                                     .addKelas(body)
                                     .then((response) =>

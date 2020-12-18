@@ -1,7 +1,8 @@
 "use strict";
 const materiModel = require("../../Models/admin/Materis");
 const formRes = require("../../Helpers/formRes");
-const {validationResult} = require("express-validator");
+const upload = require("../../../config/multer");
+const cloudinary = require("../../../config/cloudinary");
 
 module.exports = {
     getAllMateri: (req, res) => {
@@ -12,45 +13,123 @@ module.exports = {
             .catch((err) => formRes.resUser(res, err, 404));
     },
     addMateri: (req, res) => {
-        const errors = validationResult(req);
-        console.log(req.body);
-
-        if (!errors.isEmpty()) {
-            return res.status(422).jsonp(errors.array());
-        }
-        //  const bodyReq = req.body;
         var date = new Date();
-        const body = {
-            ...req.body,
-            created_at: date,
-            updated_at: date,
-        };
-        // console.log(body)
-        materiModel
-            .addMateri(body)
-            .then((response) => formRes.resUser(res, response, 200))
-            .catch((err) => formRes.resUser(res, err, 404));
+        upload.single("berkas")(req, res, async (err) => {
+            if (err) {
+                res.json({msg: err});
+            } else {
+                if (req.file == undefined) {
+                    // res.json({
+                    //   msg: "No File Selected"
+                    // });
+                    const body = {
+                        ...req.body,
+                        created_at: date,
+                        updated_at: date,
+                    };
+                    // console.log(body)
+
+                    materiModel
+                        .addMateri(body)
+                        .then((response) => formRes.resUser(res, response, 200))
+                        .catch((err) => console.log(err));
+                } else {
+                    try {
+                        cloudinary.uploader
+                            .upload(req.file.path, {folder: "POS-IMG"})
+                            .then((result) => {
+                                const body = {
+                                    ...req.body,
+                                    created_at: date,
+                                    updated_at: date,
+                                    berkas: result.url,
+                                };
+                                const {nama, aktif} = req.body;
+                                if (nama.length < 6) {
+                                    res.status(400).json({
+                                        msg: "Nama must than 6 characters",
+                                    });
+                                } else if (Number.isNaN(parseInt(aktif))) {
+                                    res.status(400).json({
+                                        msg: "Aktif must be number",
+                                    });
+                                }
+                                // console.log(body);
+                                materiModel
+                                    .addMateri(body)
+                                    .then((response) =>
+                                        formRes.resUser(res, response, 200)
+                                    )
+                                    .catch((err) => console.log(err));
+                            });
+                    } catch (err) {
+                        res.json({
+                            err,
+                        });
+                    }
+                }
+            }
+        });
     },
     updateMateri: (req, res) => {
-        const errors = validationResult(req);
-        console.log(req.body);
-
-        if (!errors.isEmpty()) {
-            return res.status(422).jsonp(errors.array());
-        }
         var date = new Date();
         const id = req.params.id;
+        upload.single("berkas")(req, res, async (err) => {
+            if (err) {
+                res.json({msg: err});
+            } else {
+                if (req.file == undefined) {
+                    // res.json({
+                    //   msg: "No File Selected"
+                    // });
+                    const body = {
+                        ...req.body,
+                        created_at: date,
+                        updated_at: date,
+                    };
+                    console.log(body, id);
 
-        // console.log('ini adalah id:',id)
-        const body = {
-            ...req.body,
-            updated_at: date,
-        };
-        // console.log(body)
-        materiModel
-            .updateMateri(body, id)
-            .then((response) => formRes.resUser(res, response, 200))
-            .catch((err) => formRes.resUser(res, err, 404));
+                    materiModel
+                        .updateMateri(body, id)
+                        .then((response) => formRes.resUser(res, response, 200))
+                        .catch((err) => console.log(err));
+                } else {
+                    try {
+                        cloudinary.uploader
+                            .upload(req.file.path, {folder: "POS-IMG"})
+                            .then((result) => {
+                                const body = {
+                                    ...req.body,
+                                    created_at: date,
+                                    updated_at: date,
+                                    berkas: result.url,
+                                };
+                                const {nama, aktif} = req.body;
+                                if (nama.length < 6) {
+                                    res.status(400).json({
+                                        msg: "Nama must than 6 characters",
+                                    });
+                                } else if (Number.isNaN(parseInt(aktif))) {
+                                    res.status(400).json({
+                                        msg: "Aktif must be number",
+                                    });
+                                }
+                                console.log(body, id);
+                                materiModel
+                                    .updateMateri(body, id)
+                                    .then((response) =>
+                                        formRes.resUser(res, response, 200)
+                                    )
+                                    .catch((err) => console.log(err));
+                            });
+                    } catch (err) {
+                        res.json({
+                            err,
+                        });
+                    }
+                }
+            }
+        });
     },
     deleteMateri: (req, res) => {
         var date = new Date();
