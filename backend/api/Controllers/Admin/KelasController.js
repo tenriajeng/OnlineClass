@@ -62,14 +62,15 @@ module.exports = {
                                     res.status(400).json({
                                         msg: "harga must be number",
                                     });
+                                } else {
+                                    console.log(body, id);
+                                    kelasModel
+                                        .updateKelas(body, id)
+                                        .then((response) =>
+                                            formRes.resUser(res, response, 200)
+                                        )
+                                        .catch((err) => console.log(err));
                                 }
-                                console.log(body, id);
-                                kelasModel
-                                    .updateKelas(body, id)
-                                    .then((response) =>
-                                        formRes.resUser(res, response, 200)
-                                    )
-                                    .catch((err) => console.log(err));
                             });
                     } catch (err) {
                         res.json({
@@ -150,14 +151,15 @@ module.exports = {
                                     res.status(400).json({
                                         msg: "harga must be number",
                                     });
+                                } else {
+                                    console.log(body);
+                                    kelasModel
+                                        .addKelas(body)
+                                        .then((response) =>
+                                            formRes.resUser(res, response, 200)
+                                        )
+                                        .catch((err) => console.log(err));
                                 }
-                                console.log(body);
-                                kelasModel
-                                    .addKelas(body)
-                                    .then((response) =>
-                                        formRes.resUser(res, response, 200)
-                                    )
-                                    .catch((err) => console.log(err));
                             });
                     } catch (err) {
                         res.json({

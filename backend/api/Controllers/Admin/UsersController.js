@@ -45,7 +45,11 @@ module.exports = {
                                     updated_at: date,
                                     foto: result.url,
                                 };
-                                const {name, password} = req.body;
+                                const validateEmail = (email) => {
+                                    const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
+                                    return emailRegex.test(email);
+                                };
+                                const {name, password, email} = req.body;
                                 if (name.length < 6) {
                                     res.status(400).json({
                                         msg: "Nama must than 6 characters",
@@ -54,14 +58,19 @@ module.exports = {
                                     res.status(400).json({
                                         msg: "Password must than 6 characters",
                                     });
+                                } else if (!validateEmail(email)) {
+                                    res.status(400).json({
+                                        msg: "Email is not valid",
+                                    });
+                                } else {
+                                    console.log(body, id);
+                                    userModel
+                                        .updateUser(body, id)
+                                        .then((response) =>
+                                            formRes.resUser(res, response, 200)
+                                        )
+                                        .catch((err) => console.log(err));
                                 }
-                                console.log(body, id);
-                                userModel
-                                    .updateUser(body, id)
-                                    .then((response) =>
-                                        formRes.resUser(res, response, 200)
-                                    )
-                                    .catch((err) => console.log(err));
                             });
                     } catch (err) {
                         res.json({
@@ -142,13 +151,14 @@ module.exports = {
                                     res.status(400).json({
                                         msg: "Email is not valid",
                                     });
+                                } else {
+                                    userModel
+                                        .addUser(body)
+                                        .then((response) =>
+                                            formRes.resUser(res, response, 200)
+                                        )
+                                        .catch((err) => console.log(err));
                                 }
-                                userModel
-                                    .addUser(body)
-                                    .then((response) =>
-                                        formRes.resUser(res, response, 200)
-                                    )
-                                    .catch((err) => console.log(err));
                             });
                     } catch (err) {
                         res.json({

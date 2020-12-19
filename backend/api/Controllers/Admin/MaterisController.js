@@ -53,14 +53,15 @@ module.exports = {
                                     res.status(400).json({
                                         msg: "Aktif must be number",
                                     });
+                                } else {
+                                    // console.log(body);
+                                    materiModel
+                                        .addMateri(body)
+                                        .then((response) =>
+                                            formRes.resUser(res, response, 200)
+                                        )
+                                        .catch((err) => console.log(err));
                                 }
-                                // console.log(body);
-                                materiModel
-                                    .addMateri(body)
-                                    .then((response) =>
-                                        formRes.resUser(res, response, 200)
-                                    )
-                                    .catch((err) => console.log(err));
                             });
                     } catch (err) {
                         res.json({
@@ -113,14 +114,15 @@ module.exports = {
                                     res.status(400).json({
                                         msg: "Aktif must be number",
                                     });
+                                } else {
+                                    console.log(body, id);
+                                    materiModel
+                                        .updateMateri(body, id)
+                                        .then((response) =>
+                                            formRes.resUser(res, response, 200)
+                                        )
+                                        .catch((err) => console.log(err));
                                 }
-                                console.log(body, id);
-                                materiModel
-                                    .updateMateri(body, id)
-                                    .then((response) =>
-                                        formRes.resUser(res, response, 200)
-                                    )
-                                    .catch((err) => console.log(err));
                             });
                     } catch (err) {
                         res.json({
