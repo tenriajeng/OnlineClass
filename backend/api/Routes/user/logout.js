@@ -1,7 +1,7 @@
 const express = require("express");
 const Router = express.Router();
-const LogoutController = require("../../Controllers/User/LogoutController");
-const {check} = require("express-validator");
+const LogoutController = require("../../Controllers/user/LogoutController");
+const { check } = require("express-validator");
 
 Router.get("/", LogoutController.loginUser);
 

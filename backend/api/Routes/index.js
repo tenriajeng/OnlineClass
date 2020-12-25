@@ -22,6 +22,7 @@ const ReadMore = require("./user/readmore");
 const Logout = require("./user/logout");
 const Login = require("./user/login");
 const Buykelas = require("./user/buykelas");
+const Cart = require("./user/cart");
 
 // admin route
 Router.use("/admin/kelas", kelas);
@@ -43,5 +44,6 @@ Router.use("/readmore", ReadMore);
 Router.use("/user/kelas", userkelas);
 Router.use("/moremateri", MoreMateri);
 Router.use("/buykelas", Buykelas);
+Router.use("/cart", Cart);
 
 module.exports = Router;

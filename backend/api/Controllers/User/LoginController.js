@@ -13,7 +13,7 @@ module.exports = {
             if (!errors.isEmpty()) {
                 return res.status(422).jsonp(errors.array());
             }
-            const { email, password } = req.body;
+            const {email, password} = req.body;
             await loginModel
                 .loginUser(email)
                 .then((response) => {

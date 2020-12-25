@@ -1,58 +1,61 @@
 import React from "react";
 import { Form, Input, Button, Row, Col } from "antd";
 import Axios from "axios";
-
-const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-};
+import { URLAPI } from "../../../Components/ApiUrl";
 
 class Register extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: [],
-            visible: false,
             name: "",
             email: "",
             password: "",
         };
+        // this.changeHandler = this.changeHandler.bind(this);
     }
 
-    onOk = () => {
+    changeHandler = (e) => {
         this.setState({
-            visibleUpdate: true,
-            name: data.name,
-            email: data.email,
-            password: data.password,
+            [e.target.name]: e.target.value,
         });
+        // alert("handle : ", e.target.name);
+    };
+
+    submitHandler = (e) => {
+        alert("lol");
+        // e.preventDefault();
+        console.log("lol : ", this.state.name);
 
         const data = {
             name: this.state.name,
             email: this.state.email,
             password: this.state.password,
         };
-
-        Axios.post("http://localhost:6600/register", data).then((res) => {
-            const data = res.data.response[0];
-            console.log("response", data);
-
-            console.log("response", data);
-        });
+        Axios.post(`${URLAPI}/register`, data)
+            .then((response) => {
+                console.log("good : ", response);
+            })
+            .catch((error) => {
+                console.log("error : ", error);
+            });
     };
 
     render() {
+        const { name, email, password } = this.state;
+
         return (
-            <Row justify="center" style={{ marginLeft: 10, marginRight: 10 }} align="bottom">
+            <Row justify="center" style={{ marginLeft: 10, marginRight: 10, height: "565px" }} align="middle">
                 <Col xl={5}>
                     <center>
                         <br></br>
-                        <h3>REGISTER</h3>
+                        <h2>REGISTER</h2>
                     </center>
                     <Form name="register">
                         <Form.Item
                             name="name"
                             label="Name"
-                            value={this.state.name}
+                            value={name}
+                            onChange={this.changeHandler}
                             rules={[
                                 {
                                     required: true,
@@ -60,12 +63,13 @@ class Register extends React.Component {
                                 },
                             ]}
                         >
-                            <Input />
+                            <Input size="large" name="name" label="Name" value={name} onChange={this.changeHandler} />
                         </Form.Item>
                         <Form.Item
                             name="email"
                             label="E-mail"
-                            value={this.state.email}
+                            value={email}
+                            onChange={this.changeHandler}
                             rules={[
                                 {
                                     type: "email",
@@ -77,13 +81,15 @@ class Register extends React.Component {
                                 },
                             ]}
                         >
-                            <Input />
+                            <Input size="large" name="email" label="E-mail" value={email} onChange={this.changeHandler} />
                         </Form.Item>
 
                         <Form.Item
+                            size="large"
                             name="password"
                             label="Password"
-                            value={this.state.password}
+                            value={password}
+                            onChange={this.changeHandler}
                             rules={[
                                 {
                                     required: true,
@@ -92,34 +98,11 @@ class Register extends React.Component {
                             ]}
                             hasFeedback
                         >
-                            <Input.Password />
+                            <Input.Password size="large" name="password" label="Password" value={password} onChange={this.changeHandler} />
                         </Form.Item>
 
-                        <Form.Item
-                            name="confirm"
-                            label="Confirm Password"
-                            value={this.state.password}
-                            dependencies={["password"]}
-                            hasFeedback
-                            rules={[
-                                {
-                                    required: true,
-                                    message: "Please confirm your password!",
-                                },
-                                ({ getFieldValue }) => ({
-                                    validator(rule, value) {
-                                        if (!value || getFieldValue("password") === value) {
-                                            return Promise.resolve();
-                                        }
-                                        return Promise.reject("The two passwords that you entered do not match!");
-                                    },
-                                }),
-                            ]}
-                        >
-                            <Input.Password />
-                        </Form.Item>
                         <Form.Item>
-                            <Button type="primary" htmlType="submit" className="register-form-button" onClick={() => this.onOk()}>
+                            <Button size="large" type="primary" htmlType="submit" className="register-form-button" onClick={() => this.submitHandler()}>
                                 Register
                             </Button>
                         </Form.Item>

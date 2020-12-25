@@ -1,7 +1,10 @@
-import { Card, Col, Row, Image } from "antd";
+import { ShoppingCartOutlined } from "@ant-design/icons";
+import { Card, Col, Row, Image, Button, Tooltip } from "antd";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
+import { URLAPI } from "../../../Components/ApiUrl";
 
 function CardComponent() {
 	const { Meta } = Card;
@@ -10,9 +13,9 @@ function CardComponent() {
 
 	const getData = async () => {
 		try {
-			let res = await Axios.get("http://localhost:6600/admin/kelas");
+			let res = await Axios.get(`${URLAPI}/admin/kelas`);
 			setData(res.data.response);
-			console.log("ini mi datanya : ", res);
+			console.log("ini mi datanya : ", URLAPI);
 		} catch (error) {
 			console.log(error.message);
 		}
@@ -27,14 +30,35 @@ function CardComponent() {
 	}, []);
 
 	return (
-		<div>
+		<div style={{ marginTop: 40, padding: "0.5rem calc((100vw - 1200px) / 2)" }}>
+			<div style={{ textAlign: "center" }}>
+				<h1>New Courses</h1>
+			</div>
 			<Row style={{ margin: "24px 16px 0" }} gutter={[16, 16]}>
 				{data.map((val) => {
 					return (
 						<Col xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 8 }}>
 							<Link to={routeCourses + val.id}>
-								<Card onClick={() => clickCard(val.nama)} hoverable cover={<img src={val.foto} />}>
-									<Meta title={val.nama} />
+								<Card hoverable onClick={() => clickCard(val.nama)} cover={<img alt="example" src={val.foto} />} actions={[,]}>
+									<Meta
+										title={val.nama}
+										description={
+											<div>
+												<label>This is the description</label>
+											</div>
+										}
+									/>
+									<br />
+									<Row justify="space-between">
+										<strong>Pendaftar</strong>
+										<Link hoverable to={`/courses/beli`}>
+											<Tooltip title="Add to cart" color="blue" key="blue">
+												<Button block>
+													<ShoppingCartOutlined style={{ fontSize: "26px", color: "#08c" }} />
+												</Button>
+											</Tooltip>
+										</Link>
+									</Row>
 								</Card>
 							</Link>
 						</Col>
