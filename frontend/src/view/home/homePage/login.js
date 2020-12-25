@@ -1,10 +1,15 @@
 import React from "react";
-import { Form, Input, Button, Checkbox } from "antd";
-import { UserOutlined, LockOutlined, ShoppingCartOutlined, GoogleOutlined } from "@ant-design/icons";
-import { Row, Col, Space } from "antd";
+import {Form, Input, Button, Checkbox} from "antd";
+import {
+    UserOutlined,
+    LockOutlined,
+    ShoppingCartOutlined,
+    GoogleOutlined,
+} from "@ant-design/icons";
+import {Row, Col, Space} from "antd";
 import Axios from "axios";
-import { Link } from "react-router-dom";
-import { URLAPI } from "../../../Components/ApiUrl";
+import {Link} from "react-router-dom";
+import {URLAPI} from "../../../Components/ApiUrl";
 import GoogleLogin from "react-google-login";
 // import { AuthAtom } from "../../../Components/Auth/AuthAtom";
 // import { useRecoilState } from "recoil";
@@ -31,7 +36,7 @@ class Login extends React.Component {
     storeCollector = () => {
         let store = JSON.parse(localStorage.getItem("login"));
         if (store && store.login) {
-            this.setState({ login: true, store: store });
+            this.setState({login: true, store: store});
         }
     };
 
@@ -63,21 +68,39 @@ class Login extends React.Component {
         const responseGoogle = (response) => {
             console.log(response);
         };
-        const { email, password } = this.state;
+        const {email, password} = this.state;
         return (
             <div>
                 {!this.state.login ? (
-                    <Row justify="center" align="middle" style={{ height: "565px" }}>
+                    <Row
+                        justify="center"
+                        align="middle"
+                        style={{height: "565px"}}
+                    >
                         <Col xl={5}>
                             <center>
                                 <br></br>
                                 <h2>SIGN IN</h2>
                             </center>
-                            <Form name="normal_login" className="login-form" initialValues={{ remember: true }}>
-                                <Form.Item name="email" rules={[{ required: true, message: "Please input your Email!" }]}>
+                            <Form
+                                name="normal_login"
+                                className="login-form"
+                                initialValues={{remember: true}}
+                            >
+                                <Form.Item
+                                    name="email"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: "Please input your Email!",
+                                        },
+                                    ]}
+                                >
                                     <Input
                                         size="large"
-                                        prefix={<UserOutlined className="site-form-item-icon" />}
+                                        prefix={
+                                            <UserOutlined className="site-form-item-icon" />
+                                        }
                                         type="email"
                                         placeholder="Email"
                                         name="email"
@@ -85,10 +108,21 @@ class Login extends React.Component {
                                         onChange={this.changeHandler}
                                     />
                                 </Form.Item>
-                                <Form.Item name="password" rules={[{ required: true, message: "Please input your Password!" }]}>
+                                <Form.Item
+                                    name="password"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message:
+                                                "Please input your Password!",
+                                        },
+                                    ]}
+                                >
                                     <Input
                                         size="large"
-                                        prefix={<LockOutlined className="site-form-item-icon" />}
+                                        prefix={
+                                            <LockOutlined className="site-form-item-icon" />
+                                        }
                                         type="password"
                                         placeholder="Password"
                                         name="password"
@@ -107,7 +141,13 @@ class Login extends React.Component {
                         </Form.Item> */}
 
                                 <Form.Item>
-                                    <Button size="large" type="primary" htmlType="submit" className="login-form-button" onClick={() => this.submitHandler()}>
+                                    <Button
+                                        size="large"
+                                        type="primary"
+                                        htmlType="submit"
+                                        className="login-form-button"
+                                        onClick={() => this.submitHandler()}
+                                    >
                                         Sig in
                                     </Button>
                                 </Form.Item>
