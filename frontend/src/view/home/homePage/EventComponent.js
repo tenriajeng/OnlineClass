@@ -1,5 +1,5 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import { Button, Card, Col, Row, Tooltip } from "antd";
+import { Button, Card, Col, Divider, Row, Tooltip } from "antd";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -32,7 +32,9 @@ function EventComponent() {
 	return (
 		<div style={{ marginTop: 40, padding: "0.5rem calc((100vw - 1200px) / 2)" }}>
 			<div style={{ textAlign: "center" }}>
-				<h1>Interactive Courses </h1>
+				<Divider orientation="left">
+					<h1>Interactive Courses </h1>
+				</Divider>
 			</div>
 			<Row style={{ margin: "24px 16px 0" }} gutter={[16, 16]}>
 				{data.map((val) => {

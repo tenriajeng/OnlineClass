@@ -28,4 +28,15 @@ module.exports = {
 			);
 		});
 	},
+	showTotalPrice: (id) => {
+		return new Promise((resolve, reject) => {
+			db.query(`SELECT SUM(harga) as totalharga FROM cart WHERE user_id = ${id}`, (err, response) => {
+				if (!err) {
+					resolve(response);
+				} else {
+					reject(err);
+				}
+			});
+		});
+	},
 };

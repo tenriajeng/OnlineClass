@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 
 import { Redirect, Route, Switch } from "react-router-dom";
@@ -25,6 +25,9 @@ import { useRecoilState } from "recoil";
 function App() {
 	const [authUser, setAuthUser] = useRecoilState(AuthAtom);
 
+	// useEffect(() => {}, [authUser]);
+
+	console.log("authUser : ", authUser.dataUser.response.level);
 	return (
 		<div>
 			<Switch>
@@ -71,21 +74,19 @@ function App() {
 				</Route>
 				<Route path="/login">
 					<NewNavbar />
-					{authUser ? <Redirect to="/home" /> : <LoginRecoil />}
+					{authUser.login ? <Redirect to="/home" /> : <LoginRecoil />}
 					<NewFooter />
 				</Route>
 				<Route path="/register">
 					<NewNavbar />
-					{authUser ? <Redirect to="/home" /> : <Register />}
+					{authUser.login ? <Redirect to="/home" /> : <Register />}
 					<NewFooter />
 				</Route>
 				{/* end user route */}
 			</Switch>
 
 			{/* admin route */}
-			<Route path="/admin">
-				<Base />
-			</Route>
+			<Route path="/admin">{authUser.dataUser.response.level == 1 ? <Redirect to="/home" /> : <Base />}</Route>
 			{/* end admin route */}
 		</div>
 	);

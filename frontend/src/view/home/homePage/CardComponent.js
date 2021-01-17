@@ -1,5 +1,5 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import { Card, Col, Row, Image, Button, Tooltip } from "antd";
+import { Card, Col, Row, Image, Button, Tooltip, Divider } from "antd";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -32,7 +32,9 @@ function CardComponent() {
 	return (
 		<div style={{ marginTop: 40, padding: "0.5rem calc((100vw - 1200px) / 2)" }}>
 			<div style={{ textAlign: "center" }}>
-				<h1>New Courses</h1>
+				<Divider orientation="left">
+					<h1>New Courses</h1>
+				</Divider>
 			</div>
 			<Row style={{ margin: "24px 16px 0" }} gutter={[16, 16]}>
 				{data.map((val) => {
@@ -51,7 +53,7 @@ function CardComponent() {
 									<br />
 									<Row justify="space-between">
 										<strong>Pendaftar</strong>
-										<Link hoverable to={`/courses/beli`}>
+										<Link hoverable to={`/courses/add-to-cart/${val.id}`}>
 											<Tooltip title="Add to cart" color="blue" key="blue">
 												<Button block>
 													<ShoppingCartOutlined style={{ fontSize: "26px", color: "#08c" }} />
